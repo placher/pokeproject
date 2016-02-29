@@ -1,7 +1,12 @@
 Rubric for Lab 7/8
 
+J. Patrick Lacher, John Adams, and Douglas Schmieder
+
+
 30 Points:
 	Complete SDL Tutorials on backgrounds, sprites, and movement
 	
 10 Points:
 	Be able to compile a simple test program that moves a sprite around a loaded background
+	
+Our repository can be viewed at: github.com/placher/pokeproject
