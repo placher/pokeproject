@@ -36,7 +36,8 @@ class Bulbasaur: public Pokemon {
 Bulbasaur::Bulbasaur() {
 	//Bulbasaur is a meduim slow pokemon
 	//There is a glitch associated with meduim slow pokemon at level 1. Additionally
-	//there's some really odd xp values for lvl 1 pokemon including fast having 1 xp to lvl up.
+	//there's some really odd xp values for lvl 1 pokemon including fast having 1 xp 
+	//to lvl up.
 	int level=1;
 	int m;
 	if(level > 1) {
