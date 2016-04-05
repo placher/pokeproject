@@ -1,0 +1,20 @@
+Report.txt for Labs 7-8
+J. Patrick Lacher
+
+Repository: https://github.com/placher/pokeproject
+Time-Log: https://docs.google.com/a/nd.edu/spreadsheets/d/1IF_tJBQy-_KnQhAaPzXVYcoNuColprwTKABPDtpU50A/edit?usp=sharing
+
+Much of the last two weeks was spent familiarizing myself with SDL, especially through Lazy Foo tutorials. Our original plan was to develop
+our project as a Windows application, but serious problems interfacing with Visual Studio led us to re-orient to a Linux-hosted project. Through
+Lazy Foo tutorials, I was able to load backgrounds from art files we developed, as well as load our sprites and move them around the screen,
+which were the two primary goals of this sub task. With these two skills acquired, much of the remaining project will be focused on developing
+back-end interface for the game (fights, data control, etc.). The sdlimage.cpp file shows how a background can be loaded and displayed using SDL,
+and the motion.cpp file shows loading one of our sprites and moving it around the screen.
+
+These test files show that the goals laid out in the pre-break rubric have been accomplished, and serve to move the basic idea of much of the
+graphics-side of our project forward. Our discussions also resulted in the development of a preliminary .h file for character control, which
+will store the various pokemon implemented into the game.
+
+Complilation of files over ssh results in an error at runtime saying that SDL can't find the renderer. The professor suggested this morning that
+there is probably an issue with X-forwarding latency. Finding a fix for this would be great, as the prospect of coding our entire project in the
+Cushing lab is less than ideal.
