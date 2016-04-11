@@ -57,6 +57,7 @@ class Pokemon{
 		int maxxp;//Max xp
 		string type1;//First type
 		string type2;//Second type/Set to Null if there is no second type
+		string name;//Name of the pokemon
 };
 
 Pokemon::Pokemon() {
@@ -129,8 +130,18 @@ void Pokemon::levelup(int levelspeed) {
 	satt+=csatt;
 	sdef+=csdef;
 	speed+=cspeed;
-	if (type == 3) {//Signifies a Medium Slow pokemon
+	/*Don't know if this is going to work
+	if (levelspeed == 1) {//Signifies a Fast pokemon
 		maxxp = 6/5*pow(level,3)) - 15*level*level + 100*level - 140;
 	}
+	if (levelspeed == 2) {//Signifies a Medium Fast pokemon
+		maxxp = 6/5*pow(level,3)) - 15*level*level + 100*level - 140;
+	}
+	if (levelspeed == 3) {//Signifies a Medium Slow pokemon
+		maxxp = 6/5*pow(level,3)) - 15*level*level + 100*level - 140;
+	}
+	if (levelspeed == 4) {//Signifies a Slow pokemon
+		maxxp = 6/5*pow(level,3)) - 15*level*level + 100*level - 140;
+	}*/
 		
 }		

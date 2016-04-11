@@ -1,4 +1,4 @@
-//Bulbasaur Pokemon
+//Gyrados Pokemon
 
 //Include things. Not complete
 #include <cmath>
@@ -24,9 +24,9 @@ Medium Slow = 6/5n^3 - 15n^2 + 100n - 140
 Slow = 5n^3/4
 */
 
-class Bulbasaur: public Pokemon {
+class Gyrados: public Pokemon {
 	public: 
-		Bulbasaur();
+		Gyrados();
 		
 	private:		
 		int bhp;
@@ -39,33 +39,32 @@ class Bulbasaur: public Pokemon {
 
 };
 
-Bulbasaur::Bulbasaur() {
-	//Bulbasaur is a meduim slow pokemon
+Gyrados::Gyrados() {
 	//There is a glitch associated with meduim slow pokemon at level 1. Additionally
 	//there's some really odd xp values for lvl 1 pokemon including fast having 1 xp 
 	//to lvl up.
 	int level=1;
-	levelspeed=3;//Medium Slow Pokemon
-	bhp = 45;
-	batt = 49;
-	bdef = 49;
-	bsatt = 65;
-	bsdef = 65;
-	bspeed = 45;
+	levelspeed=4;//Slow Pokemon
+	bhp = 95;
+	batt = 125;
+	bdef = 79;
+	bsatt = 60;
+	bsdef = 100;
+	bspeed = 81;
 	int m, hp, att, def, satt, sdef, speed;
 	//This xp determining algorithm determines MAX xp, not levelup xp
 	if(level > 1) {
-		m = (6/5*pow(level,3)) - 15*level*level + 100*level - 140;
+		m = 5.0*pow(level, 3)/4;
 	}
 	else {
-		m = 6;
+		m = 8;
 	}
-	hp = ((bhp*2)*(level)/100)+level+(rand()%4)+8;//Determine hp
-	att = (((batt*2)*level)/100)+(rand()%4)+3;//Determine att
-	def = (((bdef*2)*level)/100)+(rand()%4)+3;//Determine def
-	satt = (((bsatt*2)*level)/100)+(rand()%4)+3;//Determine satt
-	sdef = (((bsdef*2)*level)/100)+(rand()%4)+3;//Determine sdef
-	speed = (((bspeed*2)*level)/100)+(rand()%4)+3;//Determine speed
+	hp = ((bhp*2)*(level)/100)+level+(rand()%10)+18;//Determine hp
+	att = (((batt*2)*level)/100)+(rand()%5)+12;//Determine att
+	def = (((bdef*2)*level)/100)+(rand()%5)+7;//Determine def
+	satt = (((bsatt*2)*level)/100)+(rand()%5)+6;//Determine satt
+	sdef = (((bsdef*2)*level)/100)+(rand()%5)+10;//Determine sdef
+	speed = (((bspeed*2)*level)/100)+(rand()%5)+8;//Determine speed
 	
 	//Calculated with no IV with all decimals rounded down
 	Pokemon::setmhealth(hp);//Set max health
@@ -78,8 +77,8 @@ Bulbasaur::Bulbasaur() {
 	Pokemon::setspeed(speed);//Set speed
 	Pokemon::setxp(0);//Set current xp(should default to 0)
 	Pokemon::setmxp(m);//Set max xp for levelup
-	Pokemon::settype1("Grass");//Sets first type
-	Pokemon::settype2("Poison");//Sets second type
+	Pokemon::settype1("Water");//Sets first type
+	Pokemon::settype2("Flying");//Sets second type
 
 }
 

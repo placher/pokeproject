@@ -1,4 +1,4 @@
-//Bulbasaur Pokemon
+//Golem Pokemon
 
 //Include things. Not complete
 #include <cmath>
@@ -24,9 +24,9 @@ Medium Slow = 6/5n^3 - 15n^2 + 100n - 140
 Slow = 5n^3/4
 */
 
-class Bulbasaur: public Pokemon {
+class Golem: public Pokemon {
 	public: 
-		Bulbasaur();
+		Golem();
 		
 	private:		
 		int bhp;
@@ -39,33 +39,32 @@ class Bulbasaur: public Pokemon {
 
 };
 
-Bulbasaur::Bulbasaur() {
-	//Bulbasaur is a meduim slow pokemon
+Golem::Golem() {
 	//There is a glitch associated with meduim slow pokemon at level 1. Additionally
 	//there's some really odd xp values for lvl 1 pokemon including fast having 1 xp 
 	//to lvl up.
 	int level=1;
-	levelspeed=3;//Medium Slow Pokemon
-	bhp = 45;
-	batt = 49;
-	bdef = 49;
-	bsatt = 65;
+	levelspeed=2;//Medium fast Pokemon
+	bhp = 80;
+	batt = 110;
+	bdef = 130;
+	bsatt = 55;
 	bsdef = 65;
 	bspeed = 45;
 	int m, hp, att, def, satt, sdef, speed;
 	//This xp determining algorithm determines MAX xp, not levelup xp
 	if(level > 1) {
-		m = (6/5*pow(level,3)) - 15*level*level + 100*level - 140;
+		m = pow(level, 3)
 	}
 	else {
-		m = 6;
+		m = 4;
 	}
-	hp = ((bhp*2)*(level)/100)+level+(rand()%4)+8;//Determine hp
-	att = (((batt*2)*level)/100)+(rand()%4)+3;//Determine att
-	def = (((bdef*2)*level)/100)+(rand()%4)+3;//Determine def
-	satt = (((bsatt*2)*level)/100)+(rand()%4)+3;//Determine satt
-	sdef = (((bsdef*2)*level)/100)+(rand()%4)+3;//Determine sdef
-	speed = (((bspeed*2)*level)/100)+(rand()%4)+3;//Determine speed
+	hp = ((bhp*2)*(level)/100)+level+(rand()%10)+16;//Determine hp
+	att = (((batt*2)*level)/100)+(rand()%5)+11;//Determine att
+	def = (((bdef*2)*level)/100)+(rand()%5)+13;//Determine def
+	satt = (((bsatt*2)*level)/100)+(rand()%5)+5;//Determine satt
+	sdef = (((bsdef*2)*level)/100)+(rand()%5)+6;//Determine sdef
+	speed = (((bspeed*2)*level)/100)+(rand()%5)+4;//Determine speed
 	
 	//Calculated with no IV with all decimals rounded down
 	Pokemon::setmhealth(hp);//Set max health
@@ -78,8 +77,8 @@ Bulbasaur::Bulbasaur() {
 	Pokemon::setspeed(speed);//Set speed
 	Pokemon::setxp(0);//Set current xp(should default to 0)
 	Pokemon::setmxp(m);//Set max xp for levelup
-	Pokemon::settype1("Grass");//Sets first type
-	Pokemon::settype2("Poison");//Sets second type
+	Pokemon::settype1("Rock");//Sets first type
+	Pokemon::settype2("Ground");//Sets second type
 
 }
 
