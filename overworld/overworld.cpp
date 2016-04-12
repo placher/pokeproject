@@ -42,6 +42,9 @@ class Ash
 		
 		//Checks if Ash has collided with a wall
 		void checkCollision( int bg );
+		
+		//Checks for a battle in the current room
+		bool isBattle( int bg, int battle );
 
     private:
 		//The X and Y offsets of Ash
@@ -112,11 +115,18 @@ SDL_Window* gWindow = NULL;
 //The window renderer
 SDL_Renderer* gRenderer = NULL;
 
-//Sprite Textures
+//Trainer Sprite Textures
 LTexture gAshTexture; //player character
 LTexture gDougTexture; //enemy 1
 LTexture gJohnTexture; //enemy 2
 LTexture gPatrickTexture; //enemy 3
+
+//NPC Textures
+LTexture gOffficerTexture; //officer
+LTexture gLassTexture; //lass
+LTexture gLassPkmnTexture; //lass' pokemon
+LTexture gProfTexture; //professor
+LTexture gProfPkmnTexture; //professor's pokemon
 
 //Background Textures
 LTexture gBG1Texture; //exterior background
@@ -469,6 +479,42 @@ void Ash::checkCollision( int bg )
 	}
 }
 
+bool Ash::isBattle( int bg, int battle )
+{
+	
+	//Checks if a battle should initiate in the room
+	
+	if ( battle == 1 )
+	{
+		switch ( bg )
+		{
+			case 1: //exterior has no battle
+				return false;
+				break;
+			case 2: //interior has no battle
+				return false;
+				break;
+			case 3: //interior hallway has no battle
+				return false;
+				break;
+			case 4: //room 1
+				if ( mPosY < 360 ) return true;
+				break;
+			case 5: //room 2
+				if ( mPosY < 410 ) return true;
+				break;
+			case 6: //room 3
+				if ( mPosY < 360 ) return true;
+				break;
+			case 7: //room 4 has no battle
+				return false;
+				break;
+		}
+	}
+	
+	return false;
+}
+
 bool init()
 {
 	//Initialization flag
@@ -535,7 +581,7 @@ bool loadMedia()
 		success = false;
 	}
 	
-	//Load NPC Textures
+	//Load Enemy Textures
 	if( !gDougTexture.loadFromFile( "images/doug.bmp" ) )
 	{
 		printf( "Failed to load doug texture!\n" );
@@ -549,6 +595,33 @@ bool loadMedia()
 	if( !gPatrickTexture.loadFromFile( "images/patrick.bmp" ) )
 	{
 		printf( "Failed to load patrick texture!\n" );
+		success = false;
+	}
+	
+	//Load NPC textures
+	if( !gOffficerTexture.loadFromFile( "images/officer.bmp" ) )
+	{
+		printf( "Failed to load officer texture!\n" );
+		success = false;
+	}
+	if( !gLassTexture.loadFromFile( "images/lass.bmp" ) )
+	{
+		printf( "Failed to load lass texture!\n" );
+		success = false;
+	}
+	if( !gLassPkmnTexture.loadFromFile( "images/lasspkmn.bmp" ) )
+	{
+		printf( "Failed to load lasspkmn texture!\n" );
+		success = false;
+	}
+	if( !gProfTexture.loadFromFile( "images/prof.bmp" ) )
+	{
+		printf( "Failed to load prof texture!\n" );
+		success = false;
+	}
+	if( !gProfPkmnTexture.loadFromFile( "images/profpkmn.bmp" ) )
+	{
+		printf( "Failed to load profpkmn texture!\n" );
 		success = false;
 	}
 
@@ -601,6 +674,12 @@ void close()
 	gJohnTexture.free();
 	gPatrickTexture.free();
 	
+	gOffficerTexture.free();
+	gLassTexture.free();
+	gLassPkmnTexture.free();
+	gProfTexture.free();
+	gProfPkmnTexture.free();
+	
 	gBG1Texture.free();
 	gBG2Texture.free();
 	gBG3Texture.free();
@@ -621,7 +700,7 @@ void close()
 }
 
 int main( int argc, char* args[] )
-{
+{	
 	//Start up SDL and create window
 	if( !init() )
 	{
@@ -641,6 +720,12 @@ int main( int argc, char* args[] )
 			
 			//Background scene selector
 			int bg = 1;
+			
+			//Allow for battle flag
+			int battle = 1;
+			
+			//Retained value of bg in previous frame
+			int bg_backup;
 
 			//Event handler
 			SDL_Event e;
@@ -660,18 +745,34 @@ int main( int argc, char* args[] )
 						quit = true;
 					}
 
-					//Handle input for  ash
+					//Handle input for ash
 					ash.handleEvent( e );
 				}
 
-				//Move  ash
+				//Move ash
 				ash.move();
+				
+				//Save old background for later comparisson
+				bg_backup = bg;
 				
 				//Check for a collision with a door on current background
 				bg = ash.changeScene( bg );
 				
+				//Allow for new battle in room if room has changed
+				if ( bg != bg_backup )
+				{
+					battle = 1;
+				}
+				
 				//Check for a collision with a wall on current background
 				ash.checkCollision( bg );
+				
+				//Run battle if one occurs
+				/*if ( ash.isBattle( bg, battle ) )
+				{
+					fight_battle( bg );
+					battle = 0;
+				}*/
 
 				//Clear screen
 				SDL_SetRenderDrawColor( gRenderer, 0xFF, 0xFF, 0xFF, 0xFF );
@@ -680,28 +781,37 @@ int main( int argc, char* args[] )
 				//Render background
 				switch ( bg )
 				{
-					case 1: 
+					case 1: //exterior
 						gBG1Texture.render( 0, 0 );
 						break;
-					case 2:
+					case 2: //interior
 						gBG2Texture.render( 0, 0 );
+						
+						//render NPC sprites in lobby
+						gOffficerTexture.render( 370, 190 );
+						gOffficerTexture.render( 495, 190 );
+						gLassPkmnTexture.render( 273, 355 );
+						gLassTexture.render( 250, 350 );
+						gProfPkmnTexture.render( 683, 655 );
+						gProfTexture.render( 650, 650 );
+						
 						break;
-					case 3:
+					case 3: //interior hallway
 						gBG3Texture.render( 0, 0 );
 						break;
-					case 4:
+					case 4: //room 1
 						gBG4Texture.render( 0, 0 );
-						gDougTexture.render( 430, 290 );
+						if ( battle == 1 ) gDougTexture.render( 430, 290 );
 						break;
-					case 5:
+					case 5: //room 2
 						gBG5Texture.render( 0, 0 );
-						gJohnTexture.render( 440, 350 );
+						if ( battle == 1 ) gJohnTexture.render( 440, 350 );
 						break;
-					case 6:
+					case 6: //room 3
 						gBG6Texture.render( 0, 0 );
-						gPatrickTexture.render( 430, 285 );
+						if ( battle == 1 ) gPatrickTexture.render( 430, 285 );
 						break;
-					case 7:
+					case 7: //room 4
 						gBG7Texture.render( 0, 0 );
 				}
 				
