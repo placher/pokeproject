@@ -81,9 +81,7 @@ Gengar::Gengar() {
 	Pokemon::setmxp(m);//Set max xp for levelup
 	Pokemon::settype1("Ghost");//Sets first type
 	Pokemon::settype2("Poison");//Sets second type
-
-	Moves(0) = 
-	Moves(1) =
+	Pokemon::setMoves(25, 1, 3, 4);//Set up moves for pokemon
 	
 }
 

@@ -3,6 +3,7 @@
 #include <ctime>
 #include <string>
 #include <iostream>
+#include <vector>
 #include "Moves.h"
 
 using namespace std;
@@ -33,6 +34,7 @@ class Pokemon{
 		void settype1(string);//Sets the type1
 		void settype2(string);//Sets the type2
 		void levelup();//The level up function for a pokemon
+		void setMoves(int, int, int, int);//Set four moves for the pokemon
 		
 		
 		
@@ -58,6 +60,7 @@ class Pokemon{
 		string type1;//First type
 		string type2;//Second type/Set to Null if there is no second type
 		string name;//Name of the pokemon
+		vector <Moves> moves;
 };
 
 Pokemon::Pokemon() {
@@ -145,3 +148,13 @@ void Pokemon::levelup(int levelspeed) {
 	}*/
 		
 }		
+
+void Pokemon::setMoves(int mv1, int mv2, int mv3, int mv4) {
+
+	Moves move1(mv1), move2(mv2), move3(mv3), move4(mv4); // assign moves based on enum values
+
+	moves.push_back(move1); // push moves into myMoves
+	moves.push_back(move2);
+	moves.push_back(move3);
+	moves.push_back(move4); // last usable move slot
+}
