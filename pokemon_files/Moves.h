@@ -39,8 +39,9 @@ enum moveList{
 	ROCK_SLIDE,    //26
 	WING_ATTACK,   //27
 	SLUDGE_BOMB,   //28
-	CRUNCH         //29
-	
+	CRUNCH,        //29
+	GUST,          //30
+	BUG_BUZZ       //31
 	
 };
 
@@ -242,65 +243,81 @@ Moves::Moves(int myMove) {
 		case SLASH: //22
 			moveName.assign("Slash");
 			power = 70;
-			acc = 75;
+			acc = 100;
 			setmovenum(22);
 			type.assign("Normal"); //type of attack
 			typing = 1;
 			break;
 		case EARTHQUAKE: //23
 			moveName.assign("Earthquake");
-			power = 70;
-			acc = 75;
+			power = 100;
+			acc = 100;
 			setmovenum(23);
 			type.assign("Ground"); //type of attack
 			typing = 1;
 			break;
 		case DRAGON_CLAW: //24
 			moveName.assign("Dragon Claw");
-			power = 70;
-			acc = 75;
+			power = 80;
+			acc = 100;
 			setmovenum(24);
 			type.assign("Dragon"); //type of attack
 			typing = 1;
 			break;
 		case SHADOW_BALL: //25
 			moveName.assign("Shadow Ball");
-			power = 70;
-			acc = 75;
+			power = 80;
+			acc = 100;
 			setmovenum(25);
 			type.assign("Ghost"); //type of attack
 			typing = 2;
 			break;
 		case ROCK_SLIDE: //26
 			moveName.assign("Rock Slide");
-			power = 70;
-			acc = 75;
-			setmovenum(25);
-			type.assign("Ghost"); //type of attack
-			typing = 2;
+			power = 75;
+			acc = 90;
+			setmovenum(26);
+			type.assign("Rock"); //type of attack
+			typing = 1;
 			break;
 		case WING_ATTACK: //27
 			moveName.assign("Wing Attack");
-			power = 70;
-			acc = 75;
-			setmovenum(25);
-			type.assign("Ghost"); //type of attack
-			typing = 2;
+			power = 60;
+			acc = 100;
+			setmovenum(27);
+			type.assign("Flying"); //type of attack
+			typing = 1;
 			break
 		case SLUDGE_BOMB: //28
 			moveName.assign("Sludge Bomb");
-			power = 70;
-			acc = 75;
-			setmovenum(25);
-			type.assign("Ghost"); //type of attack
+			power = 90;
+			acc = 100;
+			setmovenum(28);
+			type.assign("Poison"); //type of attack
 			typing = 2;
 			break;
 		case CRUNCH: //29
 			moveName.assign("Crunch");
+			power = 80;
+			acc = 100;
+			setmovenum(29);
+			type.assign("Dark"); //type of attack
+			typing = 1;
+			break;
+		case GUST: //30
+			moveName.assign("Gust");
+			power = 40;
+			acc = 100;
+			setmovenum(30);
+			type.assign("Flying"); //type of attack
+			typing = 2;
+			break;
+		case BUG_BUZZ: //31
+			moveName.assign("Bug Buzz");
 			power = 70;
 			acc = 75;
-			setmovenum(25);
-			type.assign("Ghost"); //type of attack
+			setmovenum(31);
+			type.assign("Bug"); //type of attack
 			typing = 2;
 			break;
 		default:
