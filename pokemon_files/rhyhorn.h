@@ -1,5 +1,8 @@
 //Rhyhorn Pokemon
 
+#ifndef RHYHORN_H
+#define RHYHORN_H
+
 //Include things. Not complete
 #ifndef RHYHORN_H
 #define RHYHORN_H
