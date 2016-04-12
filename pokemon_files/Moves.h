@@ -36,6 +36,8 @@ enum moveList{
 	EARTHQUAKE,    //23
 	DRAGON_CLAW,   //24
 	SHADOW_BALL,   //25
+	ROCK_SLIDE,    //26
+	WING_ATTACK,   //27
 	
 	
 };
@@ -149,24 +151,24 @@ Moves::Moves(int myMove) {
 			break;
 		case TRI_ATTACK: //11 CONTINUE FROM THIS POINT
 			moveName.assign("Tri Attack");
-			power = 70;
-			acc = 75;
+			power = 80;
+			acc = 100;
 			setmovenum(11);
 			type.assign("Normal"); //type of attack
 			typing = 2;
 			break;
 		case DRILL_PECK: //12
 			moveName.assign("Drill Peck");
-			power = 70;
-			acc = 75;
+			power = 80;
+			acc = 100;
 			setmovenum(12);
 			type.assign("Flying"); //type of attack
 			typing = 1;
 			break;
 		case PECK: //13
 			moveName.assign("Peck");
-			power = 70;
-			acc = 75;
+			power = 35;
+			acc = 100;
 			setmovenum(13);
 			type.assign("Flying"); //type of attack
 			typing = 1;
@@ -260,6 +262,22 @@ Moves::Moves(int myMove) {
 			typing = 1;
 			break;
 		case SHADOW_BALL: //25
+			moveName.assign("Shadow Ball");
+			power = 70;
+			acc = 75;
+			setmovenum(25);
+			type.assign("Ghost"); //type of attack
+			typing = 2;
+			break;
+		case ROCK_SLIDE: //26
+			moveName.assign("Shadow Ball");
+			power = 70;
+			acc = 75;
+			setmovenum(25);
+			type.assign("Ghost"); //type of attack
+			typing = 2;
+			break;
+		case WING_ATTACK: //27
 			moveName.assign("Shadow Ball");
 			power = 70;
 			acc = 75;
