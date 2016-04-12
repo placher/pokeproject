@@ -46,7 +46,7 @@ Golduck::Golduck() {
 	//There is a glitch associated with meduim slow pokemon at level 1. Additionally
 	//there's some really odd xp values for lvl 1 pokemon including fast having 1 xp 
 	//to lvl up.
-	int level=1;
+	int level=50;
 	levelspeed=2;//Medium fast Pokemon
 	bhp = 80;
 	batt = 82;

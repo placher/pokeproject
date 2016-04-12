@@ -1,6 +1,8 @@
 //Raichu Pokemon
 
 //Include things. Not complete
+#ifndef RAICHU_H
+#define RAICHU_H
 #include <cmath>
 #include <string>
 #include "Moves.h"
@@ -44,7 +46,7 @@ Raichu::Raichu() {
 	//There is a glitch associated with meduim slow pokemon at level 1. Additionally
 	//there's some really odd xp values for lvl 1 pokemon including fast having 1 xp 
 	//to lvl up.
-	int level=1;
+	int level=50;
 	levelspeed=2;//Medium fast Pokemon
 	bhp = 60;
 	batt = 90;
@@ -84,3 +86,4 @@ Raichu::Raichu() {
 
 }
 
+#endif

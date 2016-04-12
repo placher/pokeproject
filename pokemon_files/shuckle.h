@@ -1,6 +1,8 @@
 //Shuckle Pokemon
 
 //Include things. Not complete
+#ifndef SHUCKLE_H
+#define SHUCKLE_H
 #include <cmath>
 #include <string>
 #include "Moves.h"
@@ -44,7 +46,7 @@ Shuckle::Shuckle() {
 	//There is a glitch associated with meduim slow pokemon at level 1. Additionally
 	//there's some really odd xp values for lvl 1 pokemon including fast having 1 xp 
 	//to lvl up.
-	int level=1;
+	int level=50;
 	levelspeed=3;//Medium slow Pokemon
 	bhp = 20;
 	batt = 10;
@@ -84,3 +86,4 @@ Shuckle::Shuckle() {
 
 }
 
+#endif

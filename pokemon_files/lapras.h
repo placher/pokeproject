@@ -46,7 +46,7 @@ Lapras::Lapras() {
 	//There is a glitch associated with meduim slow pokemon at level 1. Additionally
 	//there's some really odd xp values for lvl 1 pokemon including fast having 1 xp 
 	//to lvl up.
-	int level=1;
+	int level=50;
 	levelspeed=4;//Slow Pokemon
 	bhp = 130;
 	batt = 85;
