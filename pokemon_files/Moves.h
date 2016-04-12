@@ -10,31 +10,32 @@ using namespace std;
 
 
 enum moveList{
-	TACKLE,        //0
-	BODY_SLAM,
-	THUNDERBOLT,
-	THUNDERSHOCK,
-	THUNDER,
-	ICE_BEAM,
-	FIRE_BLAST,
-	FLAMETHROWER,
-	FIRE_PUNCH,
-	THUNDER_PUNCH,
-	ICE_PUNCH,
-	TRI_ATTACK,
-	DRILL_PECK,
-	PECK,
-	HEADBUTT,
-	PSYCHIC,
-	CONFUSION,
-	RAZOR_LEAF,
-	VINE_WHIP,
-	WATER_GUN,
-	SURF,
-	WATERFALL,
-	SLASH,
-	EARTHQUAKE,
-	DRAGON_BREATH,
+	SLAM,          //0
+	BODY_SLAM,     //1
+	THUNDERBOLT,   //2
+	ROCK_SMASH,    //3
+	THUNDER,       //4
+	ICE_BEAM,      //5
+	FIRE_BLAST,    //6
+	FLAMETHROWER,  //7
+	FIRE_PUNCH,    //8 
+	THUNDER_PUNCH, //9
+	ICE_PUNCH,     //10
+	TRI_ATTACK,    //11
+	DRILL_PECK,    //12
+	PECK,          //13
+	HEADBUTT,      //14
+	PSYCHIC,       //15
+	CONFUSION,     //16
+	RAZOR_LEAF,    //17
+	VINE_WHIP,     //18
+	WATER_GUN,     //19
+	SURF,          //20
+	WATERFALL,     //21
+	SLASH,         //22
+	EARTHQUAKE,    //23
+	DRAGON_CLAW,   //24
+	SHADOW_BALL,   //25
 	
 	
 };
@@ -44,8 +45,6 @@ class Moves{
 		Moves(int);
 		int getmovenum();
 		void setmovenum(int);
-		int attack(int);
-		void levelUp();
 		int noMove();
 		
 	private:
@@ -55,17 +54,219 @@ class Moves{
 		string type;//Type
 		string moveName;//Name
 		int movenum;//Number of the move
+		int typing;//1 is physical, 2 is special
 };
 
-Moves::Moves(int myMove) { //using a int sets base stats for a move
+Moves::Moves(int myMove) {
 	switch (myMove) {
-		case TACKLE: //0
-			moveName.assign("tackle");
-			power = 35;
+		case SLAM: //0
+			moveName.assign("Slam");
+			power = 80;
+			acc = 75;
 			setmovenum(0);
 			type.assign("Normal"); //type of attack
+			typing = 1;
 			break;
-
+		case BODY_SLAM: //1
+			moveName.assign("Body Slam");
+			power = 85;
+			acc = 100;
+			setmovenum(1);
+			type.assign("Normal"); //type of attack
+			typing = 1;
+			break;
+		case THUNDERBOLT: //2
+			moveName.assign("Thunderbolt");
+			power = 90;
+			acc = 100;
+			setmovenum(2);
+			type.assign("Electric"); //type of attack
+			typing = 2;
+			break;
+		case ROCK_SMASH: //3
+			moveName.assign("Rock Smash");
+			power = 40;
+			acc = 100;
+			setmovenum(3);
+			type.assign("Fighting"); //type of attack
+			typing = 1;
+			break;
+		case THUNDER: //4
+			moveName.assign("Thunder");
+			power = 110;
+			acc = 70;
+			setmovenum(4);
+			type.assign("Electric"); //type of attack
+			typing = 2;
+			break;
+		case ICE_BEAM: //5
+			moveName.assign("Ice Beam");
+			power = 90;
+			acc = 100;
+			setmovenum(5);
+			type.assign("Ice"); //type of attack
+			typing = 2;
+			break;
+		case FIRE_BLAST: //6
+			moveName.assign("Fire Blast");
+			power = 110;
+			acc = 85;
+			setmovenum(6);
+			type.assign("Fire"); //type of attack
+			typing = 2;
+			break;
+		case FLAMETHROWER: //7
+			moveName.assign("Flamethrower");
+			power = 90;
+			acc = 100
+			setmovenum(7);
+			type.assign("Fire"); //type of attack
+			typing = 2;
+			break;
+		case FIRE_PUNCH: //8
+			moveName.assign("Fire Punch");
+			power = 75;
+			acc = 100;
+			setmovenum(8);
+			type.assign("Fire"); //type of attack
+			typing = 1;
+			break;
+		case THUNDER_PUNCH: //9
+			moveName.assign("Thunder Punch");
+			power = 75;
+			acc = 100;
+			setmovenum(9);
+			type.assign("Electric"); //type of attack
+			typing = 1;
+			break;
+		case ICE_PUNCH: //10
+			moveName.assign("Ice Punch");
+			power = 75;
+			acc = 100;
+			setmovenum(10);
+			type.assign("Ice"); //type of attack
+			typing = 1;
+			break;
+		case TRI_ATTACK: //11 CONTINUE FROM THIS POINT
+			moveName.assign("Tri Attack");
+			power = 70;
+			acc = 75;
+			setmovenum(11);
+			type.assign("Normal"); //type of attack
+			typing = 2;
+			break;
+		case DRILL_PECK: //12
+			moveName.assign("Drill Peck");
+			power = 70;
+			acc = 75;
+			setmovenum(12);
+			type.assign("Flying"); //type of attack
+			typing = 1;
+			break;
+		case PECK: //13
+			moveName.assign("Peck");
+			power = 70;
+			acc = 75;
+			setmovenum(13);
+			type.assign("Flying"); //type of attack
+			typing = 1;
+			break;
+		case HEADBUTT: //14
+			moveName.assign("Headbutt");
+			power = 70;
+			acc = 75;
+			setmovenum(14);
+			type.assign("Normal"); //type of attack
+			typing = 1;
+			break;
+		case PSYCHIC: //15
+			moveName.assign("Psychic");
+			power = 70;
+			acc = 75;
+			setmovenum(15);
+			type.assign("Psychic"); //type of attack
+			typing = 2;
+			break;
+		case CONFUSION: //16
+			moveName.assign("Confusion");
+			power = 70;
+			acc = 75;
+			setmovenum(16);
+			type.assign("Psychic"); //type of attack
+			typing = 2;
+			break;
+		case RAZOR_LEAF: //17
+			moveName.assign("Razer Leaf");
+			power = 70;
+			acc = 75;
+			setmovenum(17);
+			type.assign("Grass"); //type of attack
+			typing = 1;
+			break;
+		case VINE_WHIP: //18
+			moveName.assign("Vine Whip");
+			power = 70;
+			acc = 75;
+			setmovenum(18);
+			type.assign("Grass"); //type of attack
+			typing = 1;
+			break;
+		case WATER_GUN: //19
+			moveName.assign("Water Gun");
+			power = 70;
+			acc = 75;
+			setmovenum(19);
+			type.assign("Water"); //type of attack
+			typing = 2;
+			break;
+		case SURF: //20
+			moveName.assign("Surf");
+			power = 70;
+			acc = 75;
+			setmovenum(20);
+			type.assign("Water"); //type of attack
+			typing = 2;
+			break;
+		case WATERFALL: //21
+			moveName.assign("Waterfall");
+			power = 70;
+			acc = 75;
+			setmovenum(21);
+			type.assign("Water"); //type of attack
+			typing = 1;
+			break;
+		case SLASH: //22
+			moveName.assign("Slash");
+			power = 70;
+			acc = 75;
+			setmovenum(22);
+			type.assign("Normal"); //type of attack
+			typing = 1;
+			break;
+		case EARTHQUAKE: //23
+			moveName.assign("Earthquake");
+			power = 70;
+			acc = 75;
+			setmovenum(23);
+			type.assign("Ground"); //type of attack
+			typing = 1;
+			break;
+		case DRAGON_CLAW: //24
+			moveName.assign("Dragon Claw");
+			power = 70;
+			acc = 75;
+			setmovenum(24);
+			type.assign("Dragon"); //type of attack
+			typing = 1;
+			break;
+		case SHADOW_BALL: //25
+			moveName.assign("Shadow Ball");
+			power = 70;
+			acc = 75;
+			setmovenum(25);
+			type.assign("Ghost"); //type of attack
+			typing = 2;
+			break;
 		default:
 			noMove();
 			break;

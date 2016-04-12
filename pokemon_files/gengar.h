@@ -2,6 +2,7 @@
 
 //Include things. Not complete
 #include <cmath>
+#include <string>
 #include "Moves.h"
 #include "Pokemon.h"
 
@@ -36,6 +37,7 @@ class Gengar: public Pokemon {
 		int bsdef
 		int bspeed;
 		int levelspeed;
+		vector<> Moves;
 
 };
 
@@ -80,5 +82,8 @@ Gengar::Gengar() {
 	Pokemon::settype1("Ghost");//Sets first type
 	Pokemon::settype2("Poison");//Sets second type
 
+	Moves(0) = 
+	Moves(1) =
+	
 }
 

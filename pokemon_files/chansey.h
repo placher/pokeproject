@@ -2,6 +2,7 @@
 
 //Include things. Not complete
 #include <cmath>
+#include <string>
 #include "Moves.h"
 #include "Pokemon.h"
 
@@ -78,7 +79,7 @@ Chansey::Chansey() {
 	Pokemon::setxp(0);//Set current xp(should default to 0)
 	Pokemon::setmxp(m);//Set max xp for levelup
 	Pokemon::settype1("Normal");//Sets first type
-	Pokemon::settype2(NULL);//Sets second type
+	Pokemon::settype2("");//Sets second type
 
 }
 

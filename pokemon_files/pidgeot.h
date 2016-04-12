@@ -2,6 +2,7 @@
 
 //Include things. Not complete
 #include <cmath>
+#include <string>
 #include "Moves.h"
 #include "Pokemon.h"
 
