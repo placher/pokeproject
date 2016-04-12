@@ -1,6 +1,8 @@
 //Golem Pokemon
 
 //Include things. Not complete
+#ifndef GOLEM_H
+#define GOLEM_H
 #include <cmath>
 #include <string>
 #include "Moves.h"
@@ -84,3 +86,4 @@ Golem::Golem() {
 
 }
 
+#endif

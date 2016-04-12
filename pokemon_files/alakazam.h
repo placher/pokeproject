@@ -1,6 +1,8 @@
 //Alakazam Pokemon
 
 //Include things. Not complete
+#ifndef ALAKAZAM_H
+#define ALAKAZAM_H
 #include <cmath>
 #include <string>
 #include "Moves.h"
@@ -84,3 +86,4 @@ Alakazam::Alakazam() {
 
 }
 
+#endif

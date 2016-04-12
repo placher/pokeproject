@@ -1,6 +1,8 @@
 //Butterfree Pokemon
 
 //Include things. Not complete
+#ifndef BUTTEFREE_H
+#define BUTTEFREE_H
 #include <cmath>
 #include <string>
 #include "Moves.h"
@@ -84,3 +86,4 @@ Butterfree::Butterfree() {
 
 }
 
+#endif

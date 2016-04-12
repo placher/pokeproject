@@ -1,6 +1,8 @@
 //Graveler Pokemon
 
 //Include things. Not complete
+#ifndef GRAVELER_H
+#define GRAVELER_H
 #include <cmath>
 #include <string>
 #include "Moves.h"
@@ -84,3 +86,4 @@ Graveler::Graveler() {
 
 }
 
+#endif

@@ -1,6 +1,8 @@
 //Arbok Pokemon
 
 //Include things. Not complete
+#ifndef ARBOK_H
+#define ARBOK_H
 #include <cmath>
 #include <string>
 #include "Moves.h"
@@ -84,3 +86,4 @@ Arbok::Arbok() {
 
 }
 
+#endif

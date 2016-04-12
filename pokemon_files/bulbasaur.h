@@ -1,6 +1,8 @@
 //Bulbasaur Pokemon
 
 //Include things. Not complete
+#ifndef BULBASAUR_H
+#define BULBASAUR_H
 #include <cmath>
 #include "Moves.h"
 #include "Pokemon.h"
@@ -84,3 +86,4 @@ Bulbasaur::Bulbasaur() {
 
 }
 
+#endif

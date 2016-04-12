@@ -1,6 +1,8 @@
 //Jigglypuff Pokemon
 
 //Include things. Not complete
+#ifndef JIGGLYPUFF_H
+#define JIGGLYPUFF_H
 #include <cmath>
 #include <string>
 #include "Moves.h"
@@ -84,3 +86,4 @@ Jigglypuff::Jigglypuff() {
 
 }
 
+#endif

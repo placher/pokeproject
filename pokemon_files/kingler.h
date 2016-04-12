@@ -1,6 +1,8 @@
 //Kingler Pokemon
 
 //Include things. Not complete
+#ifndef KINGLER_H
+#define KINGLER_H
 #include <cmath>
 #include <string>
 #include "Moves.h"
@@ -84,3 +86,4 @@ Kingler::Kingler() {
 
 }
 
+#endif

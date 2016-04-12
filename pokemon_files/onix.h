@@ -1,6 +1,8 @@
 //Onix Pokemon
 
 //Include things. Not complete
+#ifndef ONIX_H
+#define ONIX_H
 #include <cmath>
 #include <string>
 #include "Moves.h"
@@ -84,3 +86,4 @@ Onix::Onix() {
 
 }
 
+#endif

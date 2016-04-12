@@ -1,6 +1,8 @@
 //Gengar Pokemon
 
 //Include things. Not complete
+#ifndef GENGAR_H
+#define GENGAR_H
 #include <cmath>
 #include <string>
 #include "Moves.h"
@@ -84,3 +86,4 @@ Gengar::Gengar() {
 	
 }
 
+#endif

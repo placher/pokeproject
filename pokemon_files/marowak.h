@@ -1,6 +1,8 @@
 //Marowak Pokemon
 
 //Include things. Not complete
+#ifndef MAROWAK_H
+#define MAROWAK_H
 #include <cmath>
 #include <string>
 #include "Moves.h"
@@ -84,3 +86,4 @@ Marowak::Marowak() {
 
 }
 
+#endif

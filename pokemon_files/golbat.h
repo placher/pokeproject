@@ -1,6 +1,8 @@
 //Golbat Pokemon
 
 //Include things. Not complete
+#ifndef GOLDUCK_H
+#define GOLDUCK_H
 #include <cmath>
 #include <string>
 #include "Moves.h"
@@ -84,3 +86,4 @@ Golbat::Golbat() {
 
 }
 
+#endif

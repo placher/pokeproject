@@ -1,6 +1,8 @@
 //Ninetales Pokemon
 
 //Include things. Not complete
+#ifndef NINETALES_H
+#define NINETALES_H
 #include <cmath>
 #include <string>
 #include "Moves.h"
@@ -84,3 +86,4 @@ Ninetales::Ninetales() {
 
 }
 
+#endif

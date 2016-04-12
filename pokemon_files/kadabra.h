@@ -1,6 +1,8 @@
 //Kadabra Pokemon
 
 //Include things. Not complete
+#ifndef KADABRA_H
+#define KADABRA_H
 #include <cmath>
 #include <string>
 #include "Moves.h"
@@ -84,3 +86,4 @@ Kadabra::Kadabra() {
 
 }
 
+#endif

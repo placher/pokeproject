@@ -1,6 +1,8 @@
 //Lapras Pokemon
 
 //Include things. Not complete
+#ifndef LAPRAS_H
+#define LAPRAS_H
 #include <cmath>
 #include <string>
 #include "Moves.h"
@@ -84,3 +86,4 @@ Lapras::Lapras() {
 
 }
 
+#endif

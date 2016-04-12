@@ -1,6 +1,8 @@
 //Hitmonchan Pokemon
 
 //Include things. Not complete
+#ifndef HITMONCHAN_H
+#define HITMONCHAN_H
 #include <cmath>
 #include <string>
 #include "Moves.h"
@@ -84,3 +86,4 @@ Hitmonchan::Hitmonchan() {
 
 }
 
+#endif

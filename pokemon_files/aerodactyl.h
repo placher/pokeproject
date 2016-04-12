@@ -1,6 +1,8 @@
 //Aerodactyl Pokemon
 
 //Include things. Not complete
+#ifndef AERODACTYL_H
+#define AERODACTYL_H
 #include <cmath>
 #include <string>
 #include "Moves.h"
@@ -84,3 +86,4 @@ Aerodactyl::Aerodactyl() {
 
 }
 
+#endif

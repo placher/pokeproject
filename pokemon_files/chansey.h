@@ -1,6 +1,8 @@
 //Chansey Pokemon
 
 //Include things. Not complete
+#ifndef CHANSEY_H
+#define CHANSEY_H
 #include <cmath>
 #include <string>
 #include "Moves.h"
@@ -84,3 +86,4 @@ Chansey::Chansey() {
 
 }
 
+#endif

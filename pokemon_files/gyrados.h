@@ -1,6 +1,8 @@
 //Gyrados Pokemon
 
 //Include things. Not complete
+#ifndef GYRADOS_H
+#define GYRADOS_H
 #include <cmath>
 #include <string>
 #include "Moves.h"
@@ -84,3 +86,4 @@ Gyrados::Gyrados() {
 	
 }
 
+#endif

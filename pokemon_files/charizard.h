@@ -1,6 +1,8 @@
 //Charizard Pokemon
 
 //Include things. Not complete
+#ifndef CHARIZARD_H
+#define CHARIZARD_H
 #include <cmath>
 #include <string>
 #include "Moves.h"
@@ -84,3 +86,4 @@ Charizard::Charizard() {
 
 }
 
+#endif

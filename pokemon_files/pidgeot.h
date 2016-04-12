@@ -1,6 +1,8 @@
 //Pidgeot Pokemon
 
 //Include things. Not complete
+#ifndef PIDGEOT_H
+#define PIDGEOT_H
 #include <cmath>
 #include <string>
 #include "Moves.h"
@@ -84,3 +86,4 @@ Pidgeot::Pidgeot() {
 
 }
 
+#endif

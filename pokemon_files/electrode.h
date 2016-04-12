@@ -1,6 +1,8 @@
 //Electrode Pokemon
 
 //Include things. Not complete
+#ifndef ELECTRODE_H
+#define ELECTRODE_H
 #include <cmath>
 #include <string>
 #include "Moves.h"
@@ -84,3 +86,4 @@ Electrode::Electrode() {
 
 }
 
+#endif

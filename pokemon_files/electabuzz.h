@@ -1,6 +1,8 @@
 //Electabuzz Pokemon
 
 //Include things. Not complete
+#ifndef ELECTABUZZ_H
+#define ELECTABUZZ_H
 #include <cmath>
 #include <string>
 #include "Moves.h"
@@ -84,3 +86,4 @@ Electabuzz::Electabuzz() {
 
 }
 
+#endif

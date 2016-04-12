@@ -1,6 +1,8 @@
 //Dugtrio Pokemon
 
 //Include things. Not complete
+#ifndef DUGRIO_H
+#define DUGRIO_H
 #include <cmath>
 #include <string>
 #include "Moves.h"
@@ -84,3 +86,4 @@ Dugtrio::Dugtrio() {
 
 }
 
+#endif

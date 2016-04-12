@@ -1,6 +1,8 @@
 //Fearow Pokemon
 
 //Include things. Not complete
+#ifndef FEAROW_H
+#define FEAROW_H
 #include <cmath>
 #include <string>
 #include "Moves.h"
@@ -84,3 +86,4 @@ Fearow::Fearow() {
 
 }
 
+#endif

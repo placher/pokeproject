@@ -1,6 +1,8 @@
 //Dragonite Pokemon
 
 //Include things. Not complete
+#ifndef DRAGONITE_H
+#define DRAGONITE_H
 #include <cmath>
 #include <string>
 #include "Moves.h"
@@ -84,3 +86,4 @@ Dragonite::Dragonite() {
 
 }
 
+#endif

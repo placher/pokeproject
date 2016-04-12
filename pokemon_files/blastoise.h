@@ -1,6 +1,8 @@
 //Blastoise Pokemon
 
 //Include things. Not complete
+#ifndef BLASTOISE_H
+#define BLASTOISE_H
 #include <cmath>
 #include <string>
 #include "Moves.h"
@@ -84,3 +86,4 @@ Blastoise::Blastoise() {
 
 }
 
+#endif

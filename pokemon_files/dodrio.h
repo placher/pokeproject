@@ -1,6 +1,8 @@
 //Dodrio Pokemon
 
 //Include things. Not complete
+#ifndef DODRIO_H
+#define DODRIO_H
 #include <cmath>
 #include <string>
 #include "Moves.h"
@@ -84,3 +86,4 @@ Dodrio::Dodrio() {
 
 }
 
+#endif
