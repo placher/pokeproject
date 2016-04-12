@@ -38,6 +38,8 @@ enum moveList{
 	SHADOW_BALL,   //25
 	ROCK_SLIDE,    //26
 	WING_ATTACK,   //27
+	SLUDGE_BOMB,   //28
+	CRUNCH         //29
 	
 	
 };
@@ -176,63 +178,63 @@ Moves::Moves(int myMove) {
 		case HEADBUTT: //14
 			moveName.assign("Headbutt");
 			power = 70;
-			acc = 75;
+			acc = 100;
 			setmovenum(14);
 			type.assign("Normal"); //type of attack
 			typing = 1;
 			break;
 		case PSYCHIC: //15
 			moveName.assign("Psychic");
-			power = 70;
-			acc = 75;
+			power = 90;
+			acc = 100;
 			setmovenum(15);
 			type.assign("Psychic"); //type of attack
 			typing = 2;
 			break;
 		case CONFUSION: //16
 			moveName.assign("Confusion");
-			power = 70;
-			acc = 75;
+			power = 50;
+			acc = 100;
 			setmovenum(16);
 			type.assign("Psychic"); //type of attack
 			typing = 2;
 			break;
 		case RAZOR_LEAF: //17
 			moveName.assign("Razer Leaf");
-			power = 70;
-			acc = 75;
+			power = 55;
+			acc = 95;
 			setmovenum(17);
 			type.assign("Grass"); //type of attack
 			typing = 1;
 			break;
 		case VINE_WHIP: //18
 			moveName.assign("Vine Whip");
-			power = 70;
-			acc = 75;
+			power = 45;
+			acc = 100;
 			setmovenum(18);
 			type.assign("Grass"); //type of attack
 			typing = 1;
 			break;
 		case WATER_GUN: //19
 			moveName.assign("Water Gun");
-			power = 70;
-			acc = 75;
+			power = 40;
+			acc = 100;
 			setmovenum(19);
 			type.assign("Water"); //type of attack
 			typing = 2;
 			break;
 		case SURF: //20
 			moveName.assign("Surf");
-			power = 70;
-			acc = 75;
+			power = 90;
+			acc = 100;
 			setmovenum(20);
 			type.assign("Water"); //type of attack
 			typing = 2;
 			break;
 		case WATERFALL: //21
 			moveName.assign("Waterfall");
-			power = 70;
-			acc = 75;
+			power = 80;
+			acc = 100;
 			setmovenum(21);
 			type.assign("Water"); //type of attack
 			typing = 1;
@@ -270,7 +272,7 @@ Moves::Moves(int myMove) {
 			typing = 2;
 			break;
 		case ROCK_SLIDE: //26
-			moveName.assign("Shadow Ball");
+			moveName.assign("Rock Slide");
 			power = 70;
 			acc = 75;
 			setmovenum(25);
@@ -278,7 +280,23 @@ Moves::Moves(int myMove) {
 			typing = 2;
 			break;
 		case WING_ATTACK: //27
-			moveName.assign("Shadow Ball");
+			moveName.assign("Wing Attack");
+			power = 70;
+			acc = 75;
+			setmovenum(25);
+			type.assign("Ghost"); //type of attack
+			typing = 2;
+			break
+		case SLUDGE_BOMB: //28
+			moveName.assign("Sludge Bomb");
+			power = 70;
+			acc = 75;
+			setmovenum(25);
+			type.assign("Ghost"); //type of attack
+			typing = 2;
+			break;
+		case CRUNCH: //29
+			moveName.assign("Crunch");
 			power = 70;
 			acc = 75;
 			setmovenum(25);
