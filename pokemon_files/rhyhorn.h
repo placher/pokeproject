@@ -80,6 +80,7 @@ Rhyhorn::Rhyhorn() {
 	Pokemon::setmxp(m);//Set max xp for levelup
 	Pokemon::settype1("Ground");//Sets first type
 	Pokemon::settype2("Rock");//Sets second type
+	Pokemon::setMoves(19, 27, 31, 12);//Set up moves for pokemon
 
 }
 

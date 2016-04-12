@@ -23,7 +23,7 @@ enum moveList{
 	ICE_PUNCH,     //10
 	TRI_ATTACK,    //11
 	DRILL_PECK,    //12
-	PECK,          //13
+	AERIAL_ACE,    //13
 	HEADBUTT,      //14
 	PSYCHIC,       //15
 	CONFUSION,     //16
@@ -168,9 +168,9 @@ Moves::Moves(int myMove) {
 			type.assign("Flying"); //type of attack
 			typing = 1;
 			break;
-		case PECK: //13
-			moveName.assign("Peck");
-			power = 35;
+		case AERIAL_ACE: //13
+			moveName.assign("Aerial Ace");
+			power = 60;
 			acc = 100;
 			setmovenum(13);
 			type.assign("Flying"); //type of attack

@@ -80,6 +80,7 @@ Raichu::Raichu() {
 	Pokemon::setmxp(m);//Set max xp for levelup
 	Pokemon::settype1("Electric");//Sets first type
 	Pokemon::settype2("");//Sets second type
+	Pokemon::setMoves(2, 3, 4, 9);//Set up moves for pokemon
 
 }
 
