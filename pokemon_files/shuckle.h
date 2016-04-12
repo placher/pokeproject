@@ -80,6 +80,7 @@ Shuckle::Shuckle() {
 	Pokemon::setmxp(m);//Set max xp for levelup
 	Pokemon::settype1("Bug");//Sets first type
 	Pokemon::settype2("Rock");//Sets second type
+	Pokemon::setMoves(10, 21, 24, 16);//Set up moves for pokemon
 
 }
 

@@ -37,7 +37,6 @@ class Gengar: public Pokemon {
 		int bsdef
 		int bspeed;
 		int levelspeed;
-		vector<> Moves;
 
 };
 

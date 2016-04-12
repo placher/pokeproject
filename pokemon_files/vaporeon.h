@@ -80,6 +80,7 @@ Vaporeon::Vaporeon() {
 	Pokemon::setmxp(m);//Set max xp for levelup
 	Pokemon::settype1("Water");//Sets first type
 	Pokemon::settype2("");//Sets second type
+	Pokemon::setMoves(19, 20, 5, 14);//Set up moves for pokemon
 
 }
 

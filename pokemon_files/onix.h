@@ -80,6 +80,7 @@ Onix::Onix() {
 	Pokemon::setmxp(m);//Set max xp for levelup
 	Pokemon::settype1("Rock");//Sets first type
 	Pokemon::settype2("Ground");//Sets second type
+	Pokemon::setMoves(0, 3, 23, 26);//Set up moves for pokemon
 
 }
 

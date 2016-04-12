@@ -80,6 +80,7 @@ Marowak::Marowak() {
 	Pokemon::setmxp(m);//Set max xp for levelup
 	Pokemon::settype1("Ground");//Sets first type
 	Pokemon::settype2("");//Sets second type
+	Pokemon::setMoves(0, 1, 3, 23);//Set up moves for pokemon
 
 }
 

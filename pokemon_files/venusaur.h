@@ -80,6 +80,7 @@ Venusaur::Venusaur() {
 	Pokemon::setmxp(m);//Set max xp for levelup
 	Pokemon::settype1("Grass");//Sets first type
 	Pokemon::settype2("Poison");//Sets second type
+	Pokemon::setMoves(1, 17, 18, 28);//Set up moves for pokemon
 
 }
 
