@@ -80,6 +80,7 @@ Hitmonchan::Hitmonchan() {
 	Pokemon::setmxp(m);//Set max xp for levelup
 	Pokemon::settype1("Fighting");//Sets first type
 	Pokemon::settype2("");//Sets second type
+	Pokemon::setMoves(8,9,10,21);//Sets moves
 
 }
 

@@ -80,6 +80,7 @@ Golem::Golem() {
 	Pokemon::setmxp(m);//Set max xp for levelup
 	Pokemon::settype1("Rock");//Sets first type
 	Pokemon::settype2("Ground");//Sets second type
+	Pokemon::setMoves(1,26,23,14);//Sets moves
 
 }
 

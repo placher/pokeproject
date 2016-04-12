@@ -80,6 +80,7 @@ Electabuzz::Electabuzz() {
 	Pokemon::setmxp(m);//Set max xp for levelup
 	Pokemon::settype1("Electric");//Sets first type
 	Pokemon::settype2("");//Sets second type
+	Pokemon::setMoves(2,4,9,1);//Sets moves
 
 }
 

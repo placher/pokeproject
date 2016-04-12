@@ -80,6 +80,7 @@ Dragonite::Dragonite() {
 	Pokemon::setmxp(m);//Set max xp for levelup
 	Pokemon::settype1("Dragon");//Sets first type
 	Pokemon::settype2("Flying");//Sets second type
+	Pokemon::setMoves(1,24,4,21);//Sets moves
 
 }
 

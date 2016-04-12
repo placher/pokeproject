@@ -80,6 +80,7 @@ Dodrio::Dodrio() {
 	Pokemon::setmxp(m);//Set max xp for levelup
 	Pokemon::settype1("Normal");//Sets first type
 	Pokemon::settype2("Flying");//Sets second type
+	Pokemon::setMoves(11,12,0,14);//Sets moves
 
 }
 

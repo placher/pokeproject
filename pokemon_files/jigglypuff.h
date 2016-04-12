@@ -80,6 +80,7 @@ Jigglypuff::Jigglypuff() {
 	Pokemon::setmxp(m);//Set max xp for levelup
 	Pokemon::settype1("Normal");//Sets first type
 	Pokemon::settype2("");//Sets second type
+	Pokemon::setMoves(0,19,25,23);//Sets moves
 
 }
 

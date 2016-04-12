@@ -80,6 +80,7 @@ Bulbasaur::Bulbasaur() {
 	Pokemon::setmxp(m);//Set max xp for levelup
 	Pokemon::settype1("Grass");//Sets first type
 	Pokemon::settype2("Poison");//Sets second type
+	Pokemon::setMoves(0,17,18,3);//Sets moves
 
 }
 

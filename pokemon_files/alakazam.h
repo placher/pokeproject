@@ -80,6 +80,7 @@ Alakazam::Alakazam() {
 	Pokemon::setmxp(m);//Set max xp for levelup
 	Pokemon::settype1("Psychic");//Sets first type
 	Pokemon::settype2("");//Sets second type
+	Pokemon::setMoves(15,16,25,0);
 
 }
 
