@@ -1,5 +1,8 @@
 //Shuckle Pokemon
 
+#ifndef SHUCKLE_H
+#define SHUCKLE_H
+
 //Include things. Not complete
 #ifndef SHUCKLE_H
 #define SHUCKLE_H

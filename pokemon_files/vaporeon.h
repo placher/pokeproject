@@ -1,5 +1,8 @@
 //Vaporeon Pokemon
 
+#ifndef VAPOREON_H
+#define VAPOREON_H
+
 //Include things. Not complete
 #ifndef VAPOREON_H
 #define VAPOREON_H

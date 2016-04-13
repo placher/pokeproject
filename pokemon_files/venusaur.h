@@ -1,5 +1,8 @@
 //Venusaur Pokemon
 
+#ifndef VENUSAUR_H
+#define VENUSAUR_H
+
 //Include things. Not complete
 #ifndef VENUSAUR_H
 #define VENUSAUR_H
@@ -7,6 +10,8 @@
 #include <string>
 #include "Moves.h"
 #include "Pokemon.h"
+
+
 
 
 using namespace std;

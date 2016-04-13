@@ -1,5 +1,8 @@
 //Raichu Pokemon
 
+#ifndef RAICHU_H
+#define RAICHU_H
+
 //Include things. Not complete
 #ifndef RAICHU_H
 #define RAICHU_H
