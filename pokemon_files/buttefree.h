@@ -83,6 +83,7 @@ Butterfree::Butterfree() {
 	Pokemon::settype1("Bug");//Sets first type
 	Pokemon::settype2("Flying");//Sets second type
 	Pokemon::setMoves(0,16,30,31);//Sets moves
+	Pokemon::setNum(7);
 
 }
 

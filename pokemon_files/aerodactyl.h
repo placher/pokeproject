@@ -83,6 +83,7 @@ Aerodactyl::Aerodactyl() {
 	Pokemon::settype1("Rock");//Sets first type
 	Pokemon::settype2("Flying");//Sets second type
 	Pokemon::setMoves(22,24,26,27);//Sets Moves
+	Pokemon::setNum(1);//First pokemon
 
 }
 

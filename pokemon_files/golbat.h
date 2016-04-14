@@ -83,6 +83,7 @@ Golbat::Golbat() {
 	Pokemon::settype1("Poison");//Sets first type
 	Pokemon::settype2("Flying");//Sets second type
 	Pokemon::setMoves(29,30,0,3);//Sets moves
+	Pokemon::setNum(17);
 
 }
 

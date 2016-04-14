@@ -35,6 +35,21 @@ class Pokemon{
 		void settype2(string);//Sets the type2
 		void levelup();//The level up function for a pokemon
 		void setMoves(int, int, int, int);//Set four moves for the pokemon
+		void setNum(int);//Sets the number of the pokemon
+		int getmhealth();//Set max health
+		void getchealth();//Set curr health
+		void getlevel();//Set level
+		void getatt();//Set attack
+		void getdef();//Set defense
+		void getsatt();//Set special attack
+		void getsdef();//Set special defense
+		void getspeed();//Set speed
+		void getxp();//Set current xp(should default to 0)
+		void getmxp();//Set max xp for levelup
+		void gettype1();//Sets the type1
+		void gettype2();//Sets the type2
+		//void getMoves(int, int, int, int);//Set four moves for the pokemon
+		int getNum();//Sets the number of the pokemon
 		
 		
 		
@@ -57,6 +72,7 @@ class Pokemon{
 		int speed;//Speed stat
 		int xp;//Current xp
 		int maxxp;//Max xp
+		int num;;//Identify each pokemon
 		string type1;//First type
 		string type2;//Second type/Set to Null if there is no second type
 		string name;//Name of the pokemon
@@ -158,3 +174,8 @@ void Pokemon::setMoves(int mv1, int mv2, int mv3, int mv4) {
 	moves.push_back(move3);
 	moves.push_back(move4); // last usable move slot
 }
+
+void Pokemon::setNum(int number) {
+	num = number;
+}
+

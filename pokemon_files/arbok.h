@@ -83,6 +83,7 @@ Arbok::Arbok() {
 	Pokemon::settype1("Poison");//Sets first type
 	Pokemon::settype2("");//Sets second type
 	Pokemon::setMoves(0,28,29,14);//Sets moves
+	Pokemon::setNum(3);
 
 }
 

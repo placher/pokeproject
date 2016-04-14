@@ -11,16 +11,81 @@ using namespace std;
 class Trainer {
 	public:
 		Trainer(int); // constructor
+		Pokemon* getPokemon(int)//returns the pokemon
 	
 	private:
 		string tname;//Name of the trainer
 		vector <Pokemon*> pokemon; //Pokemon team
+		
 
 };
 
 Trainer::Trainer(int trainer){
 	switch(trainer) {
 		case 1: //This is the player
+			int n, m, o, p, q, r;
+			/*
+			cout << "Please type the number corresponding to the pokemon you want." << endl;
+			cout << "Venusaur(1), Charizard(2), Blastoise(3)" << endl;
+			cin >> n;
+			cout << "Butterfree(1), Golbat(2), Dodrio(3)" << endl;
+			cin >> m;
+			cout << "Golduck(1), Arbok(2), Electabuzz(3)" << endl;
+			cin >> o;
+			cout << "Golem(1), Marowak(2), Alakazam(3)" << endl;
+			cin >> p;
+			cout << "Fearow(1), Gyrados(2), Kingler(3)" << endl;
+			cin >> q;
+			cout << "Arcanine(1), Snorlax(2), Magmar(3)" << endl;
+			cin >> r;
+			
+			if (n == 1)
+				Pokemon *poke1 = new Venusaur;
+			else if (n == 2)
+				Pokemon *poke1 = new Charizard;
+			else 
+				Pokemon *poke1 = new Blastoise;
+			
+			if (m == 1)
+				Pokemon *poke2 = new Butterfree;
+			else if (m == 2)
+				Pokemon *poke2 = new Golbat;
+			else
+				Pokemon *poke2 = new Dodrio;
+			
+			if (o == 1)
+				Pokemon *poke3 = new Golduck;
+			else if (o == 2)
+				Pokemon *poke3 = new Arbok;
+			else
+				Pokemon *poke3 = new Electabuzz;
+			
+			if (p == 1)
+				Pokemon *poke4 = new Golem;
+			else if (p == 2)
+				Pokemon *poke4 = new Marowak;
+			else
+				Pokemon *poke4 = new Alakazam;
+			
+			if (q == 1)
+				Pokemon *poke5 = new Fearow;
+			else if (q == 2)
+				Pokemon *poke5 = new Gyrados;
+			else
+				Pokemon *poke5 = new Kingler;
+			
+			if (r == 1)
+				Pokemon *poke6 = new Arcanine;
+			else if (r == 2)
+				Pokemon *poke6 = new Snorlax;
+			else
+				Pokemon *poke6 = new Magmar;
+			*/
+			
+			
+			
+			
+			
 			tname = "Red"
 			Pokemon *poke1 = new Charizard;
 			Pokemon *poke2 = new Alakazam;
@@ -57,7 +122,7 @@ Trainer::Trainer(int trainer){
 			Pokemon *poke1 = new Venusaur;
 			Pokemon *poke2 = new Butterfree;
 			Pokemon *poke3 = new Fearow;
-			Pokemon *poke4 = new Kingler;
+			Pokemon *poke4 = new Golem;
 			Pokemon *poke5 = new Alakazam;
 			Pokemon *poke6 = new Golduck;
 			
@@ -120,5 +185,14 @@ Trainer::Trainer(int trainer){
 			break;
 	}
 }
+
+Pokemon* Trainer::getPokemon(int n) {//returns the pokemon
+	if (n < 6)
+		return pokemon[n];
+	else
+		return pokemon[0];
+}
+
+
 
 #endif

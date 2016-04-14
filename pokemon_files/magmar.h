@@ -1,8 +1,8 @@
-//Gengar Pokemon
+//Magmar Pokemon
 
 //Include things. Not complete
-#ifndef GENGAR_H
-#define GENGAR_H
+#ifndef MAGMAR_H
+#define MAGMAR_H
 #include <cmath>
 #include <string>
 #include "Moves.h"
@@ -27,9 +27,9 @@ Medium Slow = 6/5n^3 - 15n^2 + 100n - 140
 Slow = 5n^3/4
 */
 
-class Gengar: public Pokemon {
+class Magmar: public Pokemon {
 	public: 
-		Gengar();
+		Magmar();
 		
 	private:		
 		int bhp;
@@ -42,32 +42,32 @@ class Gengar: public Pokemon {
 
 };
 
-Gengar::Gengar() {
+Magmar::Magmar() {
 	//There is a glitch associated with meduim slow pokemon at level 1. Additionally
 	//there's some really odd xp values for lvl 1 pokemon including fast having 1 xp 
 	//to lvl up.
 	int level=50;
-	levelspeed=3;//Medium slow Pokemon
-	bhp = 60;
-	batt = 65;
-	bdef = 60;
-	bsatt = 130;
-	bsdef = 75;
-	bspeed = 110;
+	levelspeed=2;//Medium fast Pokemon
+	bhp = 65;
+	batt = 95;
+	bdef = 57;
+	bsatt = 100;
+	bsdef = 85;
+	bspeed = 93;
 	int m, hp, att, def, satt, sdef, speed;
 	//This xp determining algorithm determines MAX xp, not levelup xp
 	if(level > 1) {
-		m = (6.0/5.0*pow(level,3)) - 15.0*level*level + 100*level - 140;
+		m = pow(level, 3)
 	}
 	else {
-		m = 6;
+		m = 4;
 	}
 	hp = ((bhp*2)*(level)/100)+level+(rand()%10)+12;//Determine hp
-	att = (((batt*2)*level)/100)+(rand()%5)+6;//Determine att
-	def = (((bdef*2)*level)/100)+(rand()%5)+6;//Determine def
-	satt = (((bsatt*2)*level)/100)+(rand()%5)+26;//Determine satt
-	sdef = (((bsdef*2)*level)/100)+(rand()%5)+7;//Determine sdef
-	speed = (((bspeed*2)*level)/100)+(rand()%5)+11;//Determine speed
+	att = (((batt*2)*level)/100)+(rand()%5)+9;//Determine att
+	def = (((bdef*2)*level)/100)+(rand()%5)+5;//Determine def
+	satt = (((bsatt*2)*level)/100)+(rand()%5)+10;//Determine satt
+	sdef = (((bsdef*2)*level)/100)+(rand()%5)+8;//Determine sdef
+	speed = (((bspeed*2)*level)/100)+(rand()%5)+9;//Determine speed
 	
 	//Calculated with no IV with all decimals rounded down
 	Pokemon::setmhealth(hp);//Set max health
@@ -80,11 +80,11 @@ Gengar::Gengar() {
 	Pokemon::setspeed(speed);//Set speed
 	Pokemon::setxp(0);//Set current xp(should default to 0)
 	Pokemon::setmxp(m);//Set max xp for levelup
-	Pokemon::settype1("Ghost");//Sets first type
-	Pokemon::settype2("Poison");//Sets second type
-	Pokemon::setMoves(25, 28, 2, 15);//Set up moves for pokemon
-	Pokemon::setNum(16);
-	
+	Pokemon::settype1("Electric");//Sets first type
+	Pokemon::settype2("");//Sets second type
+	Pokemon::setMoves(6, 7, 8, 14);//Set up moves for pokemon
+	Pokemon::setNum(27);
+
 }
 
 #endif

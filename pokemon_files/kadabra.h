@@ -83,6 +83,7 @@ Kadabra::Kadabra() {
 	Pokemon::settype1("Psychic");//Sets first type
 	Pokemon::settype2("");//Sets second type
 	Pokemon::setMoves(14,15,16,25);//Sets moves
+	Pokemon::setNum(24);
 
 }
 

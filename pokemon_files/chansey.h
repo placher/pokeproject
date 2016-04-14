@@ -83,6 +83,7 @@ Chansey::Chansey() {
 	Pokemon::settype1("Normal");//Sets first type
 	Pokemon::settype2("");//Sets second type
 	Pokemon::setMoves(1,0,20,3)l//Sets moves
+	Pokemon::setNum(8);
 
 }
 

@@ -83,6 +83,7 @@ Charizard::Charizard() {
 	Pokemon::settype1("Fire");//Sets first type
 	Pokemon::settype2("Flying");//Sets second type
 	Pokemon::setMoves(6,7,24,22);//Sets moves
+	Pokemon::setNum(9);
 
 }
 

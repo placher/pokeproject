@@ -83,6 +83,7 @@ Ninetales::Ninetales() {
 	Pokemon::settype1("Fire");//Sets first type
 	Pokemon::settype2("");//Sets second type
 	Pokemon::setMoves(6, 7, 25, 13);//Set up moves for pokemon
+	Pokemon::setNum(29);
 
 }
 

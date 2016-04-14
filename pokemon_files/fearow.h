@@ -83,6 +83,7 @@ Fearow::Fearow() {
 	Pokemon::settype1("Normal");//Sets first type
 	Pokemon::settype2("Flying");//Sets second type
 	Pokemon::setMoves(12,27,30,11);
+	Pokemon::setNum(15);
 
 }
 

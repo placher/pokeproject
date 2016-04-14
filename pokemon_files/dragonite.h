@@ -83,6 +83,7 @@ Dragonite::Dragonite() {
 	Pokemon::settype1("Dragon");//Sets first type
 	Pokemon::settype2("Flying");//Sets second type
 	Pokemon::setMoves(1,24,4,21);//Sets moves
+	Pokemon::setNum(11);
 
 }
 

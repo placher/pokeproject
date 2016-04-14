@@ -83,6 +83,7 @@ Golem::Golem() {
 	Pokemon::settype1("Rock");//Sets first type
 	Pokemon::settype2("Ground");//Sets second type
 	Pokemon::setMoves(1,26,23,14);//Sets moves
+	Pokemon::setNum(19);
 
 }
 

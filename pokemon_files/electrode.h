@@ -83,6 +83,7 @@ Electrode::Electrode() {
 	Pokemon::settype1("Electric");//Sets first type
 	Pokemon::settype2("");//Sets second type
 	Pokemon::setMoves(2,4,14,0);//Sets moves
+	Pokemon::setNum(14);
 
 }
 

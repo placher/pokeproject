@@ -83,6 +83,7 @@ Kingler::Kingler() {
 	Pokemon::settype1("Water");//Sets first type
 	Pokemon::settype2("");//Sets second type
 	Pokemon::setMoves(14, 19, 20, 21);//Set up moves for pokemon
+	Pokemon::setNum(25);
 
 }
 

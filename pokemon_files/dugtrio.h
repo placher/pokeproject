@@ -83,6 +83,7 @@ Dugtrio::Dugtrio() {
 	Pokemon::settype1("Ground");//Sets first type
 	Pokemon::settype2("");//Sets second type
 	Pokemon::setMoves(22,23,26,3);//Sets moves
+	Pokemon::setNum(12);
 
 }
 

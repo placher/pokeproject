@@ -83,6 +83,7 @@ Blastoise::Blastoise() {
 	Pokemon::settype1("Water");//Sets first type
 	Pokemon::settype2("");//Sets second type
 	Pokemon::setMoves(20,23,21,1);//Sets Moves
+	Pokemon::setNum(5);
 
 }
 

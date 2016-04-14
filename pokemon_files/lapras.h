@@ -83,6 +83,7 @@ Lapras::Lapras() {
 	Pokemon::settype1("Water");//Sets first type
 	Pokemon::settype2("Ice");//Sets second type
 	Pokemon::setMoves(5, 19, 20, 21);//Set up moves for pokemon
+	Pokemon::setNum(26);
 
 }
 

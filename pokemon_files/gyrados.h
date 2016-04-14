@@ -83,6 +83,7 @@ Gyrados::Gyrados() {
 	Pokemon::settype1("Water");//Sets first type
 	Pokemon::settype2("Flying");//Sets second type
 	Pokemon::setMoves(21,29,0,20);//Sets moves
+	Pokemon::setNum(21);
 	
 }
 

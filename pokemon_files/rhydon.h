@@ -86,6 +86,7 @@ Rhydon::Rhydon() {
 	Pokemon::settype1("Ground");//Sets first type
 	Pokemon::settype2("Rock");//Sets second type
 	Pokemon::setMoves(3, 14, 23, 29);//Set up moves for pokemon
+	Pokemon::setNum(34);
 
 }
 

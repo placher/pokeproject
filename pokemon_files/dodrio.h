@@ -83,6 +83,7 @@ Dodrio::Dodrio() {
 	Pokemon::settype1("Normal");//Sets first type
 	Pokemon::settype2("Flying");//Sets second type
 	Pokemon::setMoves(11,12,0,14);//Sets moves
+	Pokemon::setNum(10);
 
 }
 

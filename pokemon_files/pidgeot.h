@@ -83,6 +83,7 @@ Pidgeot::Pidgeot() {
 	Pokemon::settype1("Normal");//Sets first type
 	Pokemon::settype2("Flying");//Sets second type
 	Pokemon::setMoves(0, 13, 12, 22);//Set up moves for pokemon
+	Pokemon::setNum(31);
 
 }
 
