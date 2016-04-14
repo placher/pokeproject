@@ -137,6 +137,53 @@ LTexture gBG5Texture; //room 2 background
 LTexture gBG6Texture; //room 3 background
 LTexture gBG7Texture; //room 4 background
 
+//Pokemon Textures
+LTexture gAerodactylTexture; //1
+LTexture gAlakazamTexture; //2
+LTexture gArbokTexture; //3
+LTexture gArcanineTexture; //4
+LTexture gBlastoiseTexture; //5
+LTexture gBulbasaurTexture; //6
+LTexture gButterfreeTexture; //7
+LTexture gChanseyTexture; //8
+LTexture gCharizardTexture; //9
+LTexture gDodrioTexture; //10
+LTexture gDragoniteTexture; //11
+LTexture gDugtrioTexture; //12
+LTexture gElectabuzzTexture; //13
+LTexture gElectrodeTexture; //14
+LTexture gFearowTexture; //15
+LTexture gGengarTexture; //16
+LTexture gGolbatTexture; //17
+LTexture gGolduckTexture; //18
+LTexture gGolemTexture; //19
+LTexture gGravelerTexture; //20
+LTexture gGyradosTexture; //21
+LTexture gHitmonchanTexture; //22
+LTexture gJigglypuffTexture; //23
+LTexture gKadabraTexture; //24
+LTexture gKinglerTexture; //25
+LTexture gLaprasTexture; //26
+LTexture gMagmarTexture; //27
+LTexture gMarowakTexture; //28
+LTexture gNinetalesTexture; //29
+LTexture gOnixTexture; //30
+LTexture gPidgeotTexture; //31
+LTexture gPikachuTexture; //32
+LTexture gRaichuTexture; //33
+LTexture gRhydonTexture; //34
+LTexture gRhyhornTexture; //35
+LTexture gShuckleTexture; //36
+LTexture gSnorlaxTexture; //37
+LTexture gVaporeonTexture; //38
+LTexture gVenusaurTexture; //39
+
+//Battle Textures
+LTexture gBattleScreenTexture; //background
+LTexture gHighHealthTexture; //health bar
+LTexture gMedHealthTexture; //50% depleted health bar
+LTexture gLowHelathTexture; //85% depleted health bar
+
 LTexture::LTexture()
 {
 	//Initialize
@@ -508,7 +555,6 @@ bool Ash::isBattle( int bg, int battle )
 				break;
 			case 7: //room 4 has no battle
 				return false;
-				break;
 		}
 	}
 	
@@ -574,7 +620,7 @@ bool loadMedia()
 	//Loading success flag
 	bool success = true;
 
-	//Load Ash texture
+	//Load Ash Texture
 	if( !gAshTexture.loadFromFile( "images/ash.bmp" ) )
 	{
 		printf( "Failed to load ash texture!\n" );
@@ -598,7 +644,7 @@ bool loadMedia()
 		success = false;
 	}
 	
-	//Load NPC textures
+	//Load NPC Textures
 	if( !gOffficerTexture.loadFromFile( "images/officer.bmp" ) )
 	{
 		printf( "Failed to load officer texture!\n" );
@@ -625,7 +671,7 @@ bool loadMedia()
 		success = false;
 	}
 
-	//Load background textures
+	//Load Background Textures
 	if( !gBG1Texture.loadFromFile( "images/exterior.bmp" ) )
 	{
 		printf( "Failed to load exterior texture!\n" );
@@ -661,6 +707,225 @@ bool loadMedia()
 		printf( "Failed to load room_4 texture!\n" );
 		success = false;
 	}
+	
+	//Load Pokemon Textures
+	if( !gAerodactylTexture.loadFromFile( "images/battle/aerodactyl.bmp" ) )
+	{
+		printf( "Failed to load aerodactyl texture!\n" );
+		success = false;
+	}
+	if( !gAlakazamTexture.loadFromFile( "images/battle/alakazam.bmp" ) )
+	{
+		printf( "Failed to load alakazam texture!\n" );
+		success = false;
+	}
+	if( !gArbokTexture.loadFromFile( "images/battle/arbok.bmp" ) )
+	{
+		printf( "Failed to load arbok texture!\n" );
+		success = false;
+	}
+	if( !gArcanineTexture.loadFromFile( "images/battle/arcanine.bmp" ) )
+	{
+		printf( "Failed to load arcanine texture!\n" );
+		success = false;
+	}
+	if( !gBlastoiseTexture.loadFromFile( "images/battle/blastoise.bmp" ) )
+	{
+		printf( "Failed to load blastoise texture!\n" );
+		success = false;
+	}
+	if( !gBulbasaurTexture.loadFromFile( "images/battle/bulbasaur.bmp" ) )
+	{
+		printf( "Failed to load bulbasaur texture!\n" );
+		success = false;
+	}
+	if( !gButterfreeTexture.loadFromFile( "images/battle/butterfree.bmp" ) )
+	{
+		printf( "Failed to load butterfree texture!\n" );
+		success = false;
+	}
+	if( !gChanseyTexture.loadFromFile( "images/battle/chansey.bmp" ) )
+	{
+		printf( "Failed to load chansey texture!\n" );
+		success = false;
+	}
+	if( !gCharizardTexture.loadFromFile( "images/battle/charizard.bmp" ) )
+	{
+		printf( "Failed to load aerodactyl texture!\n" );
+		success = false;
+	}
+	if( !gDodrioTexture.loadFromFile( "images/battle/dodrio.bmp" ) )
+	{
+		printf( "Failed to load dodrio texture!\n" );
+		success = false;
+	}
+	if( !gDragoniteTexture.loadFromFile( "images/battle/dragonite.bmp" ) )
+	{
+		printf( "Failed to load dragonite texture!\n" );
+		success = false;
+	}
+	if( !gDugtrioTexture.loadFromFile( "images/battle/dugtrio.bmp" ) )
+	{
+		printf( "Failed to load dugtrio texture!\n" );
+		success = false;
+	}
+	if( !gElectabuzzTexture.loadFromFile( "images/battle/electabuzz.bmp" ) )
+	{
+		printf( "Failed to load electabuzz texture!\n" );
+		success = false;
+	}
+	if( !gElectrodeTexture.loadFromFile( "images/battle/electrode.bmp" ) )
+	{
+		printf( "Failed to load electrode texture!\n" );
+		success = false;
+	}
+	if( !gFearowTexture.loadFromFile( "images/battle/fearow.bmp" ) )
+	{
+		printf( "Failed to load fearow texture!\n" );
+		success = false;
+	}
+	if( !gGengarTexture.loadFromFile( "images/battle/gengar.bmp" ) )
+	{
+		printf( "Failed to load gengar texture!\n" );
+		success = false;
+	}
+	if( !gGolbatTexture.loadFromFile( "images/battle/golbat.bmp" ) )
+	{
+		printf( "Failed to load golbat texture!\n" );
+		success = false;
+	}
+	if( !gGolduckTexture.loadFromFile( "images/battle/golduck.bmp" ) )
+	{
+		printf( "Failed to load golduck texture!\n" );
+		success = false;
+	}
+	if( !gGolemTexture.loadFromFile( "images/battle/golem.bmp" ) )
+	{
+		printf( "Failed to load golem texture!\n" );
+		success = false;
+	}
+	if( !gGravelerTexture.loadFromFile( "images/battle/graveler.bmp" ) )
+	{
+		printf( "Failed to load graveler texture!\n" );
+		success = false;
+	}
+	if( !gGyradosTexture.loadFromFile( "images/battle/gyrados.bmp" ) )
+	{
+		printf( "Failed to load gyrados texture!\n" );
+		success = false;
+	}
+	if( !gHitmonchanTexture.loadFromFile( "images/battle/hitmonchan.bmp" ) )
+	{
+		printf( "Failed to load hitmonchan texture!\n" );
+		success = false;
+	}
+	if( !gJigglypuffTexture.loadFromFile( "images/battle/jigglypufff.bmp" ) )
+	{
+		printf( "Failed to load jigglypuff texture!\n" );
+		success = false;
+	}
+	if( !gKadabraTexture.loadFromFile( "images/battle/kadabra.bmp" ) )
+	{
+		printf( "Failed to load kadabra texture!\n" );
+		success = false;
+	}
+	if( !gKinglerTexture.loadFromFile( "images/battle/kingler.bmp" ) )
+	{
+		printf( "Failed to load kingler texture!\n" );
+		success = false;
+	}
+	if( !gLaprasTexture.loadFromFile( "images/battle/lapras.bmp" ) )
+	{
+		printf( "Failed to load lapras texture!\n" );
+		success = false;
+	}
+	if( !gMagmarTexture.loadFromFile( "images/battle/magmar.bmp" ) )
+	{
+		printf( "Failed to load magmar texture!\n" );
+		success = false;
+	}
+	if( !gMarowakTexture.loadFromFile( "images/battle/marowak.bmp" ) )
+	{
+		printf( "Failed to load marowak texture!\n" );
+		success = false;
+	}
+	if( !gNinetalesTexture.loadFromFile( "images/battle/ninetales.bmp" ) )
+	{
+		printf( "Failed to load ninetales texture!\n" );
+		success = false;
+	}
+	if( !gOnixTexture.loadFromFile( "images/battle/onix.bmp" ) )
+	{
+		printf( "Failed to load onix texture!\n" );
+		success = false;
+	}
+	if( !gPidgeotTexture.loadFromFile( "images/battle/pidgeot.bmp" ) )
+	{
+		printf( "Failed to load pidgeot texture!\n" );
+		success = false;
+	}
+	if( !gPikachuTexture.loadFromFile( "images/battle/pikachu.bmp" ) )
+	{
+		printf( "Failed to load pikachu texture!\n" );
+		success = false;
+	}
+	if( !gRaichuTexture.loadFromFile( "images/battle/raichu.bmp" ) )
+	{
+		printf( "Failed to load raichu texture!\n" );
+		success = false;
+	}
+	if( !gRhydonTexture.loadFromFile( "images/battle/rhydon.bmp" ) )
+	{
+		printf( "Failed to load rhydon texture!\n" );
+		success = false;
+	}
+	if( !gRhyhornTexture.loadFromFile( "images/battle/rhyhorn.bmp" ) )
+	{
+		printf( "Failed to load rhyhorn texture!\n" );
+		success = false;
+	}
+	if( !gShuckleTexture.loadFromFile( "images/battle/shuckle.bmp" ) )
+	{
+		printf( "Failed to load shuckle texture!\n" );
+		success = false;
+	}
+	if( !gSnorlaxTexture.loadFromFile( "images/battle/snorlax.bmp" ) )
+	{
+		printf( "Failed to load snorlax texture!\n" );
+		success = false;
+	}
+	if( !gVaporeonTexture.loadFromFile( "images/battle/vaporeon.bmp" ) )
+	{
+		printf( "Failed to load vaporeon texture!\n" );
+		success = false;
+	}
+	if( !gVenusaurTexture.loadFromFile( "images/battle/venusaur.bmp" ) )
+	{
+		printf( "Failed to load venusaur texture!\n" );
+		success = false;
+	}
+	
+	//Load Battle Textures
+	if( !gBattleScreenTexture.loadFromFile( "images/battle/battle_screen.bmp" ) )
+	{
+		printf( "Failed to load battle_screen texture!\n" );
+		success = false;
+	}
+	if( !gHighHealthTexture.loadFromFile( "images/battle/high_health.bmp" ) )
+	{
+		printf( "Failed to load high_health texture!\n" );
+		success = false;
+	}
+	if( !gMedHealthTexture.loadFromFile( "images/battle/med_health.bmp" ) )
+	{
+		printf( "Failed to load med_health texture!\n" );
+		success = false;
+	}
+	if( !gLowHelathTexture.loadFromFile( "images/battle/low_health.bmp" ) )
+	{
+		printf( "Failed to load low_health texture!\n" );
+		success = false;
+	}
 
 	return success;
 }
@@ -668,18 +933,23 @@ bool loadMedia()
 void close()
 {
 	//Free loaded images
+	
+	//Player Sprite
 	gAshTexture.free();
 	
+	//Enemy Sprites
 	gDougTexture.free();
 	gJohnTexture.free();
 	gPatrickTexture.free();
 	
+	//NPC Sprites
 	gOffficerTexture.free();
 	gLassTexture.free();
 	gLassPkmnTexture.free();
 	gProfTexture.free();
 	gProfPkmnTexture.free();
 	
+	//Backgrounds
 	gBG1Texture.free();
 	gBG2Texture.free();
 	gBG3Texture.free();
@@ -687,6 +957,53 @@ void close()
 	gBG5Texture.free();
 	gBG6Texture.free();
 	gBG7Texture.free();
+	
+	//Pokemon Sprites
+	gAerodactylTexture.free();
+	gAlakazamTexture.free();
+	gArbokTexture.free();
+	gArcanineTexture.free();
+	gBlastoiseTexture.free();
+	gBulbasaurTexture.free();
+	gButterfreeTexture.free();
+	gChanseyTexture.free();
+	gCharizardTexture.free();
+	gDodrioTexture.free();
+	gDragoniteTexture.free();
+	gDugtrioTexture.free();
+	gElectabuzzTexture.free();
+	gElectrodeTexture.free();
+	gFearowTexture.free();
+	gGengarTexture.free();
+	gGolbatTexture.free();
+	gGolduckTexture.free();
+	gGolemTexture.free();
+	gGravelerTexture.free();
+	gGyradosTexture.free();
+	gHitmonchanTexture.free();
+	gJigglypuffTexture.free();
+	gKadabraTexture.free();
+	gKinglerTexture.free();
+	gLaprasTexture.free();
+	gMagmarTexture.free();
+	gMarowakTexture.free();
+	gNinetalesTexture.free();
+	gOnixTexture.free();
+	gPidgeotTexture.free();
+	gPikachuTexture.free();
+	gRaichuTexture.free();
+	gRhydonTexture.free();
+	gRhyhornTexture.free();
+	gShuckleTexture.free();
+	gSnorlaxTexture.free();
+	gVaporeonTexture.free();
+	gVenusaurTexture.free();
+	
+	//Battle Textures
+	gBattleScreenTexture.free();
+	gHighHealthTexture.free();
+	gMedHealthTexture.free();
+	gLowHelathTexture.free();
 
 	//Destroy window	
 	SDL_DestroyRenderer( gRenderer );
@@ -697,6 +1014,131 @@ void close()
 	//Quit SDL subsystems
 	IMG_Quit();
 	SDL_Quit();
+}
+
+void renderPokemon( int num, int x, int y )
+{
+	//render a specific pokemon sprite to the screen at coordinates (x,y)
+
+	switch ( num )
+	{
+		case 1:
+			gAerodactylTexture.render( x, y );
+			break;
+		case 2:
+			gAlakazamTexture.render( x, y );
+			break;
+		case 3:
+			gArbokTexture.render( x, y );
+			break;
+		case 4:
+			gArcanineTexture.render( x, y );
+			break;
+		case 5:
+			gBlastoiseTexture.render( x, y );
+			break;
+		case 6:
+			gBulbasaurTexture.render( x, y );
+			break;
+		case 7:
+			gButterfreeTexture.render( x, y );
+			break;
+		case 8:
+			gChanseyTexture.render( x, y );
+			break;
+		case 9:
+			gCharizardTexture.render( x, y );
+			break;
+		case 10:
+			gDodrioTexture.render( x, y );
+			break;
+		case 11:
+			gDragoniteTexture.render( x, y );
+			break;
+		case 12:
+			gDugtrioTexture.render( x, y );
+			break;
+		case 13:
+			gElectabuzzTexture.render( x, y );
+			break;
+		case 14:
+			gElectrodeTexture.render( x, y );
+			break;
+		case 15:
+			gFearowTexture.render( x, y );
+			break;
+		case 16:
+			gGengarTexture.render( x, y );
+			break;
+		case 17:
+			gGolbatTexture.render( x, y );
+			break;
+		case 18:
+			gGolduckTexture.render( x, y );
+			break;
+		case 19:
+			gGolemTexture.render( x, y );
+			break;
+		case 20:
+			gGravelerTexture.render( x, y );
+			break;
+		case 21:
+			gGyradosTexture.render( x, y );
+			break;
+		case 22:
+			gHitmonchanTexture.render( x, y );
+			break;
+		case 23:
+			gJigglypuffTexture.render( x, y );
+			break;
+		case 24:
+			gKadabraTexture.render( x, y );
+			break;
+		case 25:
+			gKinglerTexture.render( x, y );
+			break;
+		case 26:
+			gLaprasTexture.render( x, y );
+			break;
+		case 27:
+			gMagmarTexture.render( x, y );
+			break;
+		case 28:
+			gMarowakTexture.render( x, y );
+			break;
+		case 29:
+			gNinetalesTexture.render( x, y );
+			break;
+		case 30:
+			gOnixTexture.render( x, y );
+			break;
+		case 31:
+			gPidgeotTexture.render( x, y );
+			break;
+		case 32:
+			gPikachuTexture.render( x, y );
+			break;
+		case 33:
+			gRaichuTexture.render( x, y );
+			break;
+		case 34:
+			gRhydonTexture.render( x, y );
+			break;
+		case 35:
+			gRhyhornTexture.render( x, y );
+			break;
+		case 36:
+			gShuckleTexture.render( x, y );
+			break;
+		case 37:
+			gSnorlaxTexture.render( x, y );
+			break;
+		case 38:
+			gVaporeonTexture.render( x, y );
+			break;
+		case 39:
+			gVenusaurTexture.render( x, y );
+	}
 }
 
 int main( int argc, char* args[] )
@@ -730,7 +1172,7 @@ int main( int argc, char* args[] )
 			//Event handler
 			SDL_Event e;
 
-			//The player sprite that will be moving around on the screen
+			//Driver for the player sprite that will be moving around on the screen
 			Ash ash;
 
 			//While application is running
