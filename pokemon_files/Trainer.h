@@ -1,10 +1,48 @@
 // Makes the trainer stuff for the class things
 
-#ifndef Trainer_H
-#define Trainer_H
+#ifndef TRAINER_H
+#define TRAINER_H
 #include <vector>
 #include <string>
+#include <iostream>
+
 #include "Pokemon.h"
+#include "aerodactyl.h"
+#include "alakazam.h"
+#include "arbok.h"
+#include "arcanine.h"
+#include "blastoise.h"
+#include "bulbasaur.h"
+#include "butterfree.h"
+#include "chansey.h"
+#include "charizard.h"
+#include "dodrio.h"
+#include "electabuzz.h"
+#include "fearow.h"
+#include "gengar.h"
+#include "golbat.h"
+#include "golduck.h"
+#include "golem.h"
+#include "graveler.h"
+#include "gyrados.h"
+#include "hitmonchan.h"
+#include "jigglypuff.h"
+#include "kadabra.h"
+#include "kingler.h"
+#include "lapras.h"
+#include "magmar.h"
+#include "marowak.h"
+#include "ninetales.h"
+#include "onix.h"
+#include "pidgeot.h"
+#include "pikachu.h"
+#include "raichu.h"
+#include "rhydon.h"
+#include "rhyhorn.h"
+#include "shuckle.h"
+#include "snorlax.h"
+#include "vaporeon.h"
+#include "venusaur.h"
 
 using namespace std;
 
@@ -187,10 +225,7 @@ Trainer::Trainer(int trainer){
 }
 
 Pokemon* Trainer::getPokemon(int n) {//returns the pokemon
-	if (n < 6)
-		return pokemon[n];
-	else
-		return pokemon[0];
+	return pokemon[n];
 }
 
 

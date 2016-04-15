@@ -1,5 +1,8 @@
 //Include things. Not complete
 
+#ifndef POKEMON_H
+#define POKEMON_H
+
 #include <ctime>
 #include <string>
 #include <iostream>
@@ -37,18 +40,18 @@ class Pokemon{
 		void setMoves(int, int, int, int);//Set four moves for the pokemon
 		void setNum(int);//Sets the number of the pokemon
 		int getmhealth();//Set max health
-		void getchealth();//Set curr health
-		void getlevel();//Set level
-		void getatt();//Set attack
-		void getdef();//Set defense
-		void getsatt();//Set special attack
-		void getsdef();//Set special defense
-		void getspeed();//Set speed
-		void getxp();//Set current xp(should default to 0)
-		void getmxp();//Set max xp for levelup
-		void gettype1();//Sets the type1
-		void gettype2();//Sets the type2
-		//void getMoves(int, int, int, int);//Set four moves for the pokemon
+		int getchealth();//Set curr health
+		int getlevel();//Set level
+		int getatt();//Set attack
+		int getdef();//Set defense
+		int getsatt();//Set special attack
+		int getsdef();//Set special defense
+		int getspeed();//Set speed
+		int getxp();//Set current xp(should default to 0)
+		int getmxp();//Set max xp for levelup
+		string gettype1();//Sets the type1
+		string gettype2();//Sets the type2
+		//Moves getMoves(int);//Set four moves for the pokemon
 		int getNum();//Sets the number of the pokemon
 		
 		
@@ -179,3 +182,61 @@ void Pokemon::setNum(int number) {
 	num = number;
 }
 
+int Pokemon::getmhealth() {
+	return maxhealth;
+}
+
+int Pokemon::getchealth() {
+	return currhealth;
+}
+
+int Pokemon::getlevel() {
+	return level;
+}
+
+int Pokemon::getatt() {
+	return att;
+}
+
+int Pokemon::getdef() {
+	return def;
+}
+
+int Pokemon::getsatt() {
+	return satt;
+}
+
+int Pokemon::getsdef() {
+	return sdef;
+}
+
+int Pokemon::getspeed() {
+	return speed;
+}
+
+int Pokemon::getxp() {
+	return xp;
+}
+
+int Pokemon::getmxp() {
+	return maxxp;
+}
+
+string Pokemon::gettype1() {
+	return type1;
+}
+
+string Pokemon::gettype2() {
+	return type2;
+}
+
+Moves Pokemon::getMoves(int n) {
+	return moves[n];
+}
+
+int Pokemon::getnum() {
+	return num;
+}
+
+
+#endif
