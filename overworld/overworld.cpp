@@ -9,6 +9,12 @@ Author: J. Patrick Lacher
 #include <SDL2/SDL_image.h>
 #include <stdio.h>
 #include <string>
+#include <iostream>
+#include <stdlib.h>
+#include <time.h>
+#include "headers/Trainer.h"
+#include "headers/Pokemon.h"
+
 
 //Screen dimension constants
 const int SCREEN_WIDTH = 900;
@@ -158,7 +164,7 @@ LTexture gGolbatTexture; //17
 LTexture gGolduckTexture; //18
 LTexture gGolemTexture; //19
 LTexture gGravelerTexture; //20
-LTexture gGyradosTexture; //21
+LTexture gGyaradosTexture; //21
 LTexture gHitmonchanTexture; //22
 LTexture gJigglypuffTexture; //23
 LTexture gKadabraTexture; //24
@@ -182,7 +188,7 @@ LTexture gVenusaurTexture; //39
 LTexture gBattleScreenTexture; //background
 LTexture gHighHealthTexture; //health bar
 LTexture gMedHealthTexture; //50% depleted health bar
-LTexture gLowHelathTexture; //85% depleted health bar
+LTexture gLowHelathTexture; //80% depleted health bar
 
 LTexture::LTexture()
 {
@@ -809,9 +815,9 @@ bool loadMedia()
 		printf( "Failed to load graveler texture!\n" );
 		success = false;
 	}
-	if( !gGyradosTexture.loadFromFile( "images/battle/gyrados.bmp" ) )
+	if( !gGyaradosTexture.loadFromFile( "images/battle/gyarados.bmp" ) )
 	{
-		printf( "Failed to load gyrados texture!\n" );
+		printf( "Failed to load gyarados texture!\n" );
 		success = false;
 	}
 	if( !gHitmonchanTexture.loadFromFile( "images/battle/hitmonchan.bmp" ) )
@@ -819,7 +825,7 @@ bool loadMedia()
 		printf( "Failed to load hitmonchan texture!\n" );
 		success = false;
 	}
-	if( !gJigglypuffTexture.loadFromFile( "images/battle/jigglypufff.bmp" ) )
+	if( !gJigglypuffTexture.loadFromFile( "images/battle/jigglypuff.bmp" ) )
 	{
 		printf( "Failed to load jigglypuff texture!\n" );
 		success = false;
@@ -979,7 +985,7 @@ void close()
 	gGolduckTexture.free();
 	gGolemTexture.free();
 	gGravelerTexture.free();
-	gGyradosTexture.free();
+	gGyaradosTexture.free();
 	gHitmonchanTexture.free();
 	gJigglypuffTexture.free();
 	gKadabraTexture.free();
@@ -1083,7 +1089,7 @@ void renderPokemon( int num, int x, int y )
 			gGravelerTexture.render( x, y );
 			break;
 		case 21:
-			gGyradosTexture.render( x, y );
+			gGyaradosTexture.render( x, y );
 			break;
 		case 22:
 			gHitmonchanTexture.render( x, y );
@@ -1141,6 +1147,113 @@ void renderPokemon( int num, int x, int y )
 	}
 }
 
+int handleMove( SDL_Event& m )
+{
+	//determines what move the player has entered
+	
+	//detects key press
+	if( m.type == SDL_KEYDOWN && m.key.repeat == 0 )
+    {
+        //return the selected move
+        switch( m.key.keysym.sym )
+        {
+            case SDLK_q: return 0; break;
+            case SDLK_w: return 1; break;
+            case SDLK_a: return 2; break;
+            case SDLK_s: return 3; break;
+        }
+    }
+}
+
+int fight_battle( int bg )
+{
+	//fights a battle between two trainer classes
+	
+	//Clear screen
+	SDL_SetRenderDrawColor( gRenderer, 0xFF, 0xFF, 0xFF, 0xFF );
+	SDL_RenderClear( gRenderer );
+	
+	//Event handler
+	SDL_Event m;
+	
+	//batte continuation flag
+	bool ended = false;
+	
+	//returns result
+	int result;
+	
+	//index of pokemon in trainers' pokemon array
+	int ppkmn = 0; //player
+	int epkmn = 0; //enemy
+	
+	//move entered by player
+	int move;
+	
+	while ( !ended ) //while battle isn't over
+	{
+		//render background
+		gBattleScreenTexture.render( 0, 0 );
+
+		//render appropriate health bars
+		//enemy
+		if( ( double(epkmn_health)/double(epkmn_maxhealth) ) >= 0.8 ) gHighHealthTexture.render( 291, 277 );
+		else if ( ( double(epkmn_health)/double(epkmn_maxhealth) ) >= 0.2 ) gMedHealthTexture.render( 291, 277 );
+		else gLowHelathTexture.render( 291, 277 );
+		
+		//player
+		if( ( double(ppkmn_health)/double(ppkmn_maxhealth) ) >= 0.8 ) gHighHealthTexture.render( 515, 478 );
+		else if ( ( double(ppkmn_health)/double(ppkmn_maxhealth) ) >= 0.2 ) gMedHealthTexture.render( 515, 478 );
+		else gLowHelathTexture.render( 515, 478 );
+		
+		//render pokemon sprites
+		renderPokemon( epkmn_num, 555, 303 ); //enemy
+		renderPokemon( ppkmn_num, 329, 453 ); //player
+		
+		//render moveset box
+		renderMoveBox( ppkmn_num );
+		
+		//handle move selection
+		while( SDL_PollEvent( &m ) != 0 )
+		{
+			//User requests quit
+			if( m.type == SDL_QUIT )
+			{
+				result = 2;
+				ended = true;
+			}
+
+			//Handle input for selected move
+			move = handleMove( m );
+		}
+		
+		//player attacks enemy pokemon
+		epkmn.take_damage( ppkmn.attack( move ) );
+		
+		//enemy pokemon attacks if not KO'd
+		if ( !epkmn.fainted() )
+		{
+			//enemy pokemon attacks
+			ppkmn.take_damage( epkmn.attack( rand() %3 ) );
+		}
+		else //enemy pokemon KO'd
+		{
+			if ( epkmn == 6 ) //enemy is out of pokemon
+			{
+				result = 0;
+				ended = true;
+			}
+			else epkmn++;
+			
+		}
+		
+		//Update screen
+		SDL_RenderPresent( gRenderer );
+	}
+	
+	SDL_Delay( 2000 );
+	return result;
+}
+
 int main( int argc, char* args[] )
 {	
 	//Start up SDL and create window
@@ -1165,6 +1278,9 @@ int main( int argc, char* args[] )
 			
 			//Allow for battle flag
 			int battle = 1;
+			
+			//Test for Loss of Battle
+			int victory = 1;
 			
 			//Retained value of bg in previous frame
 			int bg_backup;
@@ -1210,11 +1326,14 @@ int main( int argc, char* args[] )
 				ash.checkCollision( bg );
 				
 				//Run battle if one occurs
-				/*if ( ash.isBattle( bg, battle ) )
+				if ( ash.isBattle( bg, battle ) )
 				{
-					fight_battle( bg );
+					victory = fight_battle( bg );
 					battle = 0;
-				}*/
+					
+					//user closed window
+					if ( victory == 2 ) quit = true;
+				}
 
 				//Clear screen
 				SDL_SetRenderDrawColor( gRenderer, 0xFF, 0xFF, 0xFF, 0xFF );
