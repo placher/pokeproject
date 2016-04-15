@@ -36,7 +36,7 @@ class Hitmonchan: public Pokemon {
 		int batt;
 		int bdef;
 		int bsatt;
-		int bsdef
+		int bsdef;
 		int bspeed;
 		int levelspeed;
 
@@ -57,7 +57,7 @@ Hitmonchan::Hitmonchan() {
 	int m, hp, att, def, satt, sdef, speed;
 	//This xp determining algorithm determines MAX xp, not levelup xp
 	if(level > 1) {
-		m = pow(level, 3)
+		m = pow(level, 3);
 	}
 	else {
 		m = 4;
@@ -87,4 +87,4 @@ Hitmonchan::Hitmonchan() {
 
 }
 
-#endi5
+#endif

@@ -1,8 +1,5 @@
 //Rhyhorn Pokemon
 
-#ifndef RHYHORN_H
-#define RHYHORN_H
-
 //Include things. Not complete
 #ifndef RHYHORN_H
 #define RHYHORN_H
@@ -39,7 +36,7 @@ class Rhyhorn: public Pokemon {
 		int batt;
 		int bdef;
 		int bsatt;
-		int bsdef
+		int bsdef;
 		int bspeed;
 		int levelspeed;
 

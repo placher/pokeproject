@@ -1,8 +1,5 @@
 //Venusaur Pokemon
 
-#ifndef VENUSAUR_H
-#define VENUSAUR_H
-
 //Include things. Not complete
 #ifndef VENUSAUR_H
 #define VENUSAUR_H
@@ -41,7 +38,7 @@ class Venusaur: public Pokemon {
 		int batt;
 		int bdef;
 		int bsatt;
-		int bsdef
+		int bsdef;
 		int bspeed;
 		int levelspeed;
 

@@ -51,7 +51,8 @@ class Moves{
 		int getmovenum();
 		void setmovenum(int);
 		int noMove();
-		
+    int getPower();
+
 	private:
 		int myMove;//Number of the move
 		int power;//Power of the move
@@ -123,7 +124,7 @@ Moves::Moves(int myMove) {
 		case FLAMETHROWER: //7
 			moveName.assign("Flamethrower");
 			power = 90;
-			acc = 100
+			acc = 100;
 			setmovenum(7);
 			type.assign("Fire"); //type of attack
 			typing = 2;
@@ -287,7 +288,7 @@ Moves::Moves(int myMove) {
 			setmovenum(27);
 			type.assign("Flying"); //type of attack
 			typing = 1;
-			break
+			break;
 		case SLUDGE_BOMB: //28
 			moveName.assign("Sludge Bomb");
 			power = 90;
@@ -335,5 +336,15 @@ void Moves::setmovenum(int m) {
 }
 
 int Moves::noMove(){};
+
+/*
+int Moves::attack(){
+  power=power*2 + lever
+  return power;
+}*/
+
+int Moves::getPower() {
+  return power;
+}
 
 #endif

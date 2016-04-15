@@ -36,7 +36,7 @@ class Gengar: public Pokemon {
 		int batt;
 		int bdef;
 		int bsatt;
-		int bsdef
+		int bsdef;
 		int bspeed;
 		int levelspeed;
 

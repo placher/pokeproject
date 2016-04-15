@@ -4,6 +4,8 @@
 #define POKEMON_H
 
 #include <ctime>
+#include <time.h>
+#include <stdlib.h>
 #include <string>
 #include <iostream>
 #include <vector>
@@ -36,25 +38,25 @@ class Pokemon{
 		void setmxp(int);//Set max xp for levelup
 		void settype1(string);//Sets the type1
 		void settype2(string);//Sets the type2
-		void levelup();//The level up function for a pokemon
+		void levelup(int);//The level up function for a pokemon
 		void setMoves(int, int, int, int);//Set four moves for the pokemon
 		void setNum(int);//Sets the number of the pokemon
-		int getmhealth();//Set max health
-		int getchealth();//Set curr health
-		int getlevel();//Set level
-		int getatt();//Set attack
-		int getdef();//Set defense
-		int getsatt();//Set special attack
-		int getsdef();//Set special defense
-		int getspeed();//Set speed
-		int getxp();//Set current xp(should default to 0)
-		int getmxp();//Set max xp for levelup
+		int getmhealth();//Get max health
+		int getchealth();//Get curr health
+		int getlevel();//Get level
+		int getatt();//Get attack
+		int getdef();//Get defense
+		int getsatt();//Get special attack
+		int getsdef();//Get special defense
+		int getspeed();//Get speed
+		int getxp();//Get current xp(should default to 0)
+		int getmxp();//Get max xp for levelup
 		string gettype1();//Sets the type1
 		string gettype2();//Sets the type2
-		//Moves getMoves(int);//Set four moves for the pokemon
+		Moves getMoves(int);//Set four moves for the pokemon
 		int getNum();//Sets the number of the pokemon
-		
-		
+    int doDamage(int);//Determines damage		
+    void takeDamage(int);//Take damage		
 		
 	private:
 		/*
@@ -234,9 +236,26 @@ Moves Pokemon::getMoves(int n) {
 	return moves[n];
 }
 
-int Pokemon::getnum() {
+int Pokemon::getNum() {
 	return num;
 }
 
 
+int Pokemon::doDamage(int n) {//Determines damage		
+  int thispower = moves[n].getPower();
+  //Run algorithm
+  double damages = ((2*(level+10))/250)*att*thispower;
+  return int(damages);
+}
+
+void Pokemon::takeDamage(int damage) {//Take damage		
+  double damages = damage/def;
+  if (damages < 1) {
+    damages = 1;
+  }
+  currhealth = currhealth - int(damages);
+  if (currhealth < 0) {
+    currhealth = 0;
+  }
+}
 #endif

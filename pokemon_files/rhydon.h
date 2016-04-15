@@ -1,8 +1,5 @@
 //Rhydon Pokemon
 
-#ifndef RHYDON_H
-#define RHYDON_H
-
 //Include things. Not complete
 #ifndef RHYDON_H
 #define RHYDON_H
@@ -39,7 +36,7 @@ class Rhydon: public Pokemon {
 		int batt;
 		int bdef;
 		int bsatt;
-		int bsdef
+		int bsdef;
 		int bspeed;
 		int levelspeed;
 

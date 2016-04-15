@@ -1,8 +1,5 @@
 //Shuckle Pokemon
 
-#ifndef SHUCKLE_H
-#define SHUCKLE_H
-
 //Include things. Not complete
 #ifndef SHUCKLE_H
 #define SHUCKLE_H
@@ -39,7 +36,7 @@ class Shuckle: public Pokemon {
 		int batt;
 		int bdef;
 		int bsatt;
-		int bsdef
+		int bsdef;
 		int bspeed;
 		int levelspeed;
 

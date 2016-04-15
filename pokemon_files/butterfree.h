@@ -1,8 +1,8 @@
-//Lapras Pokemon
+//Butterfree Pokemon
 
 //Include things. Not complete
-#ifndef LAPRAS_H
-#define LAPRAS_H
+#ifndef BUTTEFREE_H
+#define BUTTEFREE_H
 #include <cmath>
 #include <string>
 #include "Moves.h"
@@ -27,9 +27,9 @@ Medium Slow = 6/5n^3 - 15n^2 + 100n - 140
 Slow = 5n^3/4
 */
 
-class Lapras: public Pokemon {
+class Butterfree: public Pokemon {
 	public: 
-		Lapras();
+		Butterfree();
 		
 	private:		
 		int bhp;
@@ -42,32 +42,32 @@ class Lapras: public Pokemon {
 
 };
 
-Lapras::Lapras() {
+Butterfree::Butterfree() {
 	//There is a glitch associated with meduim slow pokemon at level 1. Additionally
 	//there's some really odd xp values for lvl 1 pokemon including fast having 1 xp 
 	//to lvl up.
 	int level=50;
-	levelspeed=4;//Slow Pokemon
-	bhp = 130;
-	batt = 85;
-	bdef = 80;
-	bsatt = 85;
-	bsdef = 95;
-	bspeed = 60;
+	levelspeed=2;//Medium fast Pokemon
+	bhp = 60;
+	batt = 45;
+	bdef = 50;
+	bsatt = 80;
+	bsdef = 80;
+	bspeed = 70;
 	int m, hp, att, def, satt, sdef, speed;
 	//This xp determining algorithm determines MAX xp, not levelup xp
 	if(level > 1) {
-		m = 5.0*pow(level, 3)/4;
+		m = pow(level, 3);
 	}
 	else {
-		m = 8;
+		m = 4;
 	}
-	hp = ((bhp*2)*(level)/100)+level+(rand()%10)+26;//Determine hp
-	att = (((batt*2)*level)/100)+(rand()%5)+8;//Determine att
-	def = (((bdef*2)*level)/100)+(rand()%5)+8;//Determine def
-	satt = (((bsatt*2)*level)/100)+(rand()%5)+8;//Determine satt
-	sdef = (((bsdef*2)*level)/100)+(rand()%5)+9;//Determine sdef
-	speed = (((bspeed*2)*level)/100)+(rand()%5)+6;//Determine speed
+	hp = ((bhp*2)*(level)/100)+level+(rand()%8)+12;//Determine hp
+	att = (((batt*2)*level)/100)+(rand()%4)+4;//Determine att
+	def = (((bdef*2)*level)/100)+(rand()%4)+5;//Determine def
+	satt = (((bsatt*2)*level)/100)+(rand()%4)+8;//Determine satt
+	sdef = (((bsdef*2)*level)/100)+(rand()%4)+8;//Determine sdef
+	speed = (((bspeed*2)*level)/100)+(rand()%4)+7;//Determine speed
 	
 	//Calculated with no IV with all decimals rounded down
 	Pokemon::setmhealth(hp);//Set max health
@@ -80,10 +80,10 @@ Lapras::Lapras() {
 	Pokemon::setspeed(speed);//Set speed
 	Pokemon::setxp(0);//Set current xp(should default to 0)
 	Pokemon::setmxp(m);//Set max xp for levelup
-	Pokemon::settype1("Water");//Sets first type
-	Pokemon::settype2("Ice");//Sets second type
-	Pokemon::setMoves(5, 19, 20, 21);//Set up moves for pokemon
-	Pokemon::setNum(26);
+	Pokemon::settype1("Bug");//Sets first type
+	Pokemon::settype2("Flying");//Sets second type
+	Pokemon::setMoves(0,16,30,31);//Sets moves
+	Pokemon::setNum(7);
 
 }
 
