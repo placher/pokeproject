@@ -83,7 +83,7 @@ Snorlax::Snorlax() {
 	Pokemon::settype1("Water");//Sets first type
 	Pokemon::settype2("Ice");//Sets second type
 	Pokemon::setMoves(1, 23, 20, 25);//Set up moves for pokemon
-	Pokemon::setNum(36);
+	Pokemon::setNum(37);
 
 }
 
