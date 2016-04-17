@@ -52,6 +52,10 @@ class Moves{
 		void setmovenum(int);
 		int noMove();
     int getPower();
+    int getTyping();//Returns typing
+    int getAcc();//Returns accuracy
+    string getType();//Returns type
+    string getName();//Returns name
 
 	private:
 		int myMove;//Number of the move
@@ -346,5 +350,29 @@ int Moves::attack(){
 int Moves::getPower() {
   return power;
 }
+
+
+    int getTyping();//Returns typing
+    int getAcc();//Returns accuracy
+    string getType();//Returns type
+    string getName();//Returns name
+
+int Moves::getTyping() {
+  return typing;
+}
+
+int Moves::getAcc() {
+  return acc;
+}
+
+string Moves::getType() {
+  return type;
+}
+
+string Moves::getName() {
+  return moveName;
+}
+
+
 
 #endif

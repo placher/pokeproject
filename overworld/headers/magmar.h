@@ -80,7 +80,7 @@ Magmar::Magmar() {
 	Pokemon::setspeed(speed);//Set speed
 	Pokemon::setxp(0);//Set current xp(should default to 0)
 	Pokemon::setmxp(m);//Set max xp for levelup
-	Pokemon::settype1("Electric");//Sets first type
+	Pokemon::settype1("Fire");//Sets first type
 	Pokemon::settype2("");//Sets second type
 	Pokemon::setMoves(6, 7, 8, 14);//Set up moves for pokemon
 	Pokemon::setNum(27);

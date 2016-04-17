@@ -57,7 +57,8 @@ class Pokemon{
 		int getNum();//Sets the number of the pokemon
     int doDamage(int);//Determines damage		
     void takeDamage(int);//Take damage		
-		
+	  string getName();//Returns name
+
 	private:
 		/*
 		int bhealth;//Base Health
@@ -240,6 +241,11 @@ int Pokemon::getNum() {
 	return num;
 }
 
+string Pokemon::getName() {
+	return name;
+}
+
+
 
 int Pokemon::doDamage(int n) {//Determines damage		
   int thispower = moves[n].getPower();
@@ -248,7 +254,24 @@ int Pokemon::doDamage(int n) {//Determines damage
   return int(damages);
 }
 
+/*
+
+int Pokemon::doDamage(int n, int typing) {//Determines damage		
+  int thispower = moves[n].getPower();
+  //Run algorithm
+  if (typing == 1){
+    double damages = ((2*(level+10))/250)*att*thispower;
+  }
+  else {
+    double damages = ((2*(level+10))/250)*satt*thispower; 
+  }
+  return int(damages);
+}*/
+
+
 void Pokemon::takeDamage(int damage) {//Take damage		
+  double mod = 1;
+  
   double damages = damage/def;
   if (damages < 1) {
     damages = 1;
@@ -258,4 +281,367 @@ void Pokemon::takeDamage(int damage) {//Take damage
     currhealth = 0;
   }
 }
+
+
+
+/*
+void Pokemon::takeDamage(int damage, int typing, string mtype, int acc) {//Take damage		
+  double mod = 1;
+  
+  switch(mtype):
+    case "Grass":
+      //Super effective
+      if (type1 == "Water" || type1 == "Rock" || type1 == "Ground") {
+        mod = mod*2;
+      }
+      //Not very effective
+      if (type1 == "Grass" || type1 == "Electric" ||
+        type1 == "Ground" || type1 == "Water") {
+        mod=mod/2;
+      }
+      //Super effective
+      if (type2 == "Water" || type2 == "Rock" || type2 == "Ground") {
+        mod = mod*2;
+      }
+      //Not very effective
+      if (type2 == "Grass" || type2 == "Electric" ||
+        type2 == "Ground" || type2 == "Water") {
+        mod=mod/2;
+      }
+      break;
+
+    case "Normal":
+      //Super effective
+      
+      //Not very effective
+      if (type1 == "Rock") {
+        mod=mod/2;
+      }
+
+      //Not very effective
+      if (type2 == "Rock") {
+        mod=mod/2;
+      }
+      break;
+
+    case "Fighting":
+      //Super effective
+      if (type1 == "Normal" || type1 == "Ice" || type1 == "Dark" || 
+        type1 == "Rock" || type1 == "Steel") {
+        mod = mod*2;
+      }
+      //Not very effective
+      if (type1 == "Poison" || type1 == "Flying" ||
+        type1 == "Bug" || type1 == "Psychic") {
+        mod=mod/2;
+      }
+      //Super effective
+      if (type2 == "Normal" || type2 == "Ice" || type2 == "Dark" ||
+        type1 == "Rock" || type1 == "Steel") {
+        mod = mod*2;
+      }
+      //Not very effective
+      if (type2 == "Poison" || type2 == "Flying" ||
+        type2 == "Bug" || type2 == "Psychic") {
+        mod=mod/2;
+      }
+      break;
+
+    case "Flying":
+      //Super effective
+      if (type1 == "Bug" || type1 == "Fighting" || type1 == "Grass") { 
+        mod = mod*2;
+      }
+      //Not very effective
+      if (type1 == "Electric" || type1 == "Rock" ||
+        type1 == "Steel") {
+        mod=mod/2;
+      }
+      //Super effective
+      if (type2 == "Bug" || type2 == "Fighting" || type2 == "Grass") { 
+        mod = mod*2;
+      }
+      //Not very effective
+      if (type2 == "Electric" || type2 == "Rock" ||
+        type2 == "Steel") {
+        mod=mod/2;
+      }
+      break;
+
+    case "Poison":
+      //Super effective
+      if (type1 == "Bug" || type1 == "Grass") { 
+        mod = mod*2;
+      }
+      //Not very effective
+      if (type1 == "Poison" || type1 == "Rock" ||
+        type1 == "Ground" || type1 == "Ghost") {
+        mod=mod/2;
+      }
+      //Super effective
+      if (type2 == "Bug" || type2 == "Grass") { 
+        mod = mod*2;
+      }
+      //Not very effective
+      if (type2 == "Poison" || type2 == "Rock" ||
+        type2 == "Ground" || type2 == "Ghost") {
+        mod=mod/2;
+      }
+      break;
+
+    case "Ground":
+      //Super effective
+      if (type1 == "Electric" || type1 == "Fire" || 
+          type1 == "Poison" || type1 == "Rock") { 
+        mod = mod*2;
+      }
+      //Not very effective
+      if (type1 == "Bug" || type1 == "Grass") {
+        mod=mod/2;
+      }
+      //Super effective
+      if (type2 == "Electric" || type2 == "Fire" || 
+          type2 == "Poison" || type2 == "Rock") { 
+        mod = mod*2;
+      }
+      //Not very effective
+      if (type2 == "Bug" || type2 == "Grass") {
+        mod=mod/2;
+      }
+      break;
+
+    case "Rock":
+      //Super effective
+      if (type1 == "Bug" || type1 == "Fire" || 
+          type1 == "Flying" || type1 == "Ice") { 
+        mod = mod*2;
+      }
+      //Not very effective
+      if (type1 == "Fighting" || type1 == "Ground") {
+        mod=mod/2;
+      }
+      //Super effective
+      if (type2 == "Bug" || type2 == "Fire" || 
+          type2 == "Flying" || type2 == "Ice") { 
+        mod = mod*2;
+      }
+      //Not very effective
+      if (type2 == "Fighting" || type2 == "Ground") {
+        mod=mod/2;
+      }
+      break;
+
+    case "Bug":
+      //Super effective
+      if (type1 == "Grass" || type1 == "Poison" || 
+          type1 == "Psychic") { 
+        mod = mod*2;
+      }
+      //Not very effective
+      if (type1 == "Fighting" || type1 == "Fire" || 
+          type1 == "Flying" || type1 == "Ghost") {
+        mod=mod/2;
+      }
+      //Super effective
+      if (type2 == "Grass" || type2 == "Poison" || 
+          type2 == "Psychic") { 
+        mod = mod*2;
+      }
+      //Not very effective
+      if (type2 == "Fighting" || type2 == "Fire" || 
+          type2 == "Flying" || type2 == "Ghost") {
+        mod=mod/2;
+      }
+      break;
+
+    case "Ghost":
+      //Super effective
+      if (type1 == "Ghost" || type1 == "Psychic") { 
+        mod = mod*2;
+      }
+      //Not very effective
+      if (type1 == "Dark") {
+        mod=mod/2;
+      }
+      //Super effective
+      if (type2 == "Ghost" || type2 == "Psychic") { 
+        mod = mod*2;
+      }
+      //Not very effective
+      if (type2 == "Dark") {
+        mod=mod/2;
+      }
+      break;
+
+    case "Fire":
+      //Super effective
+      if (type1 == "Grass" || type1 == "Bug" || 
+          type1 == "Ice") { 
+        mod = mod*2;
+      }
+      //Not very effective
+      if (type1 == "Dragon" || type1 == "Fire" || 
+          type1 == "Rock" || type1 == "Water") {
+        mod=mod/2;
+      }
+      //Super effective
+      if (type2 == "Grass" || type2 == "Bug" || 
+          type2 == "Ice") { 
+        mod = mod*2;
+      }
+      //Not very effective
+      if (type2 == "Dragon" || type2 == "Fire" || 
+          type2 == "Rock" || type2 == "Water") {
+        mod=mod/2;
+      }
+      break;
+
+    case "Water":
+      //Super effective
+      if (type1 == "Fire" || type1 == "Ground" || 
+          type1 == "Rock") { 
+        mod = mod*2;
+      }
+      //Not very effective
+      if (type1 == "Dragon" || type1 == "Grass" || 
+          type1 == "Water") {
+        mod=mod/2;
+      }
+      //Super effective
+      if (type2 == "Fire" || type2 == "Ground" || 
+          type2 == "Rock") { 
+        mod = mod*2;
+      }
+      //Not very effective
+      if (type2 == "Dragon" || type2 == "Grass" || 
+          type2 == "Water") {
+        mod=mod/2;
+      }
+      break;
+
+    case "Electric":
+      //Super effective
+      if (type1 == "Flying" || type1 == "Water") { 
+        mod = mod*2;
+      }
+      //Not very effective
+      if (type1 == "Dragon" || type1 == "Grass" || 
+          type1 == "Electric") {
+        mod=mod/2;
+      }
+      //Super effective
+      if (type2 == "Flying" || type2 == "Water") { 
+        mod = mod*2;
+      }
+      //Not very effective
+      if (type2 == "Dragon" || type2 == "Grass" || 
+          type2 == "Electric") {
+        mod=mod/2;
+      }
+      break;
+
+    case "Psychic":
+      //Super effective
+      if (type1 == "Fighting" || type1 == "Poison") { 
+        mod = mod*2;
+      }
+      //Not very effective
+      if (type1 == "Psychic") {
+        mod=mod/2;
+      }
+      //Super effective
+      if (type2 == "Fighting" || type2 == "Poison") { 
+        mod = mod*2;
+      }
+      //Not very effective
+      if (type2 == "Psychic") {
+        mod=mod/2;
+      }
+      break;
+
+    case "Ice":
+      //Super effective
+      if (type1 == "Dragon" || type1 == "Flying" ||
+          type1 == "Grass" || type1 == "Ground") { 
+        mod = mod*2;
+      }
+      //Not very effective
+      if (type1 == "Ice" || type1 == "Fire" || 
+          type1 == "Water") {
+        mod=mod/2;
+      }
+      //Super effective
+      if (type2 == "Dragon" || type2 == "Flying" ||
+          type2 == "Grass" || type2 == "Ground") { 
+        mod = mod*2;
+      }
+      //Not very effective
+      if (type2 == "Ice" || type2 == "Fire" || 
+          type2 == "Water") {
+        mod=mod/2;
+      }
+      break;
+
+    case "Dragon":
+      //Super effective
+      if (type1 == "Dragon") { 
+        mod = mod*2;
+      }
+      //Not very effective
+      
+      //Super effective
+      if (type2 == "Dragon") { 
+        mod = mod*2;
+      }
+      //Not very effective
+  
+      break;
+
+    case "Dark":
+      //Super effective
+      if (type1 == "Ghost" || type1 == "Psychic") { 
+        mod = mod*2;
+      }
+      //Not very effective
+      if (type1 == "Dark" || type1 == "Fighting") {
+        mod=mod/2;
+      }
+      //Super effective
+      if (type2 == "Ghost" || type2 == "Psychic") { 
+        mod = mod*2;
+      }
+      //Not very effective
+      if (type2 == "Dark" || type2 == "Fighting") {
+        mod=mod/2;
+      }
+      break;
+    default:
+      break;
+  }
+
+  n = (rand()&100)+1;
+
+  if (typing == 1){
+    double damages = damage/def;
+  }
+  else {
+    double damages = damage/sdef;
+  }
+
+  damages*=(mod);
+
+  if (damages < 1) {
+    damages = 1;
+  }
+
+  if (n > acc) {
+    damages = 0;
+  }
+  currhealth = currhealth - int(damages);
+  if (currhealth < 0) {
+    currhealth = 0;
+  }
+}*/
+
+
 #endif

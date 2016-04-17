@@ -80,8 +80,8 @@ Snorlax::Snorlax() {
 	Pokemon::setspeed(speed);//Set speed
 	Pokemon::setxp(0);//Set current xp(should default to 0)
 	Pokemon::setmxp(m);//Set max xp for levelup
-	Pokemon::settype1("Water");//Sets first type
-	Pokemon::settype2("Ice");//Sets second type
+	Pokemon::settype1("Normal");//Sets first type
+	Pokemon::settype2("");//Sets second type
 	Pokemon::setMoves(1, 23, 20, 25);//Set up moves for pokemon
 	Pokemon::setNum(37);
 
