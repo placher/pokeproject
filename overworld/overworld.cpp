@@ -115,6 +115,9 @@ bool loadMedia();
 //Ends SDL
 void close();
 
+//Event handler
+SDL_Event e;
+
 //The target window
 SDL_Window* gWindow = NULL;
 
@@ -1431,7 +1434,7 @@ void renderMoveBox( int num )
 	//render a specific pokemon's move list to the battle screen
 	
 	int x = 225;
-	int y = 600;
+	int y = 545;
 
 	switch ( num )
 	{
@@ -1554,125 +1557,34 @@ void renderMoveBox( int num )
 	}
 }
 
-int handleMove( SDL_Event& m )
+int handleMove( SDL_Event& e, int move )
 {
 	//determines what move the player has entered
 	
-	//detects key press
-	if( m.type == SDL_KEYDOWN && m.key.repeat == 0 )
-    {
-        //return the selected move
-        switch( m.key.keysym.sym )
-        {
-            case SDLK_q: return 0; break;
-            case SDLK_w: return 1; break;
-            case SDLK_a: return 2; break;
-            case SDLK_s: return 3; break;
-        }
-    }
-}
-
-int fight_battle( int bg )
-{
-	//fights a battle between two trainer classes
-	
-	//Clear screen
-	SDL_SetRenderDrawColor( gRenderer, 0xFF, 0xFF, 0xFF, 0xFF );
-	SDL_RenderClear( gRenderer );
-	
-	//Event handler
-	SDL_Event m;
-	
-	//batte continuation flag
-	bool ended = false;
-	
-	//returns result
-	int result;
-	
-	//index of pokemon in trainers' pokemon array
-	int ppkmn = 0; //player
-	int epkmn = 0; //enemy
-	
-	//move entered by player
-	int move;
-	
-	while ( !ended ) //while battle isn't over
+	int mover;
+	if ( e.type == SDL_KEYDOWN && e.key.repeat == 0 )
 	{
-		//render background
-		gBattleScreenTexture.render( 0, 0 );
-
-		//render appropriate health bars
-		//enemy
-		if( ( double(epkmn_health)/double(epkmn_maxhealth) ) >= 0.8 ) gHighHealthTexture.render( 291, 277 );
-		else if ( ( double(epkmn_health)/double(epkmn_maxhealth) ) >= 0.2 ) gMedHealthTexture.render( 291, 277 );
-		else gLowHelathTexture.render( 291, 277 );
-		
-		//player
-		if( ( double(ppkmn_health)/double(ppkmn_maxhealth) ) >= 0.8 ) gHighHealthTexture.render( 515, 478 );
-		else if ( ( double(ppkmn_health)/double(ppkmn_maxhealth) ) >= 0.2 ) gMedHealthTexture.render( 515, 478 );
-		else gLowHelathTexture.render( 515, 478 );
-		
-		//render pokemon sprites
-		renderPokemon( epkmn_num, 555, 303 ); //enemy
-		renderPokemon( ppkmn_num, 329, 453 ); //player
-		
-		//render moveset box
-		renderMoveBox( ppkmn_num );
-		
-		//handle move selection
-		while( SDL_PollEvent( &m ) != 0 )
+		switch ( e.key.keysym.sym )
 		{
-			//User requests quit
-			if( m.type == SDL_QUIT )
-			{
-				result = 2;
-				ended = true;
-			}
-
-			//Handle input for selected move
-			move = handleMove( m );
+			case SDLK_q: mover = 0; break;
+			case SDLK_w: mover = 1; break;
+			case SDLK_a: mover = 2; break;
+			case SDLK_s: mover = 3; break;
+			default: mover = 15; break;
 		}
-		
-		//player attacks enemy pokemon
-		epkmn.take_damage( ppkmn.attack( move ) );
-		
-		//enemy pokemon attacks if not KO'd
-		if ( !epkmn.fainted() )
-		{
-			//enemy pokemon attacks
-			ppkmn.take_damage( epkmn.attack( rand() %3 ) );
-		}
-		else //enemy pokemon KO'd
-		{
-			if ( epkmn == 6 ) //enemy is out of pokemon
-			{
-				result = 0; //battle won
-				ended = true;
-			}
-			else epkmn++;
-			
-		}
-		
-		//check if player pokemon is KO'd
-		if ( ppkmn.fainted() )
-		{
-			if ( ppkmn == 6 ) //player is out of pokemon
-			{
-				result = 1; //battle lost
-				ended = true;
-			}
-			else ppkmn++;
-		}
-		
-		//Update screen
-		SDL_RenderPresent( gRenderer );
 	}
-	
-	return result;
+	else mover = 15;
+	return mover;
 }
 
 int main( int argc, char* args[] )
 {	
+	//Initialize Trainers
+	Trainer Player(1);
+	Trainer Douglas(4);
+	Trainer John(5);
+	Trainer Patrick(6);
+	
 	//Start up SDL and create window
 	if( !init() )
 	{
@@ -1697,13 +1609,29 @@ int main( int argc, char* args[] )
 			int battle = 1;
 			
 			//Test for Loss of Battle
-			int victory = 1;
+			int result = 0;
+			
+			//Trainer Handlers
+			Trainer enemy(5);
+			Trainer player = Player;
 			
 			//Retained value of bg in previous frame
 			int bg_backup;
-
-			//Event handler
-			SDL_Event e;
+			
+			//batte continuation flag
+			bool ended = false;
+			
+			//index of pokemon in trainers' pokemon array
+			int ppkmn = 0; //player
+			int epkmn = 0; //enemy
+			
+			//move entered by player
+			int move = 15;
+			
+			//Key Released Event
+			SDL_Event up;
+			up.type = SDL_KEYUP;
+			up.key.keysym.sym = SDLK_UP;
 
 			//Driver for the player sprite that will be moving around on the screen
 			Ash ash;
@@ -1711,6 +1639,8 @@ int main( int argc, char* args[] )
 			//While application is running
 			while( !quit )
 			{
+				move = 15;
+				
 				//Handle events on queue
 				while( SDL_PollEvent( &e ) != 0 )
 				{
@@ -1720,84 +1650,174 @@ int main( int argc, char* args[] )
 						quit = true;
 					}
 
+					if ( ended ) move = handleMove( e, move );
+					
 					//Handle input for ash
-					ash.handleEvent( e );
+					if ( !ended ) ash.handleEvent( e );
 				}
 
-				//Move ash
-				ash.move();
-				
-				//Save old background for later comparisson
-				bg_backup = bg;
-				
-				//Check for a collision with a door on current background
-				bg = ash.changeScene( bg );
-				
-				//Allow for new battle in room if room has changed
-				if ( bg != bg_backup )
+				if ( !ended )
 				{
-					battle = 1;
+					//Clear screen
+					SDL_SetRenderDrawColor( gRenderer, 0xFF, 0xFF, 0xFF, 0xFF );
+					SDL_RenderClear( gRenderer );
+
+					//Move ash
+					ash.move();
+					
+					//Save old background for later comparisson
+					bg_backup = bg;
+					
+					//Check for a collision with a door on current background
+					bg = ash.changeScene( bg );
+					
+					//Allow for new battle in room if room has changed
+					if ( bg != bg_backup )
+					{
+						battle = 1;
+					}
+					
+					//Check for a collision with a wall on current background
+					ash.checkCollision( bg );
+					
+					//Render background
+					switch ( bg )
+					{
+						case 1: //exterior
+							gBG1Texture.render( 0, 0 );
+							break;
+						case 2: //interior
+							gBG2Texture.render( 0, 0 );
+							
+							//render NPC sprites in lobby
+							gOffficerTexture.render( 370, 190 );
+							gOffficerTexture.render( 495, 190 );
+							gLassPkmnTexture.render( 273, 355 );
+							gLassTexture.render( 250, 350 );
+							gProfPkmnTexture.render( 683, 655 );
+							gProfTexture.render( 650, 650 );
+							
+							break;
+						case 3: //interior hallway
+							gBG3Texture.render( 0, 0 );
+							break;
+						case 4: //room 1
+							gBG4Texture.render( 0, 0 );
+							if ( battle == 1 ) gDougTexture.render( 430, 290 );
+							break;
+						case 5: //room 2
+							gBG5Texture.render( 0, 0 );
+							if ( battle == 1 ) gJohnTexture.render( 440, 350 );
+							break;
+						case 6: //room 3
+							gBG6Texture.render( 0, 0 );
+							if ( battle == 1 ) gPatrickTexture.render( 430, 285 );
+							break;
+						case 7: //room 4
+							gBG7Texture.render( 0, 0 );
+					}
+					
+					//Render player sprite
+					ash.render();
+
+					//Update screen
+					SDL_RenderPresent( gRenderer );
 				}
-				
-				//Check for a collision with a wall on current background
-				ash.checkCollision( bg );
 				
 				//Run battle if one occurs
 				if ( ash.isBattle( bg, battle ) )
 				{
-					victory = fight_battle( bg );
+					switch( bg )
+					{
+						case 4: //first battle
+							enemy = Douglas;
+							player = Player;
+							ended = true;
+							ppkmn = 0;
+							epkmn = 0;
+							break;
+						case 5: //second battle
+							enemy = John;
+							player = Player;
+							ended = true;
+							ppkmn = 0;
+							epkmn = 0;
+							break;
+						case 6: //third battle
+							enemy = Patrick;
+							player = Player;
+							ended = true;
+							ppkmn = 0;
+							epkmn = 0;
+							break;
+					}
 					battle = 0;
-					
-					//user closed window
-					if ( victory == 2 ) quit = true;
-				}
-
-				//Clear screen
-				SDL_SetRenderDrawColor( gRenderer, 0xFF, 0xFF, 0xFF, 0xFF );
-				SDL_RenderClear( gRenderer );
-
-				//Render background
-				switch ( bg )
-				{
-					case 1: //exterior
-						gBG1Texture.render( 0, 0 );
-						break;
-					case 2: //interior
-						gBG2Texture.render( 0, 0 );
-						
-						//render NPC sprites in lobby
-						gOffficerTexture.render( 370, 190 );
-						gOffficerTexture.render( 495, 190 );
-						gLassPkmnTexture.render( 273, 355 );
-						gLassTexture.render( 250, 350 );
-						gProfPkmnTexture.render( 683, 655 );
-						gProfTexture.render( 650, 650 );
-						
-						break;
-					case 3: //interior hallway
-						gBG3Texture.render( 0, 0 );
-						break;
-					case 4: //room 1
-						gBG4Texture.render( 0, 0 );
-						if ( battle == 1 ) gDougTexture.render( 430, 290 );
-						break;
-					case 5: //room 2
-						gBG5Texture.render( 0, 0 );
-						if ( battle == 1 ) gJohnTexture.render( 440, 350 );
-						break;
-					case 6: //room 3
-						gBG6Texture.render( 0, 0 );
-						if ( battle == 1 ) gPatrickTexture.render( 430, 285 );
-						break;
-					case 7: //room 4
-						gBG7Texture.render( 0, 0 );
-				}
+				}				
 				
-				//Render player sprite
-				ash.render();
+				if ( ended ) //while battle isn't over
+				{
+					//Clear screen
+					SDL_SetRenderDrawColor( gRenderer, 0xFF, 0xFF, 0xFF, 0xFF );
+					SDL_RenderClear( gRenderer );
+					
+					//render background
+					gBattleScreenTexture.render( 0, 0 );
 
-				//Update screen
-				SDL_RenderPresent( gRenderer );
+					//render appropriate health bars
+					//enemy
+					if( ( double(enemy.getPokemon(epkmn)->getchealth())/double(enemy.getPokemon(epkmn)->getmhealth()) ) >= 0.8 ) gHighHealthTexture.render( 291, 277 );
+					else if ( ( double(enemy.getPokemon(epkmn)->getchealth())/double(enemy.getPokemon(epkmn)->getmhealth()) ) >= 0.2 ) gMedHealthTexture.render( 291, 277 );
+					else gLowHelathTexture.render( 291, 277 );
+					
+					//player
+					if( ( double(player.getPokemon(ppkmn)->getchealth())/double(player.getPokemon(ppkmn)->getmhealth()) ) >= 0.8 ) gHighHealthTexture.render( 515, 478 );
+					else if ( ( double(player.getPokemon(ppkmn)->getchealth())/double(player.getPokemon(ppkmn)->getmhealth()) ) >= 0.2 ) gMedHealthTexture.render( 515, 478 );
+					else gLowHelathTexture.render( 515, 478 );
+					
+					//render pokemon sprites
+					renderPokemon( enemy.getPokemon(epkmn)->getNum(), 555, 303 ); //enemy
+					renderPokemon( player.getPokemon(ppkmn)->getNum(), 329, 453 ); //player
+					
+					//render moveset box
+					renderMoveBox( player.getPokemon(ppkmn)->getNum() );
+					
+					//Update screen
+					SDL_RenderPresent( gRenderer );
+					
+					if ( move != 15 ) //ensure that the user entered a valid move
+					{
+						//player attacks enemy pokemon
+						enemy.getPokemon( epkmn )->takeDamage( player.getPokemon( ppkmn )->doDamage( move ) );
+						
+						//enemy pokemon attacks if not KO'd
+						if ( enemy.getPokemon( epkmn )->getchealth() != 0 )
+						{
+							//enemy pokemon attacks
+							player.getPokemon( ppkmn )->takeDamage( enemy.getPokemon( epkmn )->doDamage( rand() % 3 ) );
+						}
+						else //enemy pokemon KO'd
+						{
+							if ( epkmn == 5 ) //enemy is out of pokemon
+							{
+								result = 0; //battle won
+								ended = false;
+							}
+							else epkmn++;
+							
+						}
+						
+						//check if player pokemon is KO'd
+						if ( player.getPokemon( ppkmn )->getchealth() == 0 )
+						{
+							if ( ppkmn == 5 ) //player is out of pokemon
+							{
+								result = 1; //battle lost
+								ended = false;
+							}
+							else ppkmn++;
+						}
+					}
+				}
 			}
 		}
 	}
