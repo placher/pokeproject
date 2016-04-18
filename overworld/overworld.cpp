@@ -136,6 +136,7 @@ LTexture gLassTexture; //lass
 LTexture gLassPkmnTexture; //lass' pokemon
 LTexture gProfTexture; //professor
 LTexture gProfPkmnTexture; //professor's pokemon
+LTexture gStatueTexture; //lobby statue
 
 //Background Textures
 LTexture gBG1Texture; //exterior background
@@ -192,6 +193,12 @@ LTexture gBattleScreenTexture; //background
 LTexture gHighHealthTexture; //health bar
 LTexture gMedHealthTexture; //50% depleted health bar
 LTexture gLowHelathTexture; //80% depleted health bar
+
+//Battle Text Box Textures
+LTexture gPlayerDamaged; //player pokemon took damage
+LTexture gPlayerFaint; //player pokemon KO'd
+LTexture gEnemyDamaged; //enemy pokemon took damage
+LTexture gEnemyFaint; //enemy pokemon KO'd
 
 //Move Text Box Textures
 LTexture gAerodactylMovesTexture; //1
@@ -720,6 +727,11 @@ bool loadMedia()
 		printf( "Failed to load profpkmn texture!\n" );
 		success = false;
 	}
+	if( !gStatueTexture.loadFromFile( "images/statue.bmp" ) )
+	{
+		printf( "Failed to load statue texture!\n" );
+		success = false;
+	}
 
 	//Load Background Textures
 	if( !gBG1Texture.loadFromFile( "images/exterior.bmp" ) )
@@ -759,197 +771,197 @@ bool loadMedia()
 	}
 	
 	//Load Pokemon Textures
-	if( !gAerodactylTexture.loadFromFile( "images/battle/aerodactyl.bmp" ) )
+	if( !gAerodactylTexture.loadFromFile( "images/battle/aerodactyl_200.bmp" ) )
 	{
 		printf( "Failed to load aerodactyl texture!\n" );
 		success = false;
 	}
-	if( !gAlakazamTexture.loadFromFile( "images/battle/alakazam.bmp" ) )
+	if( !gAlakazamTexture.loadFromFile( "images/battle/alakazam_200.bmp" ) )
 	{
 		printf( "Failed to load alakazam texture!\n" );
 		success = false;
 	}
-	if( !gArbokTexture.loadFromFile( "images/battle/arbok.bmp" ) )
+	if( !gArbokTexture.loadFromFile( "images/battle/arbok_200.bmp" ) )
 	{
 		printf( "Failed to load arbok texture!\n" );
 		success = false;
 	}
-	if( !gArcanineTexture.loadFromFile( "images/battle/arcanine.bmp" ) )
+	if( !gArcanineTexture.loadFromFile( "images/battle/arcanine_200.bmp" ) )
 	{
 		printf( "Failed to load arcanine texture!\n" );
 		success = false;
 	}
-	if( !gBlastoiseTexture.loadFromFile( "images/battle/blastoise.bmp" ) )
+	if( !gBlastoiseTexture.loadFromFile( "images/battle/blastoise_200.bmp" ) )
 	{
 		printf( "Failed to load blastoise texture!\n" );
 		success = false;
 	}
-	if( !gBulbasaurTexture.loadFromFile( "images/battle/bulbasaur.bmp" ) )
+	if( !gBulbasaurTexture.loadFromFile( "images/battle/bulbasaur_200.bmp" ) )
 	{
 		printf( "Failed to load bulbasaur texture!\n" );
 		success = false;
 	}
-	if( !gButterfreeTexture.loadFromFile( "images/battle/butterfree.bmp" ) )
+	if( !gButterfreeTexture.loadFromFile( "images/battle/butterfree_200.bmp" ) )
 	{
 		printf( "Failed to load butterfree texture!\n" );
 		success = false;
 	}
-	if( !gChanseyTexture.loadFromFile( "images/battle/chansey.bmp" ) )
+	if( !gChanseyTexture.loadFromFile( "images/battle/chansey_200.bmp" ) )
 	{
 		printf( "Failed to load chansey texture!\n" );
 		success = false;
 	}
-	if( !gCharizardTexture.loadFromFile( "images/battle/charizard.bmp" ) )
+	if( !gCharizardTexture.loadFromFile( "images/battle/charizard_200.bmp" ) )
 	{
 		printf( "Failed to load charizard texture!\n" );
 		success = false;
 	}
-	if( !gDodrioTexture.loadFromFile( "images/battle/dodrio.bmp" ) )
+	if( !gDodrioTexture.loadFromFile( "images/battle/dodrio_200.bmp" ) )
 	{
 		printf( "Failed to load dodrio texture!\n" );
 		success = false;
 	}
-	if( !gDragoniteTexture.loadFromFile( "images/battle/dragonite.bmp" ) )
+	if( !gDragoniteTexture.loadFromFile( "images/battle/dragonite_200.bmp" ) )
 	{
 		printf( "Failed to load dragonite texture!\n" );
 		success = false;
 	}
-	if( !gDugtrioTexture.loadFromFile( "images/battle/dugtrio.bmp" ) )
+	if( !gDugtrioTexture.loadFromFile( "images/battle/dugtrio_200.bmp" ) )
 	{
 		printf( "Failed to load dugtrio texture!\n" );
 		success = false;
 	}
-	if( !gElectabuzzTexture.loadFromFile( "images/battle/electabuzz.bmp" ) )
+	if( !gElectabuzzTexture.loadFromFile( "images/battle/electabuzz_200.bmp" ) )
 	{
 		printf( "Failed to load electabuzz texture!\n" );
 		success = false;
 	}
-	if( !gElectrodeTexture.loadFromFile( "images/battle/electrode.bmp" ) )
+	if( !gElectrodeTexture.loadFromFile( "images/battle/electrode_200.bmp" ) )
 	{
 		printf( "Failed to load electrode texture!\n" );
 		success = false;
 	}
-	if( !gFearowTexture.loadFromFile( "images/battle/fearow.bmp" ) )
+	if( !gFearowTexture.loadFromFile( "images/battle/fearow_200.bmp" ) )
 	{
 		printf( "Failed to load fearow texture!\n" );
 		success = false;
 	}
-	if( !gGengarTexture.loadFromFile( "images/battle/gengar.bmp" ) )
+	if( !gGengarTexture.loadFromFile( "images/battle/gengar_200.bmp" ) )
 	{
 		printf( "Failed to load gengar texture!\n" );
 		success = false;
 	}
-	if( !gGolbatTexture.loadFromFile( "images/battle/golbat.bmp" ) )
+	if( !gGolbatTexture.loadFromFile( "images/battle/golbat_200.bmp" ) )
 	{
 		printf( "Failed to load golbat texture!\n" );
 		success = false;
 	}
-	if( !gGolduckTexture.loadFromFile( "images/battle/golduck.bmp" ) )
+	if( !gGolduckTexture.loadFromFile( "images/battle/golduck_200.bmp" ) )
 	{
 		printf( "Failed to load golduck texture!\n" );
 		success = false;
 	}
-	if( !gGolemTexture.loadFromFile( "images/battle/golem.bmp" ) )
+	if( !gGolemTexture.loadFromFile( "images/battle/golem_200.bmp" ) )
 	{
 		printf( "Failed to load golem texture!\n" );
 		success = false;
 	}
-	if( !gGravelerTexture.loadFromFile( "images/battle/graveler.bmp" ) )
+	if( !gGravelerTexture.loadFromFile( "images/battle/graveler_200.bmp" ) )
 	{
 		printf( "Failed to load graveler texture!\n" );
 		success = false;
 	}
-	if( !gGyaradosTexture.loadFromFile( "images/battle/gyarados.bmp" ) )
+	if( !gGyaradosTexture.loadFromFile( "images/battle/gyarados_200.bmp" ) )
 	{
 		printf( "Failed to load gyarados texture!\n" );
 		success = false;
 	}
-	if( !gHitmonchanTexture.loadFromFile( "images/battle/hitmonchan.bmp" ) )
+	if( !gHitmonchanTexture.loadFromFile( "images/battle/hitmonchan_200.bmp" ) )
 	{
 		printf( "Failed to load hitmonchan texture!\n" );
 		success = false;
 	}
-	if( !gJigglypuffTexture.loadFromFile( "images/battle/jigglypuff.bmp" ) )
+	if( !gJigglypuffTexture.loadFromFile( "images/battle/jigglypuff_200.bmp" ) )
 	{
 		printf( "Failed to load jigglypuff texture!\n" );
 		success = false;
 	}
-	if( !gKadabraTexture.loadFromFile( "images/battle/kadabra.bmp" ) )
+	if( !gKadabraTexture.loadFromFile( "images/battle/kadabra_200.bmp" ) )
 	{
 		printf( "Failed to load kadabra texture!\n" );
 		success = false;
 	}
-	if( !gKinglerTexture.loadFromFile( "images/battle/kingler.bmp" ) )
+	if( !gKinglerTexture.loadFromFile( "images/battle/kingler_200.bmp" ) )
 	{
 		printf( "Failed to load kingler texture!\n" );
 		success = false;
 	}
-	if( !gLaprasTexture.loadFromFile( "images/battle/lapras.bmp" ) )
+	if( !gLaprasTexture.loadFromFile( "images/battle/lapras_200.bmp" ) )
 	{
 		printf( "Failed to load lapras texture!\n" );
 		success = false;
 	}
-	if( !gMagmarTexture.loadFromFile( "images/battle/magmar.bmp" ) )
+	if( !gMagmarTexture.loadFromFile( "images/battle/magmar_200.bmp" ) )
 	{
 		printf( "Failed to load magmar texture!\n" );
 		success = false;
 	}
-	if( !gMarowakTexture.loadFromFile( "images/battle/marowak.bmp" ) )
+	if( !gMarowakTexture.loadFromFile( "images/battle/marowak_200.bmp" ) )
 	{
 		printf( "Failed to load marowak texture!\n" );
 		success = false;
 	}
-	if( !gNinetalesTexture.loadFromFile( "images/battle/ninetales.bmp" ) )
+	if( !gNinetalesTexture.loadFromFile( "images/battle/ninetales_200.bmp" ) )
 	{
 		printf( "Failed to load ninetales texture!\n" );
 		success = false;
 	}
-	if( !gOnixTexture.loadFromFile( "images/battle/onix.bmp" ) )
+	if( !gOnixTexture.loadFromFile( "images/battle/onix_200.bmp" ) )
 	{
 		printf( "Failed to load onix texture!\n" );
 		success = false;
 	}
-	if( !gPidgeotTexture.loadFromFile( "images/battle/pidgeot.bmp" ) )
+	if( !gPidgeotTexture.loadFromFile( "images/battle/pidgeot_200.bmp" ) )
 	{
 		printf( "Failed to load pidgeot texture!\n" );
 		success = false;
 	}
-	if( !gPikachuTexture.loadFromFile( "images/battle/pikachu.bmp" ) )
+	if( !gPikachuTexture.loadFromFile( "images/battle/pikachu_200.bmp" ) )
 	{
 		printf( "Failed to load pikachu texture!\n" );
 		success = false;
 	}
-	if( !gRaichuTexture.loadFromFile( "images/battle/raichu.bmp" ) )
+	if( !gRaichuTexture.loadFromFile( "images/battle/raichu_200.bmp" ) )
 	{
 		printf( "Failed to load raichu texture!\n" );
 		success = false;
 	}
-	if( !gRhydonTexture.loadFromFile( "images/battle/rhydon.bmp" ) )
+	if( !gRhydonTexture.loadFromFile( "images/battle/rhydon_200.bmp" ) )
 	{
 		printf( "Failed to load rhydon texture!\n" );
 		success = false;
 	}
-	if( !gRhyhornTexture.loadFromFile( "images/battle/rhyhorn.bmp" ) )
+	if( !gRhyhornTexture.loadFromFile( "images/battle/rhyhorn_200.bmp" ) )
 	{
 		printf( "Failed to load rhyhorn texture!\n" );
 		success = false;
 	}
-	if( !gShuckleTexture.loadFromFile( "images/battle/shuckle.bmp" ) )
+	if( !gShuckleTexture.loadFromFile( "images/battle/shuckle_200.bmp" ) )
 	{
 		printf( "Failed to load shuckle texture!\n" );
 		success = false;
 	}
-	if( !gSnorlaxTexture.loadFromFile( "images/battle/snorlax.bmp" ) )
+	if( !gSnorlaxTexture.loadFromFile( "images/battle/snorlax_200.bmp" ) )
 	{
 		printf( "Failed to load snorlax texture!\n" );
 		success = false;
 	}
-	if( !gVaporeonTexture.loadFromFile( "images/battle/vaporeon.bmp" ) )
+	if( !gVaporeonTexture.loadFromFile( "images/battle/vaporeon_200.bmp" ) )
 	{
 		printf( "Failed to load vaporeon texture!\n" );
 		success = false;
 	}
-	if( !gVenusaurTexture.loadFromFile( "images/battle/venusaur.bmp" ) )
+	if( !gVenusaurTexture.loadFromFile( "images/battle/venusaur_200.bmp" ) )
 	{
 		printf( "Failed to load venusaur texture!\n" );
 		success = false;
@@ -974,6 +986,28 @@ bool loadMedia()
 	if( !gLowHelathTexture.loadFromFile( "images/battle/low_health.bmp" ) )
 	{
 		printf( "Failed to load low_health texture!\n" );
+		success = false;
+	}
+	
+	//Load Battle Text Box Textures
+	if( !gPlayerDamaged.loadFromFile( "images/battle/Textbox_TookDamage.bmp" ) )
+	{
+		printf( "Failed to load Textbox_TookDamage texture!\n" );
+		success = false;
+	}
+	if( !gPlayerFaint.loadFromFile( "images/battle/Textbox_YouFaint.bmp" ) )
+	{
+		printf( "Failed to load Textbox_YouFaint texture!\n" );
+		success = false;
+	}
+	if( !gEnemyDamaged.loadFromFile( "images/battle/Textbox_DealtDamage.bmp" ) )
+	{
+		printf( "Failed to load Textbox_DealtDamage texture!\n" );
+		success = false;
+	}
+	if( !gEnemyFaint.loadFromFile( "images/battle/Textbox_EnemyFaints.bmp" ) )
+	{
+		printf( "Failed to load Textbox_EnemyFaints texture!\n" );
 		success = false;
 	}
 	
@@ -1195,6 +1229,7 @@ void close()
 	gLassPkmnTexture.free();
 	gProfTexture.free();
 	gProfPkmnTexture.free();
+	gStatueTexture.free();
 	
 	//Backgrounds
 	gBG1Texture.free();
@@ -1251,6 +1286,12 @@ void close()
 	gHighHealthTexture.free();
 	gMedHealthTexture.free();
 	gLowHelathTexture.free();
+	
+	//Battle Text Boxes
+	gPlayerDamaged.free();
+	gPlayerFaint.free();
+	gEnemyDamaged.free();
+	gEnemyFaint.free();
 	
 	//Move Text Box Textures
 	gAerodactylMovesTexture.free();
@@ -1557,7 +1598,7 @@ void renderMoveBox( int num )
 	}
 }
 
-int handleMove( SDL_Event& e, int move )
+int handleMove( SDL_Event& e )
 {
 	//determines what move the player has entered
 	
@@ -1619,7 +1660,7 @@ int main( int argc, char* args[] )
 			int bg_backup;
 			
 			//batte continuation flag
-			bool ended = false;
+			bool inBattle = false;
 			
 			//index of pokemon in trainers' pokemon array
 			int ppkmn = 0; //player
@@ -1650,13 +1691,11 @@ int main( int argc, char* args[] )
 						quit = true;
 					}
 
-					if ( ended ) move = handleMove( e, move );
-					
-					//Handle input for ash
-					if ( !ended ) ash.handleEvent( e );
+					if ( inBattle ) move = handleMove( e ); //handle battle input
+					else ash.handleEvent( e ); //handle input for ash
 				}
 
-				if ( !ended )
+				if ( !inBattle )
 				{
 					//Clear screen
 					SDL_SetRenderDrawColor( gRenderer, 0xFF, 0xFF, 0xFF, 0xFF );
@@ -1696,6 +1735,7 @@ int main( int argc, char* args[] )
 							gLassTexture.render( 250, 350 );
 							gProfPkmnTexture.render( 683, 655 );
 							gProfTexture.render( 650, 650 );
+							gStatueTexture.render( 571, 304 );
 							
 							break;
 						case 3: //interior hallway
@@ -1732,21 +1772,21 @@ int main( int argc, char* args[] )
 						case 4: //first battle
 							enemy = Douglas;
 							player = Player;
-							ended = true;
+							inBattle = true;
 							ppkmn = 0;
 							epkmn = 0;
 							break;
 						case 5: //second battle
 							enemy = John;
 							player = Player;
-							ended = true;
+							inBattle = true;
 							ppkmn = 0;
 							epkmn = 0;
 							break;
 						case 6: //third battle
 							enemy = Patrick;
 							player = Player;
-							ended = true;
+							inBattle = true;
 							ppkmn = 0;
 							epkmn = 0;
 							break;
@@ -1754,7 +1794,7 @@ int main( int argc, char* args[] )
 					battle = 0;
 				}				
 				
-				if ( ended ) //while battle isn't over
+				if ( inBattle ) //while battle is occurring
 				{
 					//Clear screen
 					SDL_SetRenderDrawColor( gRenderer, 0xFF, 0xFF, 0xFF, 0xFF );
@@ -1788,19 +1828,29 @@ int main( int argc, char* args[] )
 					{
 						//player attacks enemy pokemon
 						enemy.getPokemon( epkmn )->takeDamage( player.getPokemon( ppkmn )->doDamage( move ) );
+						gEnemyDamaged.render( 416, 546 );
+						SDL_RenderPresent( gRenderer );
+						SDL_Delay( 200 );
 						
 						//enemy pokemon attacks if not KO'd
 						if ( enemy.getPokemon( epkmn )->getchealth() != 0 )
 						{
 							//enemy pokemon attacks
 							player.getPokemon( ppkmn )->takeDamage( enemy.getPokemon( epkmn )->doDamage( rand() % 3 ) );
+							gPlayerDamaged.render( 416, 546 );
+							SDL_RenderPresent( gRenderer );
+							SDL_Delay( 200 );
 						}
 						else //enemy pokemon KO'd
 						{
+							gEnemyFaint.render( 416, 546 );
+							SDL_RenderPresent( gRenderer );
+							SDL_Delay( 200 );
+							
 							if ( epkmn == 5 ) //enemy is out of pokemon
 							{
 								result = 0; //battle won
-								ended = false;
+								inBattle = false;
 							}
 							else epkmn++;
 							
@@ -1809,10 +1859,14 @@ int main( int argc, char* args[] )
 						//check if player pokemon is KO'd
 						if ( player.getPokemon( ppkmn )->getchealth() == 0 )
 						{
+							gPlayerFaint.render( 416, 546 );
+							SDL_RenderPresent( gRenderer );
+							SDL_Delay( 200 );
+							
 							if ( ppkmn == 5 ) //player is out of pokemon
 							{
 								result = 1; //battle lost
-								ended = false;
+								inBattle = false;
 							}
 							else ppkmn++;
 						}
