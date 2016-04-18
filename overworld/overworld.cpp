@@ -1874,6 +1874,11 @@ int main( int argc, char* args[] )
 						}
 					}
 				}
+				
+				if ( result == 1 ) //battle lost
+				{
+					quit = true;
+				}
 			}
 		}
 	}
