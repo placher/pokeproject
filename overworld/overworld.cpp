@@ -1800,6 +1800,22 @@ int main( int argc, char* args[] )
 					SDL_SetRenderDrawColor( gRenderer, 0xFF, 0xFF, 0xFF, 0xFF );
 					SDL_RenderClear( gRenderer );
 					
+					//check if player pokemon is KO'd
+					if ( player.getPokemon( ppkmn )->getchealth() == 0 )
+					{
+						gPlayerFaint.render( 416, 546 );
+						SDL_RenderPresent( gRenderer );
+						SDL_Delay( 700 );
+						
+						if ( ppkmn == 5 ) //player is out of pokemon
+						{
+							result = 1; //battle lost
+							inBattle = false;
+							SDL_PushEvent( &up );
+						}
+						else ppkmn++;
+					}
+					
 					//render background
 					gBattleScreenTexture.render( 0, 0 );
 
@@ -1854,23 +1870,6 @@ int main( int argc, char* args[] )
 								SDL_PushEvent( &up );
 							}
 							else epkmn++;
-							
-						}
-						
-						//check if player pokemon is KO'd
-						if ( player.getPokemon( ppkmn )->getchealth() == 0 )
-						{
-							gPlayerFaint.render( 416, 546 );
-							SDL_RenderPresent( gRenderer );
-							SDL_Delay( 700 );
-							
-							if ( ppkmn == 5 ) //player is out of pokemon
-							{
-								result = 1; //battle lost
-								inBattle = false;
-								SDL_PushEvent( &up );
-							}
-							else ppkmn++;
 						}
 					}
 				}
