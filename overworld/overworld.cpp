@@ -118,6 +118,9 @@ void close();
 //Event handler
 SDL_Event e;
 
+//move entered by player
+int move = 15;
+
 //The target window
 SDL_Window* gWindow = NULL;
 
@@ -1598,24 +1601,22 @@ void renderMoveBox( int num )
 	}
 }
 
-int handleMove( SDL_Event& e )
+void handleMove( SDL_Event& e )
 {
 	//determines what move the player has entered
 	
-	int mover;
-	if ( e.type == SDL_KEYDOWN && e.key.repeat == 0 )
+	if ( e.type == SDL_KEYUP && e.key.repeat == 0 )
 	{
 		switch ( e.key.keysym.sym )
 		{
-			case SDLK_q: mover = 0; break;
-			case SDLK_w: mover = 1; break;
-			case SDLK_a: mover = 2; break;
-			case SDLK_s: mover = 3; break;
-			default: mover = 15; break;
+			case SDLK_q: move = 0; break;
+			case SDLK_w: move = 1; break;
+			case SDLK_a: move = 2; break;
+			case SDLK_s: move = 3; break;
+			default: move = 15; break;
 		}
 	}
-	else mover = 15;
-	return mover;
+	else move = 15;
 }
 
 int main( int argc, char* args[] )
@@ -1666,9 +1667,6 @@ int main( int argc, char* args[] )
 			int ppkmn = 0; //player
 			int epkmn = 0; //enemy
 			
-			//move entered by player
-			int move = 15;
-			
 			//Key Released Event
 			SDL_Event up;
 			up.type = SDL_KEYUP;
@@ -1691,7 +1689,7 @@ int main( int argc, char* args[] )
 						quit = true;
 					}
 
-					if ( inBattle ) move = handleMove( e ); //handle battle input
+					if ( inBattle ) handleMove( e ); //handle battle input
 					else ash.handleEvent( e ); //handle input for ash
 				}
 
@@ -1718,6 +1716,38 @@ int main( int argc, char* args[] )
 					
 					//Check for a collision with a wall on current background
 					ash.checkCollision( bg );
+					
+					//Run battle if one occurs
+					if ( ash.isBattle( bg, battle ) )
+					{
+						switch( bg )
+						{
+							case 4: //first battle
+								enemy = Douglas;
+								player = Player;
+								inBattle = true;
+								ppkmn = 0;
+								epkmn = 0;
+								battle = 0;
+								break;
+							case 5: //second battle
+								enemy = John;
+								player = Player;
+								inBattle = true;
+								ppkmn = 0;
+								epkmn = 0;
+								battle = 0;
+								break;
+							case 6: //third battle
+								enemy = Patrick;
+								player = Player;
+								inBattle = true;
+								ppkmn = 0;
+								epkmn = 0;
+								battle = 0;
+								break;
+						}
+					}				
 					
 					//Render background
 					switch ( bg )
@@ -1764,36 +1794,6 @@ int main( int argc, char* args[] )
 					SDL_RenderPresent( gRenderer );
 				}
 				
-				//Run battle if one occurs
-				if ( ash.isBattle( bg, battle ) )
-				{
-					switch( bg )
-					{
-						case 4: //first battle
-							enemy = Douglas;
-							player = Player;
-							inBattle = true;
-							ppkmn = 0;
-							epkmn = 0;
-							break;
-						case 5: //second battle
-							enemy = John;
-							player = Player;
-							inBattle = true;
-							ppkmn = 0;
-							epkmn = 0;
-							break;
-						case 6: //third battle
-							enemy = Patrick;
-							player = Player;
-							inBattle = true;
-							ppkmn = 0;
-							epkmn = 0;
-							break;
-					}
-					battle = 0;
-				}				
-				
 				if ( inBattle ) //while battle is occurring
 				{
 					//Clear screen
@@ -1815,8 +1815,8 @@ int main( int argc, char* args[] )
 					else gLowHelathTexture.render( 515, 478 );
 					
 					//render pokemon sprites
-					renderPokemon( enemy.getPokemon(epkmn)->getNum(), 555, 303 ); //enemy
-					renderPokemon( player.getPokemon(ppkmn)->getNum(), 329, 453 ); //player
+					renderPokemon( enemy.getPokemon(epkmn)->getNum(), 471, 226 ); //enemy
+					renderPokemon( player.getPokemon(ppkmn)->getNum(), 245, 369 ); //player
 					
 					//render moveset box
 					renderMoveBox( player.getPokemon(ppkmn)->getNum() );
@@ -1830,7 +1830,7 @@ int main( int argc, char* args[] )
 						enemy.getPokemon( epkmn )->takeDamage( player.getPokemon( ppkmn )->doDamage( move ) );
 						gEnemyDamaged.render( 416, 546 );
 						SDL_RenderPresent( gRenderer );
-						SDL_Delay( 200 );
+						SDL_Delay( 700 );
 						
 						//enemy pokemon attacks if not KO'd
 						if ( enemy.getPokemon( epkmn )->getchealth() != 0 )
@@ -1839,18 +1839,19 @@ int main( int argc, char* args[] )
 							player.getPokemon( ppkmn )->takeDamage( enemy.getPokemon( epkmn )->doDamage( rand() % 3 ) );
 							gPlayerDamaged.render( 416, 546 );
 							SDL_RenderPresent( gRenderer );
-							SDL_Delay( 200 );
+							SDL_Delay( 700 );
 						}
 						else //enemy pokemon KO'd
 						{
 							gEnemyFaint.render( 416, 546 );
 							SDL_RenderPresent( gRenderer );
-							SDL_Delay( 200 );
+							SDL_Delay( 700 );
 							
 							if ( epkmn == 5 ) //enemy is out of pokemon
 							{
 								result = 0; //battle won
 								inBattle = false;
+								SDL_PushEvent( &up );
 							}
 							else epkmn++;
 							
@@ -1861,12 +1862,13 @@ int main( int argc, char* args[] )
 						{
 							gPlayerFaint.render( 416, 546 );
 							SDL_RenderPresent( gRenderer );
-							SDL_Delay( 200 );
+							SDL_Delay( 700 );
 							
 							if ( ppkmn == 5 ) //player is out of pokemon
 							{
 								result = 1; //battle lost
 								inBattle = false;
+								SDL_PushEvent( &up );
 							}
 							else ppkmn++;
 						}

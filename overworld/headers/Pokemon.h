@@ -55,9 +55,9 @@ class Pokemon{
 		string gettype2();//Sets the type2
 		Moves getMoves(int);//Set four moves for the pokemon
 		int getNum();//Sets the number of the pokemon
-    int doDamage(int);//Determines damage		
-    void takeDamage(int);//Take damage		
-	  string getName();//Returns name
+		int doDamage(int);//Determines damage		
+		void takeDamage(int);//Take damage		
+		string getName();//Returns name
 
 	private:
 		/*
@@ -250,7 +250,7 @@ string Pokemon::getName() {
 int Pokemon::doDamage(int n) {//Determines damage		
   int thispower = moves[n].getPower();
   //Run algorithm
-  double damages = ((2*(level+10))/250)*att*thispower;
+  double damages = (double(2*(level+10))/double(250))*att*thispower;
   return int(damages);
 }
 
