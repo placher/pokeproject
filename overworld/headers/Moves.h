@@ -51,11 +51,11 @@ class Moves{
 		int getmovenum();
 		void setmovenum(int);
 		int noMove();
-    int getPower();
-    int getTyping();//Returns typing
-    int getAcc();//Returns accuracy
-    string getType();//Returns type
-    string getName();//Returns name
+		int getPower();
+		int getTyping();//Returns typing
+		int getAcc();//Returns accuracy
+		string getType();//Returns type
+		string getName();//Returns name
 
 	private:
 		int myMove;//Number of the move

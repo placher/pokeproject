@@ -78,7 +78,7 @@ class Pokemon{
 		int speed;//Speed stat
 		int xp;//Current xp
 		int maxxp;//Max xp
-		int num;;//Identify each pokemon
+		int num;//Identify each pokemon
 		string type1;//First type
 		string type2;//Second type/Set to Null if there is no second type
 		string name;//Name of the pokemon
