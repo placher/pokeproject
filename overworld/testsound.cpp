@@ -15,7 +15,7 @@ Author: J. Patrick Lacher
 #include "headers/Trainer.h"
 #include "headers/Pokemon.h"
 
-#include <SDL/SDL_mixer.h>
+#include <SDL2/SDL_mixer.h>
 
 
 //Screen dimension constants
