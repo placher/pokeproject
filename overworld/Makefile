@@ -1,10 +1,7 @@
-all: pokeproject testingsound
+all: pokeproject
 
 pokeproject: overworld.cpp
-	g++ overworld.cpp -lSDL2 -lSDL2_image -o pokeproject
-
-testingsound: testingsound.cpp
-	g++ testingsound.cpp -lSDL2 -lSDL2_image -lSDL2_mixer -o testingsound
+	g++ overworld.cpp -lSDL2 -lSDL2_image -lSDL2_mixer -o pokeproject
 
 clean:
-	rm pokeproject testingsound
+	rm pokeproject

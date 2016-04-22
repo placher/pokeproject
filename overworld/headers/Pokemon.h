@@ -56,7 +56,7 @@ class Pokemon{
 		Moves getMoves(int);//Set four moves for the pokemon
 		int getNum();//Sets the number of the pokemon
 		int doDamage(int);//Determines damage		
-		void takeDamage(int);//Take damage		
+		void takeDamage(int, int);//Take damage		
 		string getName();//Returns name
 
 	private:
@@ -246,36 +246,54 @@ string Pokemon::getName() {
 }
 
 
-
+/*
 int Pokemon::doDamage(int n) {//Determines damage		
   int thispower = moves[n].getPower();
   //Run algorithm
   double damages = (double(2*(level+10))/double(250))*att*thispower;
   return int(damages);
 }
+*/
 
-/*
-
-int Pokemon::doDamage(int n, int typing) {//Determines damage		
+int Pokemon::doDamage(int n) {//Determines damage		
   int thispower = moves[n].getPower();
+  int typing = moves[n].getTyping();
+  double damages;
   //Run algorithm
   if (typing == 1){
-    double damages = ((2*(level+10))/250)*att*thispower;
+    damages = (double(2*(level+10))/double(250))*att*thispower;
   }
   else {
-    double damages = ((2*(level+10))/250)*satt*thispower; 
+    damages = (double(2*(level+10))/double(250))*satt*thispower; 
   }
   return int(damages);
-}*/
+}
 
 
-void Pokemon::takeDamage(int damage) {//Take damage		
+void Pokemon::takeDamage(int damage, int typing) {//Take damage		
   double mod = 1;
-  
-  double damages = damage/def;
+  double damages;
+
+  //n = (rand()&100)+1;
+
+  if (typing == 1){
+    damages = damage/def;
+  }
+  else {
+    damages = damage/sdef;
+  }
+
+  //damages*=(mod);
+
   if (damages < 1) {
     damages = 1;
   }
+/*
+  if (n > acc) {
+    damages = 0;
+  }
+*/
+
   currhealth = currhealth - int(damages);
   if (currhealth < 0) {
     currhealth = 0;

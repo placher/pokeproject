@@ -81,9 +81,9 @@ Trainer::Trainer(int trainer){
         cin >> n;
         cout << "Butterfree(1), Golbat(2), Dodrio(3)" << endl;
         cin >> m;
-        cout << "Golduck(1), Arbok(2), Electabuzz(3)" << endl;
+        cout << "Golduck(1), Alakazam(2), Electabuzz(3)" << endl;
         cin >> o;
-        cout << "Golem(1), Marowak(2), Alakazam(3)" << endl;
+        cout << "Golem(1), Marowak(2), Arbok(3)" << endl;
         cin >> p;
         cout << "Fearow(1), Gyrados(2), Kingler(3)" << endl;
         cin >> q;
@@ -107,7 +107,7 @@ Trainer::Trainer(int trainer){
         if (o == 1)
           poke3 = new Golduck;
         else if (o == 2)
-          poke3 = new Arbok;
+          poke3 = new Alakazam;
         else
           poke3 = new Electabuzz;
 
@@ -116,7 +116,7 @@ Trainer::Trainer(int trainer){
         else if (p == 2)
           poke4 = new Marowak;
         else
-          poke4 = new Alakazam;
+          poke4 = new Arbok;
 
         if (q == 1)
           poke5 = new Fearow;

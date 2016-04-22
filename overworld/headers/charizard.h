@@ -46,7 +46,7 @@ Charizard::Charizard() {
 	//There is a glitch associated with meduim slow pokemon at level 1. Additionally
 	//there's some really odd xp values for lvl 1 pokemon including fast having 1 xp 
 	//to lvl up.
-	int level=50;
+	int level=62;
 	levelspeed=2;//Medium fast Pokemon
 	bhp = 78;
 	batt = 84;

@@ -1,12 +1,13 @@
 /* overworld.cpp
 
-This .cpp file controls character movement in the overworld, background changes, and initiation of battles
+   This .cpp file controls character movement in the overworld, background changes, and initiation of battles
 
 Author: J. Patrick Lacher
 */
 
 #include <SDL2/SDL.h>
 #include <SDL2/SDL_image.h>
+#include <SDL2/SDL_mixer.h>
 #include <stdio.h>
 #include <string>
 #include <iostream>
@@ -14,7 +15,7 @@ Author: J. Patrick Lacher
 #include <time.h>
 #include "headers/Trainer.h"
 #include "headers/Pokemon.h"
-
+#include "headers/Moves.h"
 
 //Screen dimension constants
 const int SCREEN_WIDTH = 900;
@@ -23,7 +24,7 @@ const int SCREEN_HEIGHT = 900;
 //The player sprite that will move around on the screen
 class Ash
 {
-    public:
+	public:
 		//The dimensions of Ash
 		static const int ASH_WIDTH = 32;
 		static const int ASH_HEIGHT = 32;
@@ -42,17 +43,17 @@ class Ash
 
 		//Shows Ash on the screen
 		void render();
-		
+
 		//Checks if Ash has entered a door
 		int changeScene( int bg );
-		
+
 		//Checks if Ash has collided with a wall
 		void checkCollision( int bg );
-		
+
 		//Checks for a battle in the current room
 		bool isBattle( int bg, int battle );
 
-    private:
+	private:
 		//The X and Y offsets of Ash
 		int mPosX, mPosY;
 
@@ -72,11 +73,11 @@ class LTexture
 
 		//Loads image at specified path
 		bool loadFromFile( std::string path );
-		
-		#ifdef _SDL_TTF_H
+
+#ifdef _SDL_TTF_H
 		//Creates image from font string
 		bool loadFromRenderedText( std::string textureText, SDL_Color textColor );
-		#endif
+#endif
 
 		//Deallocates texture
 		void free();
@@ -89,7 +90,7 @@ class LTexture
 
 		//Set alpha modulation
 		void setAlpha( Uint8 alpha );
-		
+
 		//Renders texture at given point
 		void render( int x, int y, SDL_Rect* clip = NULL, double angle = 0.0, SDL_Point* center = NULL, SDL_RendererFlip flip = SDL_FLIP_NONE );
 
@@ -126,6 +127,11 @@ SDL_Window* gWindow = NULL;
 
 //The window renderer
 SDL_Renderer* gRenderer = NULL;
+
+//The music that will be used
+Mix_Music *gMusic = NULL;
+Mix_Music *hMusic = NULL;
+Mix_Music *iMusic = NULL;
 
 //Trainer Sprite Textures
 LTexture gAshTexture; //player character
@@ -278,7 +284,7 @@ bool LTexture::loadFromFile( std::string path )
 		SDL_SetColorKey( loadedSurface, SDL_TRUE, SDL_MapRGB( loadedSurface->format, 0, 0xFF, 0xFF ) );
 
 		//Create texture from surface pixels
-        newTexture = SDL_CreateTextureFromSurface( gRenderer, loadedSurface );
+		newTexture = SDL_CreateTextureFromSurface( gRenderer, loadedSurface );
 		if( newTexture == NULL )
 		{
 			printf( "Unable to create texture from %s! SDL Error: %s\n", path.c_str(), SDL_GetError() );
@@ -310,7 +316,7 @@ bool LTexture::loadFromRenderedText( std::string textureText, SDL_Color textColo
 	if( textSurface != NULL )
 	{
 		//Create texture from surface pixels
-        mTexture = SDL_CreateTextureFromSurface( gRenderer, textSurface );
+		mTexture = SDL_CreateTextureFromSurface( gRenderer, textSurface );
 		if( mTexture == NULL )
 		{
 			printf( "Unable to create texture from rendered text! SDL Error: %s\n", SDL_GetError() );
@@ -330,7 +336,7 @@ bool LTexture::loadFromRenderedText( std::string textureText, SDL_Color textColo
 		printf( "Unable to render text surface! SDL_ttf Error: %s\n", TTF_GetError() );
 	}
 
-	
+
 	//Return success
 	return mTexture != NULL;
 }
@@ -359,7 +365,7 @@ void LTexture::setBlendMode( SDL_BlendMode blending )
 	//Set blending function
 	SDL_SetTextureBlendMode( mTexture, blending );
 }
-		
+
 void LTexture::setAlpha( Uint8 alpha )
 {
 	//Modulate texture alpha
@@ -394,78 +400,78 @@ int LTexture::getHeight()
 
 Ash::Ash()
 {
-    //Initialize the offsets
-    mPosX = 400;
-    mPosY = 840;
+	//Initialize the offsets
+	mPosX = 400;
+	mPosY = 840;
 
-    //Initialize the velocity
-    mVelX = 0;
-    mVelY = 0;
+	//Initialize the velocity
+	mVelX = 0;
+	mVelY = 0;
 }
 
 void Ash::handleEvent( SDL_Event& e )
 {
-    //If a key was pressed
+	//If a key was pressed
 	if( e.type == SDL_KEYDOWN && e.key.repeat == 0 )
-    {
-        //Adjust the velocity
-        switch( e.key.keysym.sym )
-        {
-            case SDLK_UP: mVelY -= ASH_VEL; break;
-            case SDLK_DOWN: mVelY += ASH_VEL; break;
-            case SDLK_LEFT: mVelX -= ASH_VEL; break;
-            case SDLK_RIGHT: mVelX += ASH_VEL; break;
-        }
-    }
-    //If a key was released
-    else if( e.type == SDL_KEYUP && e.key.repeat == 0 )
-    {
-        //Adjust the velocity
-        switch( e.key.keysym.sym )
-        {
-            case SDLK_UP: mVelY += ASH_VEL; break;
-            case SDLK_DOWN: mVelY -= ASH_VEL; break;
-            case SDLK_LEFT: mVelX += ASH_VEL; break;
-            case SDLK_RIGHT: mVelX -= ASH_VEL; break;
-        }
-    }
+	{
+		//Adjust the velocity
+		switch( e.key.keysym.sym )
+		{
+			case SDLK_UP: mVelY -= ASH_VEL; break;
+			case SDLK_DOWN: mVelY += ASH_VEL; break;
+			case SDLK_LEFT: mVelX -= ASH_VEL; break;
+			case SDLK_RIGHT: mVelX += ASH_VEL; break;
+		}
+	}
+	//If a key was released
+	else if( e.type == SDL_KEYUP && e.key.repeat == 0 )
+	{
+		//Adjust the velocity
+		switch( e.key.keysym.sym )
+		{
+			case SDLK_UP: mVelY += ASH_VEL; break;
+			case SDLK_DOWN: mVelY -= ASH_VEL; break;
+			case SDLK_LEFT: mVelX += ASH_VEL; break;
+			case SDLK_RIGHT: mVelX -= ASH_VEL; break;
+		}
+	}
 }
 
 void Ash::move()
 {
-    //Move Ash left or right
-    mPosX += mVelX;
+	//Move Ash left or right
+	mPosX += mVelX;
 
-    //If Ash went too far to the left or right
-    if( ( mPosX < 0 ) || ( mPosX + ASH_WIDTH > SCREEN_WIDTH ) )
-    {
-        //Move back
-        mPosX -= mVelX;
-    }
+	//If Ash went too far to the left or right
+	if( ( mPosX < 0 ) || ( mPosX + ASH_WIDTH > SCREEN_WIDTH ) )
+	{
+		//Move back
+		mPosX -= mVelX;
+	}
 
-    //Move Ash up or down
-    mPosY += mVelY;
+	//Move Ash up or down
+	mPosY += mVelY;
 
-    //If Ash went too far up or down
-    if( ( mPosY < 0 ) || ( mPosY + ASH_HEIGHT > SCREEN_HEIGHT ) )
-    {
-        //Move back
-        mPosY -= mVelY;
-    }
+	//If Ash went too far up or down
+	if( ( mPosY < 0 ) || ( mPosY + ASH_HEIGHT > SCREEN_HEIGHT ) )
+	{
+		//Move back
+		mPosY -= mVelY;
+	}
 }
 
 void Ash::render()
 {
-    //Show Ash
+	//Show Ash
 	gAshTexture.render( mPosX, mPosY );
 }
 
 int Ash::changeScene( int bg )
 {
 	//Check if Ash has collided with a door on the current background
-	
+
 	int back = bg;
-	
+
 	if ( bg == 1 ) //exterior
 	{
 		if ( mPosY <= 510 && mPosX <= 410 && mPosX >= 390 ) 
@@ -520,7 +526,7 @@ int Ash::changeScene( int bg )
 			mPosY = 535;
 		}
 	}
-	
+
 	//return the destination background
 	return back;
 }
@@ -528,7 +534,7 @@ int Ash::changeScene( int bg )
 void Ash::checkCollision( int bg )
 {
 	//Checks collision with walls for each of the backgrounds and adjusts Ash's position accordingly
-	
+
 	if ( bg == 1) //exterior
 	{
 		if ( mPosX < 180 ) mPosX = 180; //left rock face
@@ -588,9 +594,9 @@ void Ash::checkCollision( int bg )
 
 bool Ash::isBattle( int bg, int battle )
 {
-	
+
 	//Checks if a battle should initiate in the room
-	
+
 	if ( battle == 1 )
 	{
 		switch ( bg )
@@ -617,7 +623,7 @@ bool Ash::isBattle( int bg, int battle )
 				return false;
 		}
 	}
-	
+
 	return false;
 }
 
@@ -668,6 +674,13 @@ bool init()
 					printf( "SDL_image could not initialize! SDL_image Error: %s\n", IMG_GetError() );
 					success = false;
 				}
+
+				//Initialize SDL_mixer
+				if( Mix_OpenAudio( 44100, MIX_DEFAULT_FORMAT, 2, 2048 ) < 0 )
+				{
+					printf( "SDL_mixer could not initialize! SDL_mixer Error: %s\n", Mix_GetError() );
+					success = false;
+				}
 			}
 		}
 	}
@@ -680,13 +693,36 @@ bool loadMedia()
 	//Loading success flag
 	bool success = true;
 
+	//Load music
+	gMusic = Mix_LoadMUS( "audio/final_road.wav");
+	if (gMusic == NULL)
+	{
+		printf("Failed to load sick tunes! SDL_mixer Error: %s\n", Mix_GetError() );
+		success = false;
+	}
+
+	hMusic = Mix_LoadMUS( "audio/battle.wav");
+	if (hMusic == NULL)
+	{
+		printf("Failed to load sick tunes! SDL_mixer Error: %s\n", Mix_GetError() );
+		success = false;
+	}
+
+	iMusic = Mix_LoadMUS( "audio/lastBattle.wav");
+	if (iMusic == NULL)
+	{
+		printf("Failed to load sick tunes! SDL_mixer Error: %s\n", Mix_GetError() );
+		success = false;
+	}
+
+
 	//Load Ash Texture
 	if( !gAshTexture.loadFromFile( "images/ash.bmp" ) )
 	{
 		printf( "Failed to load ash texture!\n" );
 		success = false;
 	}
-	
+
 	//Load Enemy Textures
 	if( !gDougTexture.loadFromFile( "images/doug.bmp" ) )
 	{
@@ -703,7 +739,7 @@ bool loadMedia()
 		printf( "Failed to load patrick texture!\n" );
 		success = false;
 	}
-	
+
 	//Load NPC Textures
 	if( !gOffficerTexture.loadFromFile( "images/officer.bmp" ) )
 	{
@@ -772,7 +808,7 @@ bool loadMedia()
 		printf( "Failed to load room_4 texture!\n" );
 		success = false;
 	}
-	
+
 	//Load Pokemon Textures
 	if( !gAerodactylTexture.loadFromFile( "images/battle/aerodactyl_200.bmp" ) )
 	{
@@ -969,7 +1005,7 @@ bool loadMedia()
 		printf( "Failed to load venusaur texture!\n" );
 		success = false;
 	}
-	
+
 	//Load Battle Textures
 	if( !gBattleScreenTexture.loadFromFile( "images/battle/battle_screen.bmp" ) )
 	{
@@ -991,7 +1027,7 @@ bool loadMedia()
 		printf( "Failed to load low_health texture!\n" );
 		success = false;
 	}
-	
+
 	//Load Battle Text Box Textures
 	if( !gPlayerDamaged.loadFromFile( "images/battle/Textbox_TookDamage.bmp" ) )
 	{
@@ -1013,7 +1049,7 @@ bool loadMedia()
 		printf( "Failed to load Textbox_EnemyFaints texture!\n" );
 		success = false;
 	}
-	
+
 	//Load Moves Text Box Textures
 	if( !gAerodactylMovesTexture.loadFromFile( "images/battle/MovesBMPs/Moves_Aerodactyl.bmp" ) )
 	{
@@ -1217,15 +1253,23 @@ bool loadMedia()
 void close()
 {
 	//Free loaded images
-	
+
+	//Free the music
+	Mix_FreeMusic(gMusic);
+	gMusic = NULL;
+	Mix_FreeMusic(hMusic);
+	hMusic = NULL;
+	Mix_FreeMusic(iMusic);
+	iMusic = NULL;
+
 	//Player Sprite
 	gAshTexture.free();
-	
+
 	//Enemy Sprites
 	gDougTexture.free();
 	gJohnTexture.free();
 	gPatrickTexture.free();
-	
+
 	//NPC Sprites
 	gOffficerTexture.free();
 	gLassTexture.free();
@@ -1233,7 +1277,7 @@ void close()
 	gProfTexture.free();
 	gProfPkmnTexture.free();
 	gStatueTexture.free();
-	
+
 	//Backgrounds
 	gBG1Texture.free();
 	gBG2Texture.free();
@@ -1242,7 +1286,7 @@ void close()
 	gBG5Texture.free();
 	gBG6Texture.free();
 	gBG7Texture.free();
-	
+
 	//Pokemon Sprites
 	gAerodactylTexture.free();
 	gAlakazamTexture.free();
@@ -1283,19 +1327,19 @@ void close()
 	gSnorlaxTexture.free();
 	gVaporeonTexture.free();
 	gVenusaurTexture.free();
-	
+
 	//Battle Textures
 	gBattleScreenTexture.free();
 	gHighHealthTexture.free();
 	gMedHealthTexture.free();
 	gLowHelathTexture.free();
-	
+
 	//Battle Text Boxes
 	gPlayerDamaged.free();
 	gPlayerFaint.free();
 	gEnemyDamaged.free();
 	gEnemyFaint.free();
-	
+
 	//Move Text Box Textures
 	gAerodactylMovesTexture.free();
 	gAlakazamMovesTexture.free();
@@ -1476,7 +1520,7 @@ void renderPokemon( int num, int x, int y )
 void renderMoveBox( int num )
 {
 	//render a specific pokemon's move list to the battle screen
-	
+
 	int x = 225;
 	int y = 545;
 
@@ -1604,7 +1648,7 @@ void renderMoveBox( int num )
 void handleMove( SDL_Event& e )
 {
 	//determines what move the player has entered
-	
+
 	if ( e.type == SDL_KEYUP && e.key.repeat == 0 )
 	{
 		switch ( e.key.keysym.sym )
@@ -1620,13 +1664,16 @@ void handleMove( SDL_Event& e )
 }
 
 int main( int argc, char* args[] )
-{	
+{
+	int count = 0;  
+	int lastb = 0;
+
 	//Initialize Trainers
 	Trainer Player(1);
 	Trainer Douglas(4);
 	Trainer John(5);
 	Trainer Patrick(6);
-	
+
 	//Start up SDL and create window
 	if( !init() )
 	{
@@ -1643,30 +1690,34 @@ int main( int argc, char* args[] )
 		{	
 			//Main loop flag
 			bool quit = false;
-			
+
 			//Background scene selector
 			int bg = 1;
-			
+
 			//Allow for battle flag
 			int battle = 1;
-			
+
 			//Test for Loss of Battle
 			int result = 0;
-			
+
 			//Trainer Handlers
 			Trainer enemy(5);
 			Trainer player = Player;
-			
+
 			//Retained value of bg in previous frame
 			int bg_backup;
-			
+
 			//batte continuation flag
 			bool inBattle = false;
-			
+
 			//index of pokemon in trainers' pokemon array
 			int ppkmn = 0; //player
 			int epkmn = 0; //enemy
-			
+
+			//battle temporary variables
+			int typing;
+			int emove;
+
 			//Key Released Event
 			SDL_Event up;
 			up.type = SDL_KEYUP;
@@ -1679,7 +1730,38 @@ int main( int argc, char* args[] )
 			while( !quit )
 			{
 				move = 15;
-				
+
+				//If there is no music playing
+				if (Mix_PlayingMusic() == 0)
+				{
+					//Play the music
+					Mix_PlayMusic(gMusic, -1);
+				}
+
+				//If in a battle
+				if ( inBattle ) 
+				{
+					if(count == 0 && lastb == 0) 
+					{
+						Mix_PlayMusic(hMusic, -1);
+						count = 1;
+					}
+					if(count == 0 && lastb == 1)
+					{
+						Mix_PlayMusic(iMusic, -1);
+						count = 1;
+					}
+				}
+				else //Battle Ended
+				{
+					if(count == 1)
+					{
+						Mix_PlayMusic(gMusic, -1);
+						count = 0;
+						lastb = 0;
+					}
+				}
+
 				//Handle events on queue
 				while( SDL_PollEvent( &e ) != 0 )
 				{
@@ -1701,22 +1783,22 @@ int main( int argc, char* args[] )
 
 					//Move ash
 					ash.move();
-					
+
 					//Save old background for later comparisson
 					bg_backup = bg;
-					
+
 					//Check for a collision with a door on current background
 					bg = ash.changeScene( bg );
-					
+
 					//Allow for new battle in room if room has changed
 					if ( bg != bg_backup )
 					{
 						battle = 1;
 					}
-					
+
 					//Check for a collision with a wall on current background
 					ash.checkCollision( bg );
-					
+
 					//Run battle if one occurs
 					if ( ash.isBattle( bg, battle ) )
 					{
@@ -1724,7 +1806,6 @@ int main( int argc, char* args[] )
 						{
 							case 4: //first battle
 								enemy = Douglas;
-								player = Player;
 								inBattle = true;
 								ppkmn = 0;
 								epkmn = 0;
@@ -1732,7 +1813,6 @@ int main( int argc, char* args[] )
 								break;
 							case 5: //second battle
 								enemy = John;
-								player = Player;
 								inBattle = true;
 								ppkmn = 0;
 								epkmn = 0;
@@ -1740,15 +1820,15 @@ int main( int argc, char* args[] )
 								break;
 							case 6: //third battle
 								enemy = Patrick;
-								player = Player;
 								inBattle = true;
 								ppkmn = 0;
 								epkmn = 0;
 								battle = 0;
+								lastb = 1;
 								break;
 						}
 					}				
-					
+
 					//Render background
 					switch ( bg )
 					{
@@ -1757,7 +1837,7 @@ int main( int argc, char* args[] )
 							break;
 						case 2: //interior
 							gBG2Texture.render( 0, 0 );
-							
+
 							//render NPC sprites in lobby
 							gOffficerTexture.render( 370, 190 );
 							gOffficerTexture.render( 495, 190 );
@@ -1766,7 +1846,7 @@ int main( int argc, char* args[] )
 							gProfPkmnTexture.render( 683, 655 );
 							gProfTexture.render( 650, 650 );
 							gStatueTexture.render( 571, 304 );
-							
+
 							break;
 						case 3: //interior hallway
 							gBG3Texture.render( 0, 0 );
@@ -1786,25 +1866,25 @@ int main( int argc, char* args[] )
 						case 7: //room 4
 							gBG7Texture.render( 0, 0 );
 					}
-					
+
 					//Render player sprite
 					ash.render();
 
 					//Update screen
 					SDL_RenderPresent( gRenderer );
 				}
-				
+
 				if ( inBattle ) //while battle is occurring
 				{
 					while ( player.getPokemon( ppkmn )->getchealth() == 0 )
 					{
 						ppkmn++;
 					}
-					
+
 					//Clear screen
 					SDL_SetRenderDrawColor( gRenderer, 0xFF, 0xFF, 0xFF, 0xFF );
 					SDL_RenderClear( gRenderer );
-					
+
 					//render background
 					gBattleScreenTexture.render( 0, 0 );
 
@@ -1813,35 +1893,38 @@ int main( int argc, char* args[] )
 					if( ( double(enemy.getPokemon(epkmn)->getchealth())/double(enemy.getPokemon(epkmn)->getmhealth()) ) >= 0.8 ) gHighHealthTexture.render( 291, 277 );
 					else if ( ( double(enemy.getPokemon(epkmn)->getchealth())/double(enemy.getPokemon(epkmn)->getmhealth()) ) >= 0.2 ) gMedHealthTexture.render( 291, 277 );
 					else gLowHelathTexture.render( 291, 277 );
-					
+
 					//player
 					if( ( double(player.getPokemon(ppkmn)->getchealth())/double(player.getPokemon(ppkmn)->getmhealth()) ) >= 0.8 ) gHighHealthTexture.render( 515, 478 );
 					else if ( ( double(player.getPokemon(ppkmn)->getchealth())/double(player.getPokemon(ppkmn)->getmhealth()) ) >= 0.2 ) gMedHealthTexture.render( 515, 478 );
 					else gLowHelathTexture.render( 515, 478 );
-					
+
 					//render pokemon sprites
 					renderPokemon( enemy.getPokemon(epkmn)->getNum(), 471, 226 ); //enemy
 					renderPokemon( player.getPokemon(ppkmn)->getNum(), 245, 369 ); //player
-					
+
 					//render moveset box
 					renderMoveBox( player.getPokemon(ppkmn)->getNum() );
-					
+
 					//Update screen
 					SDL_RenderPresent( gRenderer );
-					
+
 					if ( move != 15 ) //ensure that the user entered a valid move
 					{
 						//player attacks enemy pokemon
-						enemy.getPokemon( epkmn )->takeDamage( player.getPokemon( ppkmn )->doDamage( move ) );
+						typing = player.getPokemon( ppkmn )->getMoves( move ).getTyping();
+						enemy.getPokemon( epkmn )->takeDamage( player.getPokemon( ppkmn )->doDamage( move ), typing );
 						gEnemyDamaged.render( 362, 546 );
 						SDL_RenderPresent( gRenderer );
 						SDL_Delay( 700 );
-						
+
 						//enemy pokemon attacks if not KO'd
 						if ( enemy.getPokemon( epkmn )->getchealth() != 0 )
 						{
 							//enemy pokemon attacks
-							player.getPokemon( ppkmn )->takeDamage( enemy.getPokemon( epkmn )->doDamage( rand() % 3 ) );
+							emove = rand() % 3;
+							typing = enemy.getPokemon( epkmn )->getMoves( emove ).getTyping();
+							player.getPokemon( ppkmn )->takeDamage( enemy.getPokemon( epkmn )->doDamage( emove ), typing );
 							gPlayerDamaged.render( 362, 546 );
 							SDL_RenderPresent( gRenderer );
 							SDL_Delay( 700 );
@@ -1851,7 +1934,7 @@ int main( int argc, char* args[] )
 							gEnemyFaint.render( 362, 546 );
 							SDL_RenderPresent( gRenderer );
 							SDL_Delay( 700 );
-							
+
 							if ( epkmn == 5 ) //enemy is out of pokemon
 							{
 								result = 0; //battle won
@@ -1860,14 +1943,14 @@ int main( int argc, char* args[] )
 							}
 							else epkmn++;
 						}
-						
+
 						//check if player pokemon is KO'd
 						if ( player.getPokemon( ppkmn )->getchealth() == 0 )
 						{
 							gPlayerFaint.render( 362, 546 );
 							SDL_RenderPresent( gRenderer );
 							SDL_Delay( 700 );
-							
+
 							if ( ppkmn == 5 ) //player is out of pokemon
 							{
 								result = 1; //battle lost
@@ -1878,7 +1961,7 @@ int main( int argc, char* args[] )
 						}
 					}
 				}
-				
+
 				if ( result == 1 ) //battle lost
 				{
 					quit = true;
