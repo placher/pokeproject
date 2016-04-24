@@ -1,4 +1,10 @@
-//Create an initial Moves.h file
+/*
+Moves.h
+
+This .h file controls all of the statistics for pokemon attacks.
+
+Author: Douglas Schmieder
+*/
 
 #ifndef MOVES_H
 #define MOVES_H

@@ -1,4 +1,11 @@
-// Makes the trainer stuff for the class things
+/*
+Trainer.h
+
+This .h file implements a trainer, containing 6 pokemon that are either automatically assigned or chosen by the
+user, depending on the interger passed to the constructor
+
+Author: Douglas Schmieder
+*/
 
 #ifndef TRAINER_H
 #define TRAINER_H

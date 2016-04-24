@@ -1,4 +1,11 @@
-//Include things. Not complete
+/*
+Pokemon.h
+
+This .h file is the base file for pokemon, controling stats and damage in battles.
+All other pokemon files inherit from this class.
+
+Author: Douglas Schmieder
+*/
 
 #ifndef POKEMON_H
 #define POKEMON_H
