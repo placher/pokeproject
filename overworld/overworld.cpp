@@ -1,6 +1,7 @@
-/* overworld.cpp
+/*
+overworld.cpp
 
-   This .cpp file controls character movement in the overworld, background changes, and initiation of battles
+This .cpp file controls character movement in the overworld, background changes, music, and controls battles
 
 Author: J. Patrick Lacher
 */
@@ -35,7 +36,7 @@ class Ash
 		//Initializes the variables
 		Ash();
 
-		//Takes key presses and adjusts Ash's velocity
+		//Takes input and adjusts Ash's velocity
 		void handleEvent( SDL_Event& e );
 
 		//Moves Ash
@@ -249,6 +250,10 @@ LTexture gShuckleMovesTexture; //36
 LTexture gSnorlaxMovesTexture; //37
 LTexture gVaporeonMovesTexture; //38
 LTexture gVenusaurMovesTexture; //39
+
+//End-Game Screen Textures
+LTexture gWinScreenTexture;
+LTexture gLoseScreenTexture;
 
 LTexture::LTexture()
 {
@@ -524,6 +529,13 @@ int Ash::changeScene( int bg )
 			back = 7;
 			mPosX = 440;
 			mPosY = 535;
+		}
+	}
+	if ( bg == 7 ) //room 4
+	{
+		if ( mPosY <= 352 )
+		{
+			back = 8;
 		}
 	}
 
@@ -1246,6 +1258,18 @@ bool loadMedia()
 		printf( "Failed to load moves_venusaur texture!\n" );
 		success = false;
 	}
+	
+	//Load End-Game Screen Textures
+	if( !gWinScreenTexture.loadFromFile( "images/win_screen.bmp" ) )
+	{
+		printf( "Failed to load win_screen texture!\n" );
+		success = false;
+	}
+	if( !gLoseScreenTexture.loadFromFile( "images/lose_screen.bmp" ) )
+	{
+		printf( "Failed to load lose_screen texture!\n" );
+		success = false;
+	}
 
 	return success;
 }
@@ -1380,6 +1404,10 @@ void close()
 	gSnorlaxMovesTexture.free();
 	gVaporeonMovesTexture.free();
 	gVenusaurMovesTexture.free();
+	
+	//End-Game Screen Textures
+	gWinScreenTexture.free();
+	gLoseScreenTexture.free();
 
 	//Destroy window	
 	SDL_DestroyRenderer( gRenderer );
@@ -1865,13 +1893,22 @@ int main( int argc, char* args[] )
 							break;
 						case 7: //room 4
 							gBG7Texture.render( 0, 0 );
+						case 8: //win screen
+							gWinScreenTexture.render( 0, 0 );
 					}
 
 					//Render player sprite
-					ash.render();
+					if ( bg != 8 ) ash.render();
 
 					//Update screen
 					SDL_RenderPresent( gRenderer );
+					
+					//Close game if win screen was reached
+					if ( bg == 8 )
+					{
+						SDL_Delay( 2000 );
+						quit = true;
+					}
 				}
 
 				if ( inBattle ) //while battle is occurring
@@ -1964,6 +2001,8 @@ int main( int argc, char* args[] )
 
 				if ( result == 1 ) //battle lost
 				{
+					gLoseScreenTexture.render( 0, 0 );
+					SDL_Delay( 2000 );
 					quit = true;
 				}
 			}
