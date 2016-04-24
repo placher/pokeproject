@@ -9,8 +9,6 @@
 #include "Pokemon.h"
 
 
-
-
 using namespace std;
 
 /*
@@ -18,8 +16,6 @@ http://bulbapedia.bulbagarden.net/wiki/Statistic
 Gen I and II formula:
 HP = [(((Base+IV)x2+(root(EV)/4))xLevel)/100]+level+10
 Others = [((base+IV)x2+[root(EV)/4]xLevel)/100]+5
-IV range from 0-31. Generate average IV and give to every pokemon?
-Ignore EVs?
 
 http://bulbapedia.bulbagarden.net/wiki/Experience
 Four exp groups in Gen I:Fast, Medium Fast, Medium Slow, Slow
@@ -50,6 +46,7 @@ Venusaur::Venusaur() {
 	//to lvl up.
 	int level=62;
 	levelspeed=3;//Medium slow Pokemon
+  //Makes base stats
 	bhp = 80;
 	batt = 82;
 	bdef = 83;
@@ -85,7 +82,7 @@ Venusaur::Venusaur() {
 	Pokemon::settype1("Grass");//Sets first type
 	Pokemon::settype2("Poison");//Sets second type
 	Pokemon::setMoves(1, 17, 18, 28);//Set up moves for pokemon
-	Pokemon::setNum(39);
+	Pokemon::setNum(39);//Thiry-ninth Pokemon
 
 }
 

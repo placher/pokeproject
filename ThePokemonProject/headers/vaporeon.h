@@ -16,8 +16,6 @@ http://bulbapedia.bulbagarden.net/wiki/Statistic
 Gen I and II formula:
 HP = [(((Base+IV)x2+(root(EV)/4))xLevel)/100]+level+10
 Others = [((base+IV)x2+[root(EV)/4]xLevel)/100]+5
-IV range from 0-31. Generate average IV and give to every pokemon?
-Ignore EVs?
 
 http://bulbapedia.bulbagarden.net/wiki/Experience
 Four exp groups in Gen I:Fast, Medium Fast, Medium Slow, Slow
@@ -48,6 +46,7 @@ Vaporeon::Vaporeon() {
 	//to lvl up.
 	int level=53;
 	levelspeed=2;//Medium fast Pokemon
+  //Makes base stats
 	bhp = 130;
 	batt = 65;
 	bdef = 60;
@@ -83,7 +82,7 @@ Vaporeon::Vaporeon() {
 	Pokemon::settype1("Water");//Sets first type
 	Pokemon::settype2("");//Sets second type
 	Pokemon::setMoves(19, 20, 5, 14);//Set up moves for pokemon
-	Pokemon::setNum(38);
+	Pokemon::setNum(38);//Thiry-eighth Pokemon
 
 }
 

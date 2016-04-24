@@ -16,8 +16,6 @@ http://bulbapedia.bulbagarden.net/wiki/Statistic
 Gen I and II formula:
 HP = [(((Base+IV)x2+(root(EV)/4))xLevel)/100]+level+10
 Others = [((base+IV)x2+[root(EV)/4]xLevel)/100]+5
-IV range from 0-31. Generate average IV and give to every pokemon?
-Ignore EVs?
 
 http://bulbapedia.bulbagarden.net/wiki/Experience
 Four exp groups in Gen I:Fast, Medium Fast, Medium Slow, Slow
@@ -48,6 +46,7 @@ Electrode::Electrode() {
 	//to lvl up.
 	int level=57;
 	levelspeed=2;//Medium Fast Pokemon
+  //Makes base stats
 	bhp = 60;
 	batt = 50;
 	bdef = 70;
@@ -83,7 +82,7 @@ Electrode::Electrode() {
 	Pokemon::settype1("Electric");//Sets first type
 	Pokemon::settype2("");//Sets second type
 	Pokemon::setMoves(2,4,14,0);//Sets moves
-	Pokemon::setNum(14);
+	Pokemon::setNum(14);//Fourteenth Pokemon 
 
 }
 

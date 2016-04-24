@@ -15,8 +15,6 @@ http://bulbapedia.bulbagarden.net/wiki/Statistic
 Gen I and II formula:
 HP = [(((Base+IV)x2+(root(EV)/4))xLevel)/100]+level+10
 Others = [((base+IV)x2+[root(EV)/4]xLevel)/100]+5
-IV range from 0-31. Generate average IV and give to every pokemon?
-Ignore EVs?
 
 http://bulbapedia.bulbagarden.net/wiki/Experience
 Four exp groups in Gen I:Fast, Medium Fast, Medium Slow, Slow
@@ -48,7 +46,8 @@ Bulbasaur::Bulbasaur() {
 	//to lvl up.
 	int level=300;
 	levelspeed=3;//Medium Slow Pokemon
-	bhp = 45;
+	//Makes base stats
+  bhp = 45;
 	batt = 49;
 	bdef = 49;
 	bsatt = 65;
@@ -83,7 +82,7 @@ Bulbasaur::Bulbasaur() {
 	Pokemon::settype1("Grass");//Sets first type
 	Pokemon::settype2("Poison");//Sets second type
 	Pokemon::setMoves(0,17,18,3);//Sets moves
-	Pokemon::setNum(6);
+	Pokemon::setNum(6);//Sixth Pokemon
 
 }
 

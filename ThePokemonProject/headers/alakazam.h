@@ -16,8 +16,6 @@ http://bulbapedia.bulbagarden.net/wiki/Statistic
 Gen I and II formula:
 HP = [(((Base+IV)x2+(root(EV)/4))xLevel)/100]+level+10
 Others = [((base+IV)x2+[root(EV)/4]xLevel)/100]+5
-IV range from 0-31. Generate average IV and give to every pokemon?
-Ignore EVs?
 
 http://bulbapedia.bulbagarden.net/wiki/Experience
 Four exp groups in Gen I:Fast, Medium Fast, Medium Slow, Slow
@@ -48,7 +46,8 @@ Alakazam::Alakazam() {
 	//to lvl up.
 	int level=65;
 	levelspeed=3;//Medium slow Pokemon
-	bhp = 55;
+	//Make base stats
+  bhp = 55;
 	batt = 50;
 	bdef = 45;
 	bsatt = 135;
@@ -82,8 +81,8 @@ Alakazam::Alakazam() {
 	Pokemon::setmxp(m);//Set max xp for levelup
 	Pokemon::settype1("Psychic");//Sets first type
 	Pokemon::settype2("");//Sets second type
-	Pokemon::setMoves(15,16,25,0);
-	Pokemon::setNum(2);
+	Pokemon::setMoves(15,16,25,0);//Set moves
+	Pokemon::setNum(2);//Second Pokemon
 
 }
 

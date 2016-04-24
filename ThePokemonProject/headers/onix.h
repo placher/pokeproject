@@ -16,8 +16,6 @@ http://bulbapedia.bulbagarden.net/wiki/Statistic
 Gen I and II formula:
 HP = [(((Base+IV)x2+(root(EV)/4))xLevel)/100]+level+10
 Others = [((base+IV)x2+[root(EV)/4]xLevel)/100]+5
-IV range from 0-31. Generate average IV and give to every pokemon?
-Ignore EVs?
 
 http://bulbapedia.bulbagarden.net/wiki/Experience
 Four exp groups in Gen I:Fast, Medium Fast, Medium Slow, Slow
@@ -48,6 +46,7 @@ Onix::Onix() {
 	//to lvl up.
 	int level=53;
 	levelspeed=2;//Medium fast Pokemon
+  //Makes base stats
 	bhp = 35;
 	batt = 45;
 	bdef = 160;
@@ -83,7 +82,7 @@ Onix::Onix() {
 	Pokemon::settype1("Rock");//Sets first type
 	Pokemon::settype2("Ground");//Sets second type
 	Pokemon::setMoves(0, 3, 23, 26);//Set up moves for pokemon
-	Pokemon::setNum(30);
+	Pokemon::setNum(30);//Thirtieth Pokemon
 
 }
 

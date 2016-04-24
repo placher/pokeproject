@@ -16,8 +16,6 @@ http://bulbapedia.bulbagarden.net/wiki/Statistic
 Gen I and II formula:
 HP = [(((Base+IV)x2+(root(EV)/4))xLevel)/100]+level+10
 Others = [((base+IV)x2+[root(EV)/4]xLevel)/100]+5
-IV range from 0-31. Generate average IV and give to every pokemon?
-Ignore EVs?
 
 http://bulbapedia.bulbagarden.net/wiki/Experience
 Four exp groups in Gen I:Fast, Medium Fast, Medium Slow, Slow
@@ -48,7 +46,8 @@ Arbok::Arbok() {
 	//to lvl up.
 	int level=64;
 	levelspeed=2;//Medium fast Pokemon
-	bhp = 60;
+	//Make base stats
+  bhp = 60;
 	batt = 85;
 	bdef = 69;
 	bsatt = 65;
@@ -83,7 +82,7 @@ Arbok::Arbok() {
 	Pokemon::settype1("Poison");//Sets first type
 	Pokemon::settype2("");//Sets second type
 	Pokemon::setMoves(0,28,29,14);//Sets moves
-	Pokemon::setNum(3);
+	Pokemon::setNum(3);//Third Pokemon
 
 }
 

@@ -16,8 +16,6 @@ http://bulbapedia.bulbagarden.net/wiki/Statistic
 Gen I and II formula:
 HP = [(((Base+IV)x2+(root(EV)/4))xLevel)/100]+level+10
 Others = [((base+IV)x2+[root(EV)/4]xLevel)/100]+5
-IV range from 0-31. Generate average IV and give to every pokemon?
-Ignore EVs?
 
 http://bulbapedia.bulbagarden.net/wiki/Experience
 Four exp groups in Gen I:Fast, Medium Fast, Medium Slow, Slow
@@ -48,6 +46,7 @@ Gyrados::Gyrados() {
 	//to lvl up.
 	int level=64;
 	levelspeed=4;//Slow Pokemon
+  //Makes base stats
 	bhp = 95;
 	batt = 125;
 	bdef = 79;
@@ -83,7 +82,7 @@ Gyrados::Gyrados() {
 	Pokemon::settype1("Water");//Sets first type
 	Pokemon::settype2("Flying");//Sets second type
 	Pokemon::setMoves(21,29,0,20);//Sets moves
-	Pokemon::setNum(21);
+	Pokemon::setNum(21);//Twenty-first Pokemon
 	
 }
 

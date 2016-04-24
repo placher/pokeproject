@@ -16,8 +16,6 @@ http://bulbapedia.bulbagarden.net/wiki/Statistic
 Gen I and II formula:
 HP = [(((Base+IV)x2+(root(EV)/4))xLevel)/100]+level+10
 Others = [((base+IV)x2+[root(EV)/4]xLevel)/100]+5
-IV range from 0-31. Generate average IV and give to every pokemon?
-Ignore EVs?
 
 http://bulbapedia.bulbagarden.net/wiki/Experience
 Four exp groups in Gen I:Fast, Medium Fast, Medium Slow, Slow
@@ -48,6 +46,7 @@ Arcanine::Arcanine() {
 	//to lvl up.
 	int level=65;
 	levelspeed=4;//Slow Pokemon
+  //Make base stats
 	bhp = 90;
 	batt = 110;
 	bdef = 80;
@@ -83,7 +82,7 @@ Arcanine::Arcanine() {
 	Pokemon::settype1("Fire");//Sets first type
 	Pokemon::settype2("");//Sets second type
 	Pokemon::setMoves(1, 6, 7, 29);//Set up moves for pokemon
-	Pokemon::setNum(4);
+	Pokemon::setNum(4);//Fourth Pokemon
 
 }
 

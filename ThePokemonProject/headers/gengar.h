@@ -16,8 +16,6 @@ http://bulbapedia.bulbagarden.net/wiki/Statistic
 Gen I and II formula:
 HP = [(((Base+IV)x2+(root(EV)/4))xLevel)/100]+level+10
 Others = [((base+IV)x2+[root(EV)/4]xLevel)/100]+5
-IV range from 0-31. Generate average IV and give to every pokemon?
-Ignore EVs?
 
 http://bulbapedia.bulbagarden.net/wiki/Experience
 Four exp groups in Gen I:Fast, Medium Fast, Medium Slow, Slow
@@ -48,6 +46,7 @@ Gengar::Gengar() {
 	//to lvl up.
 	int level=58;
 	levelspeed=3;//Medium slow Pokemon
+  //Makes base stats
 	bhp = 60;
 	batt = 65;
 	bdef = 60;
@@ -83,7 +82,7 @@ Gengar::Gengar() {
 	Pokemon::settype1("Ghost");//Sets first type
 	Pokemon::settype2("Poison");//Sets second type
 	Pokemon::setMoves(25, 28, 2, 15);//Set up moves for pokemon
-	Pokemon::setNum(16);
+	Pokemon::setNum(16);//Sixteenth
 	
 }
 

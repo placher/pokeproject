@@ -16,8 +16,6 @@ http://bulbapedia.bulbagarden.net/wiki/Statistic
 Gen I and II formula:
 HP = [(((Base+IV)x2+(root(EV)/4))xLevel)/100]+level+10
 Others = [((base+IV)x2+[root(EV)/4]xLevel)/100]+5
-IV range from 0-31. Generate average IV and give to every pokemon?
-Ignore EVs?
 
 http://bulbapedia.bulbagarden.net/wiki/Experience
 Four exp groups in Gen I:Fast, Medium Fast, Medium Slow, Slow
@@ -48,6 +46,7 @@ Lapras::Lapras() {
 	//to lvl up.
 	int level=56;
 	levelspeed=4;//Slow Pokemon
+  //Makes base stats
 	bhp = 130;
 	batt = 85;
 	bdef = 80;
@@ -83,7 +82,7 @@ Lapras::Lapras() {
 	Pokemon::settype1("Water");//Sets first type
 	Pokemon::settype2("Ice");//Sets second type
 	Pokemon::setMoves(5, 19, 20, 21);//Set up moves for pokemon
-	Pokemon::setNum(26);
+	Pokemon::setNum(26);//Twenty-sixth Pokemon
 
 }
 

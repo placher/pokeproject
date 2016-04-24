@@ -16,8 +16,6 @@ http://bulbapedia.bulbagarden.net/wiki/Statistic
 Gen I and II formula:
 HP = [(((Base+IV)x2+(root(EV)/4))xLevel)/100]+level+10
 Others = [((base+IV)x2+[root(EV)/4]xLevel)/100]+5
-IV range from 0-31. Generate average IV and give to every pokemon?
-Ignore EVs?
 
 http://bulbapedia.bulbagarden.net/wiki/Experience
 Four exp groups in Gen I:Fast, Medium Fast, Medium Slow, Slow
@@ -48,6 +46,7 @@ Rhyhorn::Rhyhorn() {
 	//to lvl up.
 	int level=59;
 	levelspeed=4;//Slow Pokemon
+  //Makes base stats
 	bhp = 80;
 	batt = 85;
 	bdef = 95;
@@ -83,7 +82,7 @@ Rhyhorn::Rhyhorn() {
 	Pokemon::settype1("Ground");//Sets first type
 	Pokemon::settype2("Rock");//Sets second type
 	Pokemon::setMoves(19, 27, 31, 12);//Set up moves for pokemon
-	Pokemon::setNum(35);
+	Pokemon::setNum(35);//Thirty-fifth Pokemon
 
 }
 

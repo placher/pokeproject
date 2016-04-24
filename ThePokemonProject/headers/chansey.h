@@ -16,8 +16,6 @@ http://bulbapedia.bulbagarden.net/wiki/Statistic
 Gen I and II formula:
 HP = [(((Base+IV)x2+(root(EV)/4))xLevel)/100]+level+10
 Others = [((base+IV)x2+[root(EV)/4]xLevel)/100]+5
-IV range from 0-31. Generate average IV and give to every pokemon?
-Ignore EVs?
 
 http://bulbapedia.bulbagarden.net/wiki/Experience
 Four exp groups in Gen I:Fast, Medium Fast, Medium Slow, Slow
@@ -48,6 +46,7 @@ Chansey::Chansey() {
 	//to lvl up.
 	int level=57;
 	levelspeed=1;//Fast Pokemon
+  //Sets base stats
 	bhp = 250;
 	batt = 5;
 	bdef = 5;
@@ -83,7 +82,7 @@ Chansey::Chansey() {
 	Pokemon::settype1("Normal");//Sets first type
 	Pokemon::settype2("");//Sets second type
 	Pokemon::setMoves(1,0,20,3);//Sets moves
-	Pokemon::setNum(8);
+	Pokemon::setNum(8);//Eighth Pokemon
 
 }
 

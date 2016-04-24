@@ -16,8 +16,6 @@ http://bulbapedia.bulbagarden.net/wiki/Statistic
 Gen I and II formula:
 HP = [(((Base+IV)x2+(root(EV)/4))xLevel)/100]+level+10
 Others = [((base+IV)x2+[root(EV)/4]xLevel)/100]+5
-IV range from 0-31. Generate average IV and give to every pokemon?
-Ignore EVs?
 
 http://bulbapedia.bulbagarden.net/wiki/Experience
 Four exp groups in Gen I:Fast, Medium Fast, Medium Slow, Slow
@@ -48,6 +46,7 @@ Pidgeot::Pidgeot() {
 	//to lvl up.
 	int level=58;
 	levelspeed=3;//Medium slow Pokemon
+  //Makes base stats
 	bhp = 83;
 	batt = 80;
 	bdef = 75;
@@ -83,7 +82,7 @@ Pidgeot::Pidgeot() {
 	Pokemon::settype1("Normal");//Sets first type
 	Pokemon::settype2("Flying");//Sets second type
 	Pokemon::setMoves(0, 13, 12, 22);//Set up moves for pokemon
-	Pokemon::setNum(31);
+	Pokemon::setNum(31);//Thirty-first Pokemon
 
 }
 

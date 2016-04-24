@@ -16,8 +16,6 @@ http://bulbapedia.bulbagarden.net/wiki/Statistic
 Gen I and II formula:
 HP = [(((Base+IV)x2+(root(EV)/4))xLevel)/100]+level+10
 Others = [((base+IV)x2+[root(EV)/4]xLevel)/100]+5
-IV range from 0-31. Generate average IV and give to every pokemon?
-Ignore EVs?
 
 http://bulbapedia.bulbagarden.net/wiki/Experience
 Four exp groups in Gen I:Fast, Medium Fast, Medium Slow, Slow
@@ -48,6 +46,7 @@ Dodrio::Dodrio() {
 	//to lvl up.
 	int level=60;
 	levelspeed=2;//Medium fast Pokemon
+  //Makes base stats
 	bhp = 60;
 	batt = 110;
 	bdef = 70;
@@ -83,7 +82,7 @@ Dodrio::Dodrio() {
 	Pokemon::settype1("Normal");//Sets first type
 	Pokemon::settype2("Flying");//Sets second type
 	Pokemon::setMoves(11,12,0,14);//Sets moves
-	Pokemon::setNum(10);
+	Pokemon::setNum(10);//Tenth Pokemon
 
 }
 

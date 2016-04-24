@@ -1,6 +1,5 @@
 //Raichu Pokemon
 
-
 //Include things. Not complete
 #ifndef RAICHU_H
 #define RAICHU_H
@@ -17,8 +16,6 @@ http://bulbapedia.bulbagarden.net/wiki/Statistic
 Gen I and II formula:
 HP = [(((Base+IV)x2+(root(EV)/4))xLevel)/100]+level+10
 Others = [((base+IV)x2+[root(EV)/4]xLevel)/100]+5
-IV range from 0-31. Generate average IV and give to every pokemon?
-Ignore EVs?
 
 http://bulbapedia.bulbagarden.net/wiki/Experience
 Four exp groups in Gen I:Fast, Medium Fast, Medium Slow, Slow
@@ -49,6 +46,7 @@ Raichu::Raichu() {
 	//to lvl up.
 	int level=52;
 	levelspeed=2;//Medium fast Pokemon
+  //Makes base stats
 	bhp = 60;
 	batt = 90;
 	bdef = 55;
@@ -84,7 +82,7 @@ Raichu::Raichu() {
 	Pokemon::settype1("Electric");//Sets first type
 	Pokemon::settype2("");//Sets second type
 	Pokemon::setMoves(2, 3, 4, 9);//Set up moves for pokemon
-	Pokemon::setNum(33);
+	Pokemon::setNum(33);//Thirty-third Pokemon
 
 }
 

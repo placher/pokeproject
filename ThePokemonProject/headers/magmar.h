@@ -16,8 +16,6 @@ http://bulbapedia.bulbagarden.net/wiki/Statistic
 Gen I and II formula:
 HP = [(((Base+IV)x2+(root(EV)/4))xLevel)/100]+level+10
 Others = [((base+IV)x2+[root(EV)/4]xLevel)/100]+5
-IV range from 0-31. Generate average IV and give to every pokemon?
-Ignore EVs?
 
 http://bulbapedia.bulbagarden.net/wiki/Experience
 Four exp groups in Gen I:Fast, Medium Fast, Medium Slow, Slow
@@ -48,6 +46,7 @@ Magmar::Magmar() {
 	//to lvl up.
 	int level=65;
 	levelspeed=2;//Medium fast Pokemon
+  //Makes base stats
 	bhp = 65;
 	batt = 95;
 	bdef = 57;
@@ -83,7 +82,7 @@ Magmar::Magmar() {
 	Pokemon::settype1("Fire");//Sets first type
 	Pokemon::settype2("");//Sets second type
 	Pokemon::setMoves(6, 7, 8, 14);//Set up moves for pokemon
-	Pokemon::setNum(27);
+	Pokemon::setNum(27);//Twenty-seventh Pokemon
 
 }
 
