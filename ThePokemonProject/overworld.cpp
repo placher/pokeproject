@@ -1,7 +1,7 @@
 /*
 overworld.cpp
 
-This .cpp file controls character movement in the overworld, background changes, music, and controls battles
+This .cpp file controls character movement in the overworld, background changes, music, and controls battles.s
 
 Author: J. Patrick Lacher
 */
@@ -134,6 +134,7 @@ Mix_Music *OverworldMusic = NULL;
 Mix_Music *BattleMusic = NULL;
 Mix_Music *FinalBattleMusic = NULL;
 Mix_Music *VictoryMusic = NULL;
+Mix_Music *DefeatMusic = NULL;
 
 //Trainer Sprite Textures
 LTexture gAshTexture; //player character
@@ -601,6 +602,12 @@ void Ash::checkCollision( int bg )
 	{
 		if ( mPosY < 180 && ( mPosX > 450 || mPosX < 410) ) mPosY = 180; //top wall
 		if ( mPosY > 870 ) mPosY = 870; //bottom wall
+		if ( ( mPosY > 272 && mPosY < 595 ) ) //pokemon statue
+		{
+			if ( mPosY <= 283 && ( mPosX > 539 && mPosX < 871 ) ) mPosY = 272; //impact from top
+			else if ( mPosX > 539 && mPosX <= 550 ) mPosX = 539; //impact from left
+			else if ( mPosY > 400 && ( mPosX > 539 && mPosX < 871 ) ) mPosY = 595; //impact from bottom
+		}
 	}
 	if ( bg == 3 ) //interior hallway
 	{
@@ -770,6 +777,12 @@ bool loadMedia()
 	if (VictoryMusic == NULL)
 	{
 		printf("Failed to load ending audio! SDL_mixer Error: %s\n", Mix_GetError() );
+		success = false;
+	}
+	DefeatMusic = Mix_LoadMUS( "audio/grandma.wav");
+	if (DefeatMusic == NULL)
+	{
+		printf("Failed to load grandma audio! SDL_mixer Error: %s\n", Mix_GetError() );
 		success = false;
 	}
 
@@ -1347,7 +1360,7 @@ bool loadMedia()
 		printf( "Failed to load bulbasaur_name texture!\n" );
 		success = false;
 	}
-	if( !gButterfreeNameTexture.loadFromFile( "images/battle/butterfree_name.bmp" ) )
+	if( !gButterfreeNameTexture.loadFromFile( "images/battle/NameBars/butterfree_name.bmp" ) )
 	{
 		printf( "Failed to load butterfree_name texture!\n" );
 		success = false;
@@ -1521,14 +1534,16 @@ void close()
 	//Free loaded images
 
 	//Free the music
-	Mix_FreeMusic(OverworldMusic);
+	Mix_FreeMusic( OverworldMusic );
 	OverworldMusic = NULL;
-	Mix_FreeMusic(BattleMusic);
+	Mix_FreeMusic( BattleMusic );
 	BattleMusic = NULL;
-	Mix_FreeMusic(FinalBattleMusic);
+	Mix_FreeMusic( FinalBattleMusic );
 	FinalBattleMusic = NULL;
-	Mix_FreeMusic(VictoryMusic);
+	Mix_FreeMusic( VictoryMusic );
 	VictoryMusic = NULL;
+	Mix_FreeMusic( DefeatMusic );
+	DefeatMusic = NULL;
 
 	//Player Sprite
 	gAshTexture.free();
@@ -1707,126 +1722,179 @@ void close()
 
 void renderPokemon( int num, int x, int y )
 {
-	//render a specific pokemon sprite to the screen at coordinates (x,y)
+	//render a specific pokemon sprite and corresponding nameplate to the screen at coordinates (x,y)
 
+	//get name plate position
+	int a;
+	int b;
+	if ( x == 245 ) //player
+	{
+		a = 471;
+		b = 435;
+	}
+	else //enemy
+	{
+		a = 229;
+		b = 236;
+	}
+	
 	switch ( num )
 	{
 		case 1:
 			gAerodactylTexture.render( x, y );
+			gAerodactylNameTexture.render( a, b );
 			break;
 		case 2:
 			gAlakazamTexture.render( x, y );
+			gAlakazamNameTexture.render( a, b );
 			break;
 		case 3:
 			gArbokTexture.render( x, y );
+			gArbokNameTexture.render( a, b );
 			break;
 		case 4:
 			gArcanineTexture.render( x, y );
+			gArcanineNameTexture.render( a, b );
 			break;
 		case 5:
 			gBlastoiseTexture.render( x, y );
+			gBlastoiseNameTexture.render( a, b );
 			break;
 		case 6:
 			gBulbasaurTexture.render( x, y );
+			gBulbasaurNameTexture.render( a, b );
 			break;
 		case 7:
 			gButterfreeTexture.render( x, y );
+			gButterfreeNameTexture.render( a, b );
 			break;
 		case 8:
 			gChanseyTexture.render( x, y );
+			gChanseyNameTexture.render( a, b );
 			break;
 		case 9:
 			gCharizardTexture.render( x, y );
+			gCharizardNameTexture.render( a, b );
 			break;
 		case 10:
 			gDodrioTexture.render( x, y );
+			gDodrioNameTexture.render( a, b );
 			break;
 		case 11:
 			gDragoniteTexture.render( x, y );
+			gDragoniteNameTexture.render( a, b );
 			break;
 		case 12:
 			gDugtrioTexture.render( x, y );
+			gDugtrioNameTexture.render( a, b );
 			break;
 		case 13:
 			gElectabuzzTexture.render( x, y );
+			gElectabuzzNameTexture.render( a, b );
 			break;
 		case 14:
 			gElectrodeTexture.render( x, y );
+			gElectrodeNameTexture.render( a, b );
 			break;
 		case 15:
 			gFearowTexture.render( x, y );
+			gFearowNameTexture.render( a, b );
 			break;
 		case 16:
 			gGengarTexture.render( x, y );
+			gGengarNameTexture.render( a, b );
 			break;
 		case 17:
 			gGolbatTexture.render( x, y );
+			gGolbatNameTexture.render( a, b );
 			break;
 		case 18:
 			gGolduckTexture.render( x, y );
+			gGolduckNameTexture.render( a, b );
 			break;
 		case 19:
 			gGolemTexture.render( x, y );
+			gGolemNameTexture.render( a, b );
 			break;
 		case 20:
 			gGravelerTexture.render( x, y );
+			gGravelerNameTexture.render( a, b );
 			break;
 		case 21:
 			gGyaradosTexture.render( x, y );
+			gGyaradosNameTexture.render( a, b );
 			break;
 		case 22:
 			gHitmonchanTexture.render( x, y );
+			gHitmonchanNameTexture.render( a, b );
 			break;
 		case 23:
 			gJigglypuffTexture.render( x, y );
+			gJigglypuffNameTexture.render( a, b );
 			break;
 		case 24:
 			gKadabraTexture.render( x, y );
+			gKadabraNameTexture.render( a, b );
 			break;
 		case 25:
 			gKinglerTexture.render( x, y );
+			gKinglerNameTexture.render( a, b );
 			break;
 		case 26:
 			gLaprasTexture.render( x, y );
+			gLaprasNameTexture.render( a, b );
 			break;
 		case 27:
 			gMagmarTexture.render( x, y );
+			gMagmarNameTexture.render( a, b );
 			break;
 		case 28:
 			gMarowakTexture.render( x, y );
+			gMarowakNameTexture.render( a, b );
 			break;
 		case 29:
 			gNinetalesTexture.render( x, y );
+			gNinetalesNameTexture.render( a, b );
 			break;
 		case 30:
 			gOnixTexture.render( x, y );
+			gOnixNameTexture.render( a, b );
 			break;
 		case 31:
 			gPidgeotTexture.render( x, y );
+			gPidgeotNameTexture.render( a, b );
 			break;
 		case 32:
 			gPikachuTexture.render( x, y );
+			gPikachuNameTexture.render( a, b );
 			break;
 		case 33:
 			gRaichuTexture.render( x, y );
+			gRaichuNameTexture.render( a, b );
 			break;
 		case 34:
 			gRhydonTexture.render( x, y );
+			gRhydonNameTexture.render( a, b );
 			break;
 		case 35:
 			gRhyhornTexture.render( x, y );
+			gRhyhornNameTexture.render( a, b );
 			break;
 		case 36:
 			gShuckleTexture.render( x, y );
+			gShuckleNameTexture.render( a, b );
 			break;
 		case 37:
 			gSnorlaxTexture.render( x, y );
+			gSnorlaxNameTexture.render( a, b );
 			break;
 		case 38:
 			gVaporeonTexture.render( x, y );
+			gVaporeonNameTexture.render( a, b );
 			break;
 		case 39:
 			gVenusaurTexture.render( x, y );
+			gVenusaurNameTexture.render( a, b );
 	}
 }
 
@@ -2155,9 +2223,9 @@ int main( int argc, char* args[] )
 							gOffficerTexture.render( 370, 190 );
 							gOffficerTexture.render( 495, 190 );
 							gLassPkmnTexture.render( 273, 355 );
-							gLassTexture.render( 250, 350 );
+							gLassTexture.render( 250, 359 );
 							gProfPkmnTexture.render( 683, 655 );
-							gProfTexture.render( 650, 650 );
+							gProfTexture.render( 650, 659 );
 							gStatueTexture.render( 571, 304 );
 
 							break;
@@ -2178,8 +2246,10 @@ int main( int argc, char* args[] )
 							break;
 						case 7: //room 4
 							gBG7Texture.render( 0, 0 );
+							break;
 						case 8: //win screen
 							gWinScreenTexture.render( 0, 0 );
+							Mix_PlayMusic(VictoryMusic, -1);
 					}
 
 					//Render player sprite
@@ -2191,7 +2261,7 @@ int main( int argc, char* args[] )
 					//Close game if win screen was reached
 					if ( bg == 8 )
 					{
-						SDL_Delay( 2000 );
+						SDL_Delay( 20000 );
 						quit = true;
 					}
 				}
@@ -2210,20 +2280,19 @@ int main( int argc, char* args[] )
 					//render background
 					gBattleScreenTexture.render( 0, 0 );
 
-					//render appropriate health bars
-					//enemy
-					if( ( double(enemy.getPokemon(epkmn)->getchealth())/double(enemy.getPokemon(epkmn)->getmhealth()) ) >= 0.8 ) gHighHealthTexture.render( 291, 277 );
-					else if ( ( double(enemy.getPokemon(epkmn)->getchealth())/double(enemy.getPokemon(epkmn)->getmhealth()) ) >= 0.2 ) gMedHealthTexture.render( 291, 277 );
+					//render enemy health bar
+					if( ( double(enemy.getPokemon( epkmn )->getchealth())/double(enemy.getPokemon( epkmn )->getmhealth()) ) >= 0.8 ) gHighHealthTexture.render( 291, 277 );
+					else if ( ( double(enemy.getPokemon( epkmn )->getchealth())/double(enemy.getPokemon( epkmn )->getmhealth()) ) >= 0.2 ) gMedHealthTexture.render( 291, 277 );
 					else gLowHelathTexture.render( 291, 277 );
 
-					//player
-					if( ( double(player.getPokemon(ppkmn)->getchealth())/double(player.getPokemon(ppkmn)->getmhealth()) ) >= 0.8 ) gHighHealthTexture.render( 515, 478 );
-					else if ( ( double(player.getPokemon(ppkmn)->getchealth())/double(player.getPokemon(ppkmn)->getmhealth()) ) >= 0.2 ) gMedHealthTexture.render( 515, 478 );
+					//render player health bar
+					if( ( double(player.getPokemon( ppkmn )->getchealth())/double(player.getPokemon( ppkmn )->getmhealth()) ) >= 0.8 ) gHighHealthTexture.render( 515, 478 );
+					else if ( ( double(player.getPokemon( ppkmn )->getchealth())/double(player.getPokemon( ppkmn )->getmhealth()) ) >= 0.2 ) gMedHealthTexture.render( 515, 478 );
 					else gLowHelathTexture.render( 515, 478 );
 
 					//render pokemon sprites
-					renderPokemon( enemy.getPokemon(epkmn)->getNum(), 471, 226 ); //enemy
 					renderPokemon( player.getPokemon(ppkmn)->getNum(), 245, 369 ); //player
+					renderPokemon( enemy.getPokemon(epkmn)->getNum(), 471, 226 ); //enemy
 
 					//render moveset box
 					renderMoveBox( player.getPokemon(ppkmn)->getNum() );
@@ -2286,8 +2355,11 @@ int main( int argc, char* args[] )
 
 				if ( result == 1 ) //battle lost
 				{
+					//stop the music and display game over screen
 					gLoseScreenTexture.render( 0, 0 );
-					SDL_Delay( 2000 );
+					SDL_RenderPresent( gRenderer );
+					Mix_PlayMusic(DefeatMusic, -1);
+					SDL_Delay( 25000 );
 					quit = true;
 				}
 			}
