@@ -2271,13 +2271,6 @@ int main( int argc, char* args[] )
 
 					//Update screen
 					SDL_RenderPresent( gRenderer );
-					
-					//Close game if win screen was reached
-					if ( bg == 8 )
-					{
-						SDL_Delay( 20000 );
-						quit = true;
-					}
 				}
 
 				if ( inBattle ) //while battle is occurring
