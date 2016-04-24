@@ -5,3 +5,6 @@ pokeproject: overworld.cpp
 
 clean:
 	rm pokeproject
+	
+uninstall:
+	rm -r *
