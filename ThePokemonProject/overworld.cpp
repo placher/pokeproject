@@ -2048,6 +2048,7 @@ int main( int argc, char* args[] )
 {
 	int count = 0;  
 	int lastb = 0;
+	int endscreen = 0;
 
 	//Initialize Trainers
 	Trainer Player(1);
@@ -2153,7 +2154,7 @@ int main( int argc, char* args[] )
 					}
 
 					if ( inBattle ) handleMove( e ); //handle battle input
-					else ash.handleEvent( e ); //handle input for ash
+					else if ( result == 0 ) ash.handleEvent( e ); //handle input for ash as long as game is continuing
 				}
 
 				if ( !inBattle )
@@ -2249,11 +2250,24 @@ int main( int argc, char* args[] )
 							break;
 						case 8: //win screen
 							gWinScreenTexture.render( 0, 0 );
-							Mix_PlayMusic(VictoryMusic, -1);
+							if ( endscreen == 0 )
+							{
+								Mix_PlayMusic( VictoryMusic, -1 );
+								endscreen = 1;
+							}
+							break;
+						case 9: //lose screen
+							gLoseScreenTexture.render( 0, 0 );
+							if ( endscreen == 0 )
+							{
+								Mix_PlayMusic( DefeatMusic, -1 );
+								endscreen = 1;
+							}
+							break;
 					}
 
 					//Render player sprite
-					if ( bg != 8 ) ash.render();
+					if ( bg < 8 ) ash.render();
 
 					//Update screen
 					SDL_RenderPresent( gRenderer );
@@ -2355,12 +2369,7 @@ int main( int argc, char* args[] )
 
 				if ( result == 1 ) //battle lost
 				{
-					//stop the music and display game over screen
-					gLoseScreenTexture.render( 0, 0 );
-					SDL_RenderPresent( gRenderer );
-					Mix_PlayMusic(DefeatMusic, -1);
-					SDL_Delay( 25000 );
-					quit = true;
+					bg = 9;
 				}
 			}
 		}
