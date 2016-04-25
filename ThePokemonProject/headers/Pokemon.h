@@ -24,9 +24,8 @@ using namespace std;
 /*
 HP = [(((Base+IV)x2+(root(EV)/4))xLevel)/100]+level+10
 Others = [((base+IV)x2+[root(EV)/4]xLevel)/100]+5
-IV range from 0-31. Generate average IV and give to every pokemon?
-Ignore EVs?
-Level up is 1/50 the base stat value. How do we do that?
+IV range from 0-31. Generate average IV and give to every pokemon.
+Level up is 1/50 the base stat value.
 */
 
 class Pokemon{
@@ -58,22 +57,16 @@ class Pokemon{
 		int getspeed();//Get speed
 		int getxp();//Get current xp(should default to 0)
 		int getmxp();//Get max xp for levelup
-		string gettype1();//Sets the type1
-		string gettype2();//Sets the type2
-		Moves getMoves(int);//Set four moves for the pokemon
-		int getNum();//Sets the number of the pokemon
+		string gettype1();//Gets type1
+		string gettype2();//Gets type2
+		Moves getMoves(int);//Get one of the pokemon's moves
+		int getNum();//Gets the number of the pokemon
 		int doDamage(int);//Determines damage		
 		void takeDamage(int, int);//Take damage		
 		string getName();//Returns name
 
 	private:
-		/*
-		int bhealth;//Base Health
-		int batt;//Base Attack
-		int bdef;//Base Defense
-		int bsatt;//Base Special Attack
-		int bsdef;//Base Special Defense
-		int bspeed;//Base Speed*///Was trying to set up a personal levelup
+		
 		//Current levelup is simple random number generator for reasonable stat increase
 		int maxhealth;
 		int currhealth;
@@ -161,21 +154,7 @@ void Pokemon::levelup(int levelspeed) {
 	def+=cdef;
 	satt+=csatt;
 	sdef+=csdef;
-	speed+=cspeed;
-	/*Don't know if this is going to work
-	if (levelspeed == 1) {//Signifies a Fast pokemon
-		maxxp = 6/5*pow(level,3)) - 15*level*level + 100*level - 140;
-	}
-	if (levelspeed == 2) {//Signifies a Medium Fast pokemon
-		maxxp = 6/5*pow(level,3)) - 15*level*level + 100*level - 140;
-	}
-	if (levelspeed == 3) {//Signifies a Medium Slow pokemon
-		maxxp = 6/5*pow(level,3)) - 15*level*level + 100*level - 140;
-	}
-	if (levelspeed == 4) {//Signifies a Slow pokemon
-		maxxp = 6/5*pow(level,3)) - 15*level*level + 100*level - 140;
-	}*/
-		
+	speed+=cspeed;		
 }		
 
 void Pokemon::setMoves(int mv1, int mv2, int mv3, int mv4) {
@@ -252,64 +231,55 @@ string Pokemon::getName() {
 	return name;
 }
 
-
-/*
 int Pokemon::doDamage(int n) {//Determines damage		
-  int thispower = moves[n].getPower();
-  //Run algorithm
-  double damages = (double(2*(level+10))/double(250))*att*thispower;
-  return int(damages);
-}
-*/
+	int thispower = moves[n].getPower();
+	int typing = moves[n].getTyping();
+	string movetype = moves[n].getType();
+	double damages;
 
-int Pokemon::doDamage(int n) {//Determines damage		
-  int thispower = moves[n].getPower();
-  int typing = moves[n].getTyping();
-  double damages;
-  //Run algorithm
-  if (typing == 1){
-    damages = (double(2*(level+10))/double(250))*att*thispower;
-  }
-  else {
-    damages = (double(2*(level+10))/double(250))*satt*thispower; 
-  }
-  return int(damages);
+	//Run algorithm
+	if (typing == 1){
+		damages = (double(2*(level+10))/double(250))*att*thispower;
+	}
+	else {
+		damages = (double(2*(level+10))/double(250))*satt*thispower; 
+	}
+
+	//Determine if same type attack bonus applies
+	if ( movetype == type1 || movetype == type2 ) damages *= 1.5;
+
+	return int(damages);
 }
 
 
 void Pokemon::takeDamage(int damage, int typing) {//Take damage		
-  double mod = 1;
-  double damages;
+	double damages;
 
-  //n = (rand()&100)+1;
+	//Apply defense multiplier to physical and special attacks
+	if (typing == 1){
+		damages = damage/def;
+	}
+	else {
+		damages = damage/sdef;
+	}
 
-  if (typing == 1){
-    damages = damage/def;
-  }
-  else {
-    damages = damage/sdef;
-  }
+	if (damages < 1) {//Don't allow 0 or negative damage
+		damages = 1;
+	}
 
-  //damages*=(mod);
-
-  if (damages < 1) {
-    damages = 1;
-  }
-/*
-  if (n > acc) {
-    damages = 0;
-  }
-*/
-
-  currhealth = currhealth - int(damages);
-  if (currhealth < 0) {
-    currhealth = 0;
-  }
+	currhealth = currhealth - int(damages);
+	if (currhealth < 0) {//Don't allow negative health
+		currhealth = 0;
+	}
 }
 
 
 
 /*
+
+This section was designed as part of a more complicated battle algorithm, but we ultimately decided that the
+resulting mechanics would leave the game too unbalanced and virtually impossible to win, so it was discarded
+
 void Pokemon::takeDamage(int damage, int typing, string mtype, int acc) {//Take damage		
   double mod = 1;
   

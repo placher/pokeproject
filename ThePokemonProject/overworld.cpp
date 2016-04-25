@@ -2046,6 +2046,7 @@ void handleMove( SDL_Event& e )
 
 int main( int argc, char* args[] )
 {
+	//Music tracking variables
 	int count = 0;  
 	int lastb = 0;
 	int endscreen = 0;
@@ -2089,14 +2090,14 @@ int main( int argc, char* args[] )
 			//Retained value of bg in previous frame
 			int bg_backup;
 
-			//batte continuation flag
+			//Batte continuation flag
 			bool inBattle = false;
 
-			//index of pokemon in trainers' pokemon array
+			//Index of pokemon in trainers' pokemon array
 			int ppkmn = 0; //player
 			int epkmn = 0; //enemy
 
-			//battle temporary variables
+			//Battle temporary variables
 			int typing;
 			int emove;
 

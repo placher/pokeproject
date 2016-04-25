@@ -15,7 +15,7 @@ Author: Douglas Schmieder
 using namespace std;
 
 
-enum moveList{
+enum moveList {
 	SLAM,          //0
 	BODY_SLAM,     //1
 	THUNDERBOLT,   //2
@@ -48,10 +48,9 @@ enum moveList{
 	CRUNCH,        //29
 	GUST,          //30
 	BUG_BUZZ       //31
-	
 };
 
-class Moves{
+class Moves {
 	public:
 		Moves(int);
 		int getmovenum();
@@ -345,23 +344,11 @@ void Moves::setmovenum(int m) {
 	movenum = m;
 }
 
-int Moves::noMove(){};
-
-/*
-int Moves::attack(){
-  power=power*2 + lever
-  return power;
-}*/
+int Moves::noMove() {};
 
 int Moves::getPower() {
   return power;
 }
-
-
-    int getTyping();//Returns typing
-    int getAcc();//Returns accuracy
-    string getType();//Returns type
-    string getName();//Returns name
 
 int Moves::getTyping() {
   return typing;
