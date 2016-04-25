@@ -25,6 +25,6 @@ $ pokeproject
 
 You will be prompted to select six pokémon to serve as your team in the game. For each prompt, enter 1, 2, or 3 on the command line to select the corresponding pokémon from the provided list. These will be the pokémon that fight on your side during the battles throughout the game.
 
-The controls are simple: use the arrow keys to move your character around the world. If you encounter another trainer who wishes to battle
+The controls are simple: use the arrow keys to move your character around the world. If you encounter another trainer who wishes to battle, battle will be automatically initiated. When in a battle, use QWAS to select your pokémon's moves from their respective moveset.
 
 Once you have chosen your team, SDL will launch and the game will begin. Make sure to turn up the volume, and good luck becoming the new Pokémon League champion!
