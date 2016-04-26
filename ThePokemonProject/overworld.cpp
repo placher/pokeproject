@@ -2071,6 +2071,9 @@ int main( int argc, char* args[] )
 		}
 		else
 		{	
+			//Seed Random Attacks
+			srand(time(NULL));
+			
 			//Main loop flag
 			bool quit = false;
 
