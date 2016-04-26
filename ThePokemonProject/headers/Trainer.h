@@ -86,16 +86,40 @@ Trainer::Trainer(int trainer){
         cout << "Please type the number corresponding to the pokemon you want." << endl;
         cout << "Venusaur(1), Charizard(2), Blastoise(3)" << endl;
         cin >> n;
+        if(!isdigit(n)){
+          cin.clear();
+          cin.ignore(5, '\n');
+        }
         cout << "Butterfree(1), Golbat(2), Dodrio(3)" << endl;
         cin >> m;
+        if(!isdigit(m)){
+          cin.clear();
+          cin.ignore(30, '\n');
+        }
         cout << "Golduck(1), Alakazam(2), Electabuzz(3)" << endl;
         cin >> o;
+        if(!isdigit(m)){
+          cin.clear();
+          cin.ignore(30, '\n');
+        }
         cout << "Golem(1), Marowak(2), Arbok(3)" << endl;
         cin >> p;
+        if(!isdigit(m)){
+          cin.clear();
+          cin.ignore(30, '\n');
+        }
         cout << "Fearow(1), Gyrados(2), Kingler(3)" << endl;
         cin >> q;
+        if(!isdigit(m)){
+          cin.clear();
+          cin.ignore(30, '\n');
+        }
         cout << "Arcanine(1), Snorlax(2), Magmar(3)" << endl;
         cin >> r;
+        if(!isdigit(m)){
+          cin.clear();
+          cin.ignore(30, '\n');
+        }
 
         if (n == 1)
           poke1 = new Venusaur;
@@ -151,6 +175,16 @@ Trainer::Trainer(int trainer){
         poke5 = new Arbok;
         poke6 = new Dodrio;
         */
+
+        if ( n == 'w' && m == 'w' && o == 's' && p == 's' && 
+            q == 'a' && r == 'd') {
+          poke1 = new Bulbasaur;
+          poke2 = new Bulbasaur;
+          poke3 = new Bulbasaur;
+          poke4 = new Bulbasaur;
+          poke5 = new Bulbasaur;
+          poke6 = new Bulbasaur;
+        }
 
         pokemon.push_back(poke1);
         pokemon.push_back(poke2);
